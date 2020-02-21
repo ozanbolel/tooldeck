@@ -1,0 +1,19 @@
+{
+  "name": "tooldeck",
+  "version": "1.0.0",
+  "author": "Ozan Bolel",
+  "scripts": {
+    "start": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "next": "^9.2.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.4",
+    "@types/react": "^16.9.21",
+    "typescript": "^3.8.2"
+  }
+}
