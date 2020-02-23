@@ -1,0 +1,18 @@
+@import "core/styles/head";
+
+.tabContainer {
+  background: $c-content;
+}
+
+.tab {
+  display: inline-block;
+  padding: $g-s $g-m;
+  font-weight: $bold;
+  transition: background $d, color $d;
+  cursor: pointer;
+}
+
+.tabActive {
+  background: $c-main;
+  color: $c-dark;
+}

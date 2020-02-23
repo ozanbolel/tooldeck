@@ -1,15 +1,10 @@
 import * as React from "react";
 import { NextPage } from "next";
-import { useTransition } from "core/tools";
 
-const Deck: NextPage = () => {
-  const { refTransition, setTransition } = useTransition({ marginLeft: 0 });
+import HomeContainer from "components/home/HomeContainer/HomeContainer";
 
-  return (
-    <div ref={refTransition} onClick={() => setTransition({ marginLeft: "300px" })}>
-      TEXT
-    </div>
-  );
+const Home: NextPage = () => {
+  return <HomeContainer />;
 };
 
-export default Deck;
+export default Home;

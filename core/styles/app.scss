@@ -1,0 +1,10 @@
+@import "./head";
+@import "./reset";
+
+body {
+  font-family: $font;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  background: $c-dark;
+  color: $c-light;
+}
