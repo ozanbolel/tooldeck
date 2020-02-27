@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { store } from "core/store";
+import { Store } from "core/types";
 import { Web } from "core/elements";
 import css from "./WebFrame.scss";
 
 const WebFrame: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: store) => store.home);
+  const { tabs, currentTabId } = useSelector((store: Store) => store.home);
 
   return (
     <div className={css.webFrame} style={currentTabId === "" ? { display: "none" } : {}}>

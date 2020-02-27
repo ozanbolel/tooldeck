@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { store } from "core/store";
+import { Store } from "core/types";
+import ToolCard from "../ToolCard/ToolCard";
 import css from "./Deck.scss";
 
 type tab = {
@@ -10,7 +11,7 @@ type tab = {
 };
 
 const Deck: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: store) => store.home);
+  const { tabs, currentTabId } = useSelector((store: Store) => store.home);
   const dispatch = useDispatch();
 
   const tools: Array<tab> = [
@@ -37,9 +38,7 @@ const Deck: React.FC = () => {
   return (
     <div style={currentTabId !== "" ? { display: "none" } : {}}>
       {tools.map((i) => (
-        <button key={i.id} onClick={() => onClickTool(i)}>
-          {i.title}
-        </button>
+        <ToolCard key={i.id} title={i.title} onClick={() => onClickTool(i)} />
       ))}
     </div>
   );

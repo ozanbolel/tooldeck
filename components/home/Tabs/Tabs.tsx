@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { store } from "core/store";
+import { Store } from "core/types";
 import css from "./Tabs.scss";
 
 const Tabs: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: store) => store.home);
+  const { tabs, currentTabId } = useSelector((store: Store) => store.home);
   const dispatch = useDispatch();
 
   const closeTab = (id: string) => {

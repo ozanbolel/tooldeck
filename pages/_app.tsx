@@ -19,4 +19,4 @@ const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Stor
   );
 };
 
-export default withRedux(App);
+export default withRedux(App as any);
