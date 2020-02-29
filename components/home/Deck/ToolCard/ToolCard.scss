@@ -1,11 +1,9 @@
 @import "core/styles/head";
 
 .card {
-  width: 100%;
-  height: 200px;
-  background: #666;
+  background: url(/static/coolors.jpg);
+  background-size: cover;
   border-radius: $r;
-  box-shadow: $s-card;
   cursor: pointer;
 }
 

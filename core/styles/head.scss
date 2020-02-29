@@ -24,11 +24,25 @@ $g-xxl: 90px;
 // Radius
 
 $r: 1rem;
+$r-100: 100rem;
 
 // Shadow
 
-$s-card: 0 10px 40px rgba(255, 255, 255, 0.2);
+$s-card: 0 10px 30px rgba(255, 255, 255, 0.1);
 
-// Animation
+// Easing
 
-$d: 0.4s ease-out;
+$eio: ease-in-out;
+$ei: ease-in;
+$eo: ease-out;
+$el: linear;
+
+// Duration
+
+$d-xs: 0.2s;
+$d-s: 0.3s;
+$d: 0.4s;
+$d-l: 0.6s;
+$d-xl: 0.8s;
+
+$de: $d $eo;

@@ -2,12 +2,14 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "core/types";
 import { Nest } from "core/elements";
-import ToolCard from "../ToolCard/ToolCard";
 import css from "./Deck.scss";
+
+import ToolCard from "./ToolCard/ToolCard";
+import Nameplate from "./Nameplate/Nameplate";
 
 type tab = {
   id: string;
-  title: string;
+  label: string;
   url: string;
 };
 
@@ -18,12 +20,12 @@ const Deck: React.FC = () => {
   const tools: Array<tab> = [
     {
       id: "1",
-      title: "Coolors",
+      label: "Coolors",
       url: "coolors.co/browser/latest/1"
     },
     {
       id: "2",
-      title: "iHateRegex",
+      label: "iHateRegex",
       url: "ihateregex.io"
     }
   ];
@@ -41,15 +43,12 @@ const Deck: React.FC = () => {
       <div className={css.section}>
         <div className={css.grid}>
           {tools.map((i) => (
-            <ToolCard key={i.id} title={i.title} onClick={() => onClickTool(i)} />
-          ))}
-        </div>
-      </div>
+            <div className={css.gridItemContainer}>
+              <div className={css.gridItemShadow} />
 
-      <div className={css.section}>
-        <div className={css.grid}>
-          {tools.map((i) => (
-            <ToolCard key={i.id} title={i.title} onClick={() => onClickTool(i)} />
+              <ToolCard key={"card-" + i.id} className={css.gridItemCard} label={i.label} onClick={() => onClickTool(i)} />
+              <Nameplate key={"plate-" + i.id} className={css.gridItemPlate} label={i.label} />
+            </div>
           ))}
         </div>
       </div>

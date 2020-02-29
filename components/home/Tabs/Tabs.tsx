@@ -31,7 +31,7 @@ const Tabs: React.FC = () => {
           className={css.tab + (currentTabId === i.id ? " " + css.tabActive : "")}
           onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: i.id })}
         >
-          {i.title}
+          {i.label}
 
           <span onClick={() => closeTab(i.id)}>&nbsp;&nbsp;&nbsp;X</span>
         </div>

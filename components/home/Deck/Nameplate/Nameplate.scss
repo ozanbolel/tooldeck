@@ -1,0 +1,14 @@
+@import "core/styles/head";
+
+.container {
+  text-align: center;
+}
+
+.label {
+  display: inline-block;
+  background: $c-content;
+  font-weight: $b;
+  padding: $g-xs $g-m;
+  border: solid 1px $c-divider;
+  border-radius: $r-100;
+}

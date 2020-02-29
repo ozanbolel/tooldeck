@@ -1,5 +1,11 @@
 @import "core/styles/head";
 
+$card-width: 200px;
+
+.deck {
+  border-top: solid 1px $c-divider;
+}
+
 .hidden {
   display: none;
 }
@@ -15,6 +21,27 @@
 .grid {
   display: grid;
   justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: $g-m;
+  grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
+  grid-gap: $g-xl;
+}
+
+.gridItemContainer {
+  position: relative;
+}
+
+.gridItemShadow {
+  position: absolute;
+  top: $card-width / 2;
+  left: $card-width / 2;
+  box-shadow: 0 0 120px 60px $c-light;
+}
+
+.gridItemCard {
+  width: 100%;
+  height: $card-width;
+}
+
+.gridItemPlate {
+  margin-top: $g-m;
+  position: relative;
 }
