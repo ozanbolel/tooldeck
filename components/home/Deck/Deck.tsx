@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "core/types";
+import { Nest } from "core/elements";
 import ToolCard from "../ToolCard/ToolCard";
 import css from "./Deck.scss";
 
@@ -36,11 +37,23 @@ const Deck: React.FC = () => {
   };
 
   return (
-    <div style={currentTabId !== "" ? { display: "none" } : {}}>
-      {tools.map((i) => (
-        <ToolCard key={i.id} title={i.title} onClick={() => onClickTool(i)} />
-      ))}
-    </div>
+    <Nest className={currentTabId !== "" ? css.hidden : undefined}>
+      <div className={css.section}>
+        <div className={css.grid}>
+          {tools.map((i) => (
+            <ToolCard key={i.id} title={i.title} onClick={() => onClickTool(i)} />
+          ))}
+        </div>
+      </div>
+
+      <div className={css.section}>
+        <div className={css.grid}>
+          {tools.map((i) => (
+            <ToolCard key={i.id} title={i.title} onClick={() => onClickTool(i)} />
+          ))}
+        </div>
+      </div>
+    </Nest>
   );
 };
 

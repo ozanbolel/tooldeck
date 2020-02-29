@@ -1,0 +1,20 @@
+@import "core/styles/head";
+
+.hidden {
+  display: none;
+}
+
+.section {
+  margin-bottom: $g-xl;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.grid {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: $g-m;
+}
