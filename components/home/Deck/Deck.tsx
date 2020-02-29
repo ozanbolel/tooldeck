@@ -15,21 +15,27 @@ const Deck: React.FC = () => {
     {
       id: "coolors",
       label: "Coolors",
+      cat: "design",
+      sub_cat: "colors",
+      external: false,
       url: "coolors.co/browser/latest/1"
     },
     {
       id: "ihateregex",
       label: "iHateRegex",
+      cat: "dev",
+      sub_cat: "regex",
+      external: false,
       url: "ihateregex.io"
     }
   ];
 
-  const onClickTool = (tab: TTool) => {
-    if (tabs.findIndex((i) => i.id === tab.id) === -1) {
-      dispatch({ type: "ADD_TAB", payload: tab });
+  const onClickTool = (tool: TTool) => {
+    if (tabs.findIndex((i) => i.id === tool.id) === -1) {
+      dispatch({ type: "ADD_TAB", payload: tool });
     }
 
-    dispatch({ type: "SET_CURRENT_TAB_ID", payload: tab.id });
+    dispatch({ type: "SET_CURRENT_TAB_ID", payload: tool.id });
   };
 
   return (
