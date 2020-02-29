@@ -1,10 +1,13 @@
 @import "./head";
 @import "./reset";
 
-body {
+html {
   font-family: $f;
   font-size: 12px;
   letter-spacing: 0.01em;
+}
+
+body {
   background: $c-dark;
   color: $c-light;
 }

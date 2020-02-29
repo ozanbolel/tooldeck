@@ -1,7 +1,17 @@
+// Text
+
+$f: "Roboto", sans-serif;
+$b: 700;
+
+// Color
+
 $c-main: #f5cb5c;
 $c-content: #252525;
+$c-divider: #353535;
 $c-dark: #151515;
 $c-light: #f5f5f5;
+
+// Space
 
 $g-xxs: 5px;
 $g-xs: 10px;
@@ -11,10 +21,14 @@ $g-l: 45px;
 $g-xl: 60px;
 $g-xxl: 90px;
 
-$f: "Roboto", sans-serif;
+// Radius
 
-$b: 700;
+$r: 1rem;
+
+// Shadow
+
+$s-card: 0 10px 40px rgba(255, 255, 255, 0.2);
+
+// Animation
 
 $d: 0.4s ease-out;
-
-$r: 8px;
