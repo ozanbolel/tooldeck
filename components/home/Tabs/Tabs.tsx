@@ -20,7 +20,7 @@ const Tabs: React.FC = () => {
   };
 
   return (
-    <div className={css.tabContainer}>
+    <div className={css.tabContainer + (currentTabId !== "" ? " " + css.borderNone : "")}>
       <div className={css.tab + (currentTabId === "" ? " " + css.tabActive : "")} onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}>
         Deck
       </div>

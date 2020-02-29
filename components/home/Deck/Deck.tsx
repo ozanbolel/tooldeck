@@ -19,12 +19,12 @@ const Deck: React.FC = () => {
 
   const tools: Array<tab> = [
     {
-      id: "1",
+      id: "coolors",
       label: "Coolors",
       url: "coolors.co/browser/latest/1"
     },
     {
-      id: "2",
+      id: "ihateregex",
       label: "iHateRegex",
       url: "ihateregex.io"
     }
@@ -43,11 +43,11 @@ const Deck: React.FC = () => {
       <div className={css.section}>
         <div className={css.grid}>
           {tools.map((i) => (
-            <div className={css.gridItemContainer}>
+            <div key={i.id} className={css.gridItemContainer}>
               <div className={css.gridItemShadow} />
 
-              <ToolCard key={"card-" + i.id} className={css.gridItemCard} label={i.label} onClick={() => onClickTool(i)} />
-              <Nameplate key={"plate-" + i.id} className={css.gridItemPlate} label={i.label} />
+              <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i)} />
+              <Nameplate className={css.gridItemPlate} label={i.label} />
             </div>
           ))}
         </div>

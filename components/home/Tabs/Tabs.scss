@@ -5,6 +5,10 @@
   border-bottom: solid 1px $c-divider;
 }
 
+.borderNone {
+  border-bottom: none;
+}
+
 .tab {
   display: inline-block;
   padding: $g-s $g-m;

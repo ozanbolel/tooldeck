@@ -32,8 +32,8 @@ $card-width: 200px;
 .gridItemShadow {
   position: absolute;
   top: $card-width / 2;
-  left: $card-width / 2;
-  box-shadow: 0 0 120px 60px $c-light;
+  left: 50%;
+  box-shadow: 0 0 150px 50px $c-light;
 }
 
 .gridItemCard {

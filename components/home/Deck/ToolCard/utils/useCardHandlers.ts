@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AnimatedValue, SetUpdateFn } from "react-spring";
 
-const useCardHandlers = (spring: AnimatedValue<any>, setSpring: SetUpdateFn<any>, clicked: boolean) => {
+const useCardHandlers = (spring: AnimatedValue<any>, setSpring: SetUpdateFn<any>) => {
   const [initial, setInitial] = React.useState([0, 0]);
   const refCard = React.useRef<any>(null);
 
@@ -14,12 +14,31 @@ const useCardHandlers = (spring: AnimatedValue<any>, setSpring: SetUpdateFn<any>
       drag = [clientX - initial[0], clientY - initial[1]];
     }
 
-    setSpring({
-      x: (drag[1] / height) * 30 * -1,
-      y: (drag[0] / width) * 30
-    });
+    const ratio = [drag[1] / height, drag[0] / width];
 
-    !clicked ? setSpring({ s: 1.1 }) : null;
+    let finalRatio = [ratio[0], ratio[1]];
+
+    if (ratio[0] > 1) {
+      finalRatio[0] = 1;
+    }
+
+    if (ratio[0] < -1) {
+      finalRatio[0] = -1;
+    }
+
+    if (ratio[1] > 1) {
+      finalRatio[1] = 1;
+    }
+
+    if (ratio[1] < -1) {
+      finalRatio[1] = -1;
+    }
+
+    setSpring({
+      x: finalRatio[0] * 30 * -1,
+      y: finalRatio[1] * 30,
+      s: 1.15
+    });
   };
 
   const onMouseMove = (e: React.MouseEvent) => {
@@ -41,9 +60,11 @@ const useCardHandlers = (spring: AnimatedValue<any>, setSpring: SetUpdateFn<any>
       setInitial([0, 0]);
     }
 
-    setSpring({ x: 0, y: 0 });
-
-    !clicked ? setSpring({ s: 1 }) : null;
+    setSpring({
+      x: 0,
+      y: 0,
+      s: 1
+    });
   };
 
   return {
