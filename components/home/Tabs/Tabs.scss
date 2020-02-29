@@ -3,6 +3,7 @@
 .tabContainer {
   background: $c-content;
   border-bottom: solid 1px $c-divider;
+  @include no-select;
 }
 
 .borderNone {
@@ -13,7 +14,7 @@
   display: inline-block;
   padding: $g-s $g-m;
   font-weight: $b;
-  transition: background $d, color $d;
+  transition: background $de, color $de;
   cursor: pointer;
 }
 

@@ -46,3 +46,12 @@ $d-l: 0.6s;
 $d-xl: 0.8s;
 
 $de: $d $eo;
+
+// Mixins
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

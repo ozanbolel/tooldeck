@@ -1,23 +1,17 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Store } from "core/types";
+import { TTool, TStore } from "core/types";
 import { Nest } from "core/elements";
 import css from "./Deck.scss";
 
 import ToolCard from "./ToolCard/ToolCard";
 import Nameplate from "./Nameplate/Nameplate";
 
-type tab = {
-  id: string;
-  label: string;
-  url: string;
-};
-
 const Deck: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: Store) => store.home);
+  const { tabs, currentTabId } = useSelector((store: TStore) => store.home);
   const dispatch = useDispatch();
 
-  const tools: Array<tab> = [
+  const tools: Array<TTool> = [
     {
       id: "coolors",
       label: "Coolors",
@@ -30,7 +24,7 @@ const Deck: React.FC = () => {
     }
   ];
 
-  const onClickTool = (tab: tab) => {
+  const onClickTool = (tab: TTool) => {
     if (tabs.findIndex((i) => i.id === tab.id) === -1) {
       dispatch({ type: "ADD_TAB", payload: tab });
     }

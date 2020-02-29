@@ -1,4 +1,4 @@
-export type stateHome = {
+export type THome = {
   tabs: Array<any>;
   currentTabId: string;
 };
@@ -8,7 +8,7 @@ type action = {
   payload: any;
 };
 
-const initialState: stateHome = {
+const initialState: THome = {
   tabs: [],
   currentTabId: ""
 };

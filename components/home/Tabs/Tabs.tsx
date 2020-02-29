@@ -1,22 +1,28 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Store } from "core/types";
+import { TStore } from "core/types";
 import css from "./Tabs.scss";
 
 const Tabs: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: Store) => store.home);
+  const { tabs, currentTabId } = useSelector((store: TStore) => store.home);
   const dispatch = useDispatch();
 
   const closeTab = (id: string) => {
-    const indexTab = tabs.findIndex((i) => i.id === id);
-
-    if (indexTab === 0) {
-      setTimeout(() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" }), 0);
-    } else {
-      setTimeout(() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: tabs[indexTab - 1].id }), 0);
-    }
+    const deletedTabIndex = tabs.findIndex((i) => i.id === id);
 
     dispatch({ type: "REMOVE_TAB", payload: id });
+
+    let newCurrentTabId = "";
+
+    if (deletedTabIndex === 0) {
+      if (tabs.length !== 1) {
+        newCurrentTabId = tabs[1].id;
+      }
+    } else {
+      newCurrentTabId = tabs[deletedTabIndex - 1].id;
+    }
+
+    setTimeout(() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: newCurrentTabId }), 0);
   };
 
   return (

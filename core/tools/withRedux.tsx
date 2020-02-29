@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AppContext } from "next/app";
 import { NextPage } from "next";
-import { Store } from "core/types";
+import { TStore } from "core/types";
 import initializeStore from "../store/initializeStore";
 
 const isServer = typeof window === "undefined";
@@ -18,11 +18,11 @@ function getOrCreateStore() {
   }
 }
 
-export function withRedux(App: NextPage<{ reduxStore: Store }>) {
-  return class AppWithRedux extends React.Component<{ reduxStore: Store }> {
-    private reduxStore: Store;
+export function withRedux(App: NextPage<{ reduxStore: TStore }>) {
+  return class AppWithRedux extends React.Component<{ reduxStore: TStore }> {
+    private reduxStore: TStore;
 
-    static async getInitialProps(appContext: AppContext & { ctx: { reduxStore: Store } }) {
+    static async getInitialProps(appContext: AppContext & { ctx: { reduxStore: TStore } }) {
       const reduxStore = getOrCreateStore();
 
       appContext.ctx.reduxStore = reduxStore;

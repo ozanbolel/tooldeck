@@ -1,10 +1,12 @@
 import * as React from "react";
 import { useSpring, animated, interpolate } from "react-spring";
-import useCardHandlers from "./utils/useCardHandlers";
+import { TTool } from "core/types";
 import css from "./ToolCard.scss";
 
+import useCardHandlers from "./utils/useCardHandlers";
+
 type TToolCard = React.FC<{
-  tool: any;
+  tool: TTool;
   className?: string;
   onClick?: Function;
 }>;

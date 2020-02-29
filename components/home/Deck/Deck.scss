@@ -2,10 +2,6 @@
 
 $card-width: 200px;
 
-.deck {
-  border-top: solid 1px $c-divider;
-}
-
 .hidden {
   display: none;
 }
@@ -23,6 +19,7 @@ $card-width: 200px;
   justify-content: space-between;
   grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
   grid-gap: $g-xl;
+  @include no-select;
 }
 
 .gridItemContainer {

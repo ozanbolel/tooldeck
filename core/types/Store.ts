@@ -1,5 +1,5 @@
-import { stateHome } from "../store/reducerHome";
+import { THome } from "../store/reducerHome";
 
-export type Store = {
-  home: stateHome;
+export type TStore = {
+  home: THome;
 };
