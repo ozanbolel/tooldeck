@@ -1,14 +1,13 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TTool, TStore } from "core/types";
-import { Nest } from "core/elements";
 import css from "./Deck.scss";
 
-import ToolCard from "./ToolCard/ToolCard";
-import Nameplate from "./Nameplate/Nameplate";
+import ToolCard from "../ToolCard/ToolCard";
+import Nameplate from "../Nameplate/Nameplate";
 
 const Deck: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: TStore) => store.home);
+  const { tabs } = useSelector((store: TStore) => store.home);
   const dispatch = useDispatch();
 
   const tools: Array<TTool> = [
@@ -39,7 +38,7 @@ const Deck: React.FC = () => {
   };
 
   return (
-    <Nest className={currentTabId !== "" ? css.hidden : undefined}>
+    <div>
       <div className={css.section}>
         <div className={css.grid}>
           {tools.map((i) => (
@@ -52,7 +51,7 @@ const Deck: React.FC = () => {
           ))}
         </div>
       </div>
-    </Nest>
+    </div>
   );
 };
 

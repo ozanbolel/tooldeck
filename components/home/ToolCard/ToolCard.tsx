@@ -19,7 +19,7 @@ const ToolCard: TToolCard = ({ tool, className, onClick }) => {
     React.useMemo(
       () => (
         <div className={css.inner}>
-          <img className={css.cover} src={`/static/${tool.id}.jpg`} />
+          <img className={css.cover} src={`/static/${tool.id}.jpg`} draggable="false" />
         </div>
       ),
       [JSON.stringify(tool)]

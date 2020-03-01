@@ -4,11 +4,11 @@ import { TStore } from "core/types";
 import { Web } from "core/elements";
 import css from "./WebFrame.scss";
 
-const WebFrame: React.FC = () => {
+const WebFrame: React.FC<{ hidden: boolean }> = ({ hidden }) => {
   const { tabs, currentTabId } = useSelector((store: TStore) => store.home);
 
   return (
-    <div className={css.webFrame} style={currentTabId === "" ? { display: "none" } : {}}>
+    <div className={css.webFrame + (hidden ? " " + css.hidden : "")}>
       {tabs.map((i) => (
         <Web key={i.id} url={i.url} show={currentTabId === i.id} />
       ))}

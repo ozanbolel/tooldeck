@@ -1,3 +1,4 @@
+import * as React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { Store } from "redux";
@@ -6,6 +7,13 @@ import { withRedux } from "core/tools";
 import "core/styles/app.scss";
 
 const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Store }) => {
+  React.useEffect(() => {
+    const resizeOps = () => document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+
+    window.addEventListener("resize", resizeOps, { passive: true });
+    return () => window.removeEventListener("resize", resizeOps);
+  }, []);
+
   return (
     <Provider store={reduxStore}>
       <Head>

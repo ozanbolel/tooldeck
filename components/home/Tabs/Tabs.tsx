@@ -25,6 +25,14 @@ const Tabs: React.FC = () => {
     setTimeout(() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: newCurrentTabId }), 0);
   };
 
+  const onClickTab = (id: string) => {
+    const { pathname, search } = window.location;
+
+    (history as any).replaceState(null, null, pathname + search);
+
+    dispatch({ type: "SET_CURRENT_TAB_ID", payload: id });
+  };
+
   return (
     <div className={css.tabContainer + (currentTabId !== "" ? " " + css.borderNone : "")}>
       <div className={css.tab + (currentTabId === "" ? " " + css.tabActive : "")} onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}>
@@ -32,11 +40,7 @@ const Tabs: React.FC = () => {
       </div>
 
       {tabs.map((i) => (
-        <div
-          key={i.id}
-          className={css.tab + (currentTabId === i.id ? " " + css.tabActive : "")}
-          onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: i.id })}
-        >
+        <div key={i.id} className={css.tab + (currentTabId === i.id ? " " + css.tabActive : "")} onClick={() => onClickTab(i.id)}>
           {i.label}
 
           <span onClick={() => closeTab(i.id)}>&nbsp;&nbsp;&nbsp;X</span>
