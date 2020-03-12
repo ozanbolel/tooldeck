@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Icon } from "core/elements";
 import { TStore } from "core/types";
 import css from "./Tabs.scss";
 
@@ -26,16 +27,15 @@ const Tabs: React.FC = () => {
   };
 
   const onClickTab = (id: string) => {
-    const { pathname, search } = window.location;
-
-    (history as any).replaceState(null, null, pathname + search);
-
     dispatch({ type: "SET_CURRENT_TAB_ID", payload: id });
   };
 
   return (
     <div className={css.tabContainer + (currentTabId !== "" ? " " + css.borderNone : "")}>
-      <div className={css.tab + (currentTabId === "" ? " " + css.tabActive : "")} onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}>
+      <div
+        className={css.tab + " " + css.tabDeck + (currentTabId === "" ? " " + css.tabActive : "")}
+        onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}
+      >
         Deck
       </div>
 
@@ -43,7 +43,9 @@ const Tabs: React.FC = () => {
         <div key={i.id} className={css.tab + (currentTabId === i.id ? " " + css.tabActive : "")} onClick={() => onClickTab(i.id)}>
           {i.label}
 
-          <span onClick={() => closeTab(i.id)}>&nbsp;&nbsp;&nbsp;X</span>
+          <div className={css.tabCloseIcon} onClick={() => closeTab(i.id)}>
+            <Icon name="x" />
+          </div>
         </div>
       ))}
     </div>

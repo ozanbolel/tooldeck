@@ -2,6 +2,7 @@
 
 .card {
   border-radius: $r;
+  backdrop-filter: blur(0);
   overflow: hidden;
   cursor: pointer;
 }
@@ -9,6 +10,27 @@
 .inner {
   width: 100%;
   height: 100%;
+}
+
+.innerAdd {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  background: rgba($c-dark, 0.4);
+  backdrop-filter: blur(10px);
+  font-size: 1.25rem;
+  font-weight: $b;
+  text-shadow: 0 5px 15px $c-dark;
+  transition: color $de;
+}
+
+.card:hover .innerAdd {
+  color: $c-main;
 }
 
 .cover {

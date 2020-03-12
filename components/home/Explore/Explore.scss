@@ -1,1 +1,46 @@
 @import "core/styles/head";
+
+$card-width: 200px;
+
+.section {
+  margin-bottom: $g-xxl;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 4rem;
+  font-weight: $b;
+  margin-bottom: $g-xl;
+}
+
+.grid {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
+  grid-gap: $g-xl;
+  @include no-select;
+}
+
+.gridItemContainer {
+  position: relative;
+}
+
+.gridItemShadow {
+  position: absolute;
+  top: $card-width / 2;
+  left: 50%;
+  box-shadow: 0 0 150px 50px $c-light;
+}
+
+.gridItemCard {
+  width: 100%;
+  height: $card-width;
+}
+
+.gridItemPlate {
+  margin-top: $g-m;
+  position: relative;
+}

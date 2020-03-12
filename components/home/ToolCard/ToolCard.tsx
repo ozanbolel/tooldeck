@@ -8,10 +8,11 @@ import useCardHandlers from "./utils/useCardHandlers";
 type TToolCard = React.FC<{
   tool: TTool;
   className?: string;
+  explore?: boolean;
   onClick?: Function;
 }>;
 
-const ToolCard: TToolCard = ({ tool, className, onClick }) => {
+const ToolCard: TToolCard = ({ tool, className, explore, onClick }) => {
   const [spring, setSpring] = useSpring(() => ({ x: 0, y: 0, s: 1 }));
   const cardHandlers = useCardHandlers(spring, setSpring);
 
@@ -20,6 +21,8 @@ const ToolCard: TToolCard = ({ tool, className, onClick }) => {
       () => (
         <div className={css.inner}>
           <img className={css.cover} src={`/static/${tool.id}.jpg`} draggable="false" />
+
+          {explore ? <div className={css.innerAdd}>Add to Deck</div> : null}
         </div>
       ),
       [JSON.stringify(tool)]
