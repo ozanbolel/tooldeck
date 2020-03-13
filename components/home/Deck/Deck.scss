@@ -34,3 +34,30 @@ $card-width: 200px;
   margin-top: $g-m;
   position: relative;
 }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.emptyImg {
+  width: 350px;
+  height: 350px;
+  cursor: pointer;
+  margin-bottom: $g-m;
+}
+
+.emptyText {
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.emptyTextHightlight {
+  color: $c-main;
+  font-weight: $b;
+}

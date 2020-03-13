@@ -13,7 +13,7 @@ const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Stor
     <Provider store={reduxStore}>
       <Head>
         <title>ToolDeck</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
         <base target="_blank" />
       </Head>
 

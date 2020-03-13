@@ -24,33 +24,43 @@ const Deck: React.FC = () => {
     }
   };
 
-  const renderAddedTools = () =>
-    React.useMemo(() => {
-      let addedTools = [];
+  const renderAddedTools = () => {
+    let addedTools = [];
 
-      for (let index = 0; index < addedToolIds.length; index++) {
-        addedTools.push(tools.find((tool) => tool.id === addedToolIds[index]));
-      }
+    for (let index = 0; index < addedToolIds.length; index++) {
+      addedTools.push(tools.find((tool) => tool.id === addedToolIds[index]));
+    }
 
-      return addedTools.map((tool: any) => {
-        return (
-          <div key={tool.id} className={css.gridItemContainer}>
-            <div className={css.gridItemShadow} />
+    return addedTools.map((tool: any) => {
+      return (
+        <div key={tool.id} className={css.gridItemContainer}>
+          <div className={css.gridItemShadow} />
 
-            <ToolCard className={css.gridItemCard} tool={tool} onClick={() => onClickTool(tool)} />
-            <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => dispatch({ type: "REMOVE_TOOL_ID", payload: tool.id })} />
-          </div>
-        );
-      });
-    }, [addedToolIds]);
+          <ToolCard className={css.gridItemCard} tool={tool} onClick={() => onClickTool(tool)} />
+          <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => dispatch({ type: "REMOVE_TOOL_ID", payload: tool.id })} />
+        </div>
+      );
+    });
+  };
 
-  return (
-    <div>
+  if (addedToolIds.length !== 0) {
+    return (
       <div className={css.section}>
         <div className={css.grid}>{renderAddedTools()}</div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={css.empty}>
+        <img src="/static/taken.svg" className={css.emptyImg} />
+
+        <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
+        <div className={css.emptyText}>
+          Don't worry, we have plenty 😉 <span className={css.emptyTextHightlight}>Click to Explore</span> now!
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Deck;
