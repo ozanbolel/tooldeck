@@ -1,10 +1,6 @@
 @import "core/styles/head";
 
 .tabContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   background: $c-content;
   border-bottom: solid 1px $c-divider;
   @include no-select;
@@ -30,8 +26,7 @@
   display: inline-flex;
   align-items: center;
   width: 175px;
-  height: $h-tabs;
-  padding: 0 $g-s;
+  padding: $g-s;
   font-weight: $b;
   animation: tabIn $de;
   cursor: pointer;

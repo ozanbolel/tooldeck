@@ -13,39 +13,47 @@ const Explore: React.FC = () => {
 
   const onClickTool = (id: string) => {
     if (addedToolIds.findIndex((i) => i === id) === -1) {
-      dispatch({ type: "ADD_TOOL", payload: id });
+      dispatch({ type: "ADD_TOOL_ID", payload: id });
     }
   };
 
   return (
     <>
       <div className={css.section}>
-        <div className={css.sectionTitle}>For Developers</div>
+        <div className={css.sectionTitle}>Develop with Ease</div>
 
         <div className={css.grid}>
-          {tools.map((i) => (
-            <div key={i.id} className={css.gridItemContainer}>
-              <div className={css.gridItemShadow} />
+          {tools.map((i) => {
+            if (i.cat === "dev") {
+              return (
+                <div key={i.id} className={css.gridItemContainer}>
+                  <div className={css.gridItemShadow} />
 
-              <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i.id)} explore />
-              <Nameplate className={css.gridItemPlate} label={i.label} />
-            </div>
-          ))}
+                  <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i.id)} explore />
+                  <Nameplate className={css.gridItemPlate} label={i.label} explore />
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
 
       <div className={css.section}>
-        <div className={css.sectionTitle}>For Designers</div>
+        <div className={css.sectionTitle}>Power-up Your Designs</div>
 
         <div className={css.grid}>
-          {tools.map((i) => (
-            <div key={i.id} className={css.gridItemContainer}>
-              <div className={css.gridItemShadow} />
+          {tools.map((i) => {
+            if (i.cat === "design") {
+              return (
+                <div key={i.id} className={css.gridItemContainer}>
+                  <div className={css.gridItemShadow} />
 
-              <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i.id)} explore />
-              <Nameplate className={css.gridItemPlate} label={i.label} />
-            </div>
-          ))}
+                  <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i.id)} explore />
+                  <Nameplate className={css.gridItemPlate} label={i.label} explore />
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </>

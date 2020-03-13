@@ -12,4 +12,20 @@
 
 .switch {
   flex: 1;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $c-divider;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner,
+  &::-webkit-resizer {
+    background: $c-dark;
+  }
 }

@@ -5,10 +5,28 @@
 }
 
 .label {
-  display: inline-block;
   background: $c-content;
   font-weight: $b;
   padding: $g-xs $g-m;
   border: solid 1px $c-divider;
   border-radius: $r-100;
+}
+
+.options {
+  margin-left: $g-xxs;
+  padding: $g-xs;
+  border-radius: 100%;
+  transition: background $de;
+  cursor: pointer;
+
+  &:hover {
+    background: $c-warn;
+  }
+}
+
+.optionsIcon {
+  width: 1.25rem;
+  height: 1rem;
+  stroke-width: 3px;
+  transform: translateY(1px);
 }

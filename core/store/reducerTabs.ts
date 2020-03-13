@@ -27,6 +27,11 @@ export default function(state = initialState, action: TStoreAction) {
         currentTabId: action.payload
       });
 
+    case "REPLACE_TABS":
+      return Object.assign({}, state, {
+        opened: action.payload
+      });
+
     default:
       return state;
   }

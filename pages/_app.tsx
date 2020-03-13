@@ -6,14 +6,9 @@ import { Provider } from "react-redux";
 import { withRedux } from "core/tools";
 import "core/styles/app.scss";
 
+import Startup from "components/app/Startup/Startup";
+
 const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Store }) => {
-  React.useEffect(() => {
-    const resizeOps = () => document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
-
-    window.addEventListener("resize", resizeOps, { passive: true });
-    return () => window.removeEventListener("resize", resizeOps);
-  }, []);
-
   return (
     <Provider store={reduxStore}>
       <Head>
@@ -22,6 +17,7 @@ const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Stor
         <base target="_blank" />
       </Head>
 
+      <Startup />
       <Component {...pageProps} />
     </Provider>
   );
