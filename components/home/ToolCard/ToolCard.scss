@@ -12,6 +12,21 @@
   height: 100%;
 }
 
+.innerExternal {
+  position: absolute;
+  top: $g-xxs;
+  right: $g-xxs;
+  background: rgba($c-dark, 0.4);
+  backdrop-filter: blur(10px);
+  padding: $g-xs;
+  border-radius: 100%;
+}
+
+.innerExternalIcon {
+  width: 2rem;
+  height: 1.75rem;
+}
+
 .innerAdd {
   position: absolute;
   bottom: 0;
@@ -23,7 +38,7 @@
   height: 30%;
   background: rgba($c-dark, 0.4);
   backdrop-filter: blur(10px);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: $b;
   text-shadow: 0 5px 15px $c-dark;
   transition: color $de;

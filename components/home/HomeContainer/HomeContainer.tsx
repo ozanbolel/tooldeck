@@ -8,7 +8,7 @@ import DeckContainer from "../DeckContainer/DeckContainer";
 import WebFrame from "../WebFrame/WebFrame";
 
 const HomeContainer: React.FC = () => {
-  const currentTabId = useSelector((store: TStore) => store.home.currentTabId);
+  const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
 
   return (
     <div className={css.home}>

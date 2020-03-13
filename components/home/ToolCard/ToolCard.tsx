@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSpring, animated, interpolate } from "react-spring";
+import { Icon } from "core/elements";
 import { TTool } from "core/types";
 import css from "./ToolCard.scss";
 
@@ -21,6 +22,12 @@ const ToolCard: TToolCard = ({ tool, className, explore, onClick }) => {
       () => (
         <div className={css.inner}>
           <img className={css.cover} src={`/static/${tool.id}.jpg`} draggable="false" />
+
+          {!explore && tool.external ? (
+            <div className={css.innerExternal}>
+              <Icon name="link" className={css.innerExternalIcon} />
+            </div>
+          ) : null}
 
           {explore ? <div className={css.innerAdd}>Add to Deck</div> : null}
         </div>

@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 
-import reducerHome from "./reducerHome";
+import reducerTabs from "./reducerTabs";
+import reducerDeck from "./reducerDeck";
 
 const reducerRoot = combineReducers({
-  home: reducerHome
+  tabs: reducerTabs,
+  deck: reducerDeck
 });
 
 export default reducerRoot;

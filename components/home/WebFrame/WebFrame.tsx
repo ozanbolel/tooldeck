@@ -5,7 +5,8 @@ import { Web } from "core/elements";
 import css from "./WebFrame.scss";
 
 const WebFrame: React.FC<{ hidden: boolean }> = ({ hidden }) => {
-  const { tabs, currentTabId } = useSelector((store: TStore) => store.home);
+  const tabs = useSelector((store: TStore) => store.tabs.opened);
+  const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
 
   return (
     <div className={css.webFrame + (hidden ? " " + css.hidden : "")}>

@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": "coolors",
+      "label": "Coolors",
+      "cat": "design",
+      "sub_cat": "colors",
+      "external": false,
+      "url": "coolors.co/browser/latest/1"
+    },
+    {
+      "id": "ihateregex",
+      "label": "iHateRegex",
+      "cat": "dev",
+      "sub_cat": "regex",
+      "external": false,
+      "url": "ihateregex.io"
+    },
+    {
+      "id": "reactdocs",
+      "label": "React Docs",
+      "cat": "dev",
+      "sub_cat": "docs",
+      "external": true,
+      "url": "reactjs.org/docs/getting-started.html"
+    }
+  ]
+}

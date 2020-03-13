@@ -5,7 +5,8 @@ import { TStore } from "core/types";
 import css from "./Tabs.scss";
 
 const Tabs: React.FC = () => {
-  const { tabs, currentTabId } = useSelector((store: TStore) => store.home);
+  const tabs = useSelector((store: TStore) => store.tabs.opened);
+  const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
   const dispatch = useDispatch();
 
   const closeTab = (id: string) => {

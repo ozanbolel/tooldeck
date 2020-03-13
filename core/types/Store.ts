@@ -1,5 +1,12 @@
-import { THome } from "../store/reducerHome";
+import { TStoreTabs } from "../store/reducerTabs";
+import { TStoreDeck } from "../store/reducerDeck";
 
 export type TStore = {
-  home: THome;
+  tabs: TStoreTabs;
+  deck: TStoreDeck;
+};
+
+export type TStoreAction = {
+  type: string;
+  payload: any;
 };

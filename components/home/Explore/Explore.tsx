@@ -1,29 +1,21 @@
 import * as React from "react";
-import { TTool } from "core/types";
+import { useSelector, useDispatch } from "react-redux";
+import { TStore } from "core/types";
+import { tools } from "core/data";
 import css from "./Explore.scss";
 
 import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 
 const Explore: React.FC = () => {
-  const tools: Array<TTool> = [
-    {
-      id: "coolors",
-      label: "Coolors",
-      cat: "design",
-      sub_cat: "colors",
-      external: false,
-      url: "coolors.co/browser/latest/1"
-    },
-    {
-      id: "ihateregex",
-      label: "iHateRegex",
-      cat: "dev",
-      sub_cat: "regex",
-      external: false,
-      url: "ihateregex.io"
+  const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
+  const dispatch = useDispatch();
+
+  const onClickTool = (id: string) => {
+    if (addedToolIds.findIndex((i) => i === id) === -1) {
+      dispatch({ type: "ADD_TOOL", payload: id });
     }
-  ];
+  };
 
   return (
     <>
@@ -35,7 +27,7 @@ const Explore: React.FC = () => {
             <div key={i.id} className={css.gridItemContainer}>
               <div className={css.gridItemShadow} />
 
-              <ToolCard className={css.gridItemCard} tool={i} explore />
+              <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i.id)} explore />
               <Nameplate className={css.gridItemPlate} label={i.label} />
             </div>
           ))}
@@ -50,7 +42,7 @@ const Explore: React.FC = () => {
             <div key={i.id} className={css.gridItemContainer}>
               <div className={css.gridItemShadow} />
 
-              <ToolCard className={css.gridItemCard} tool={i} explore />
+              <ToolCard className={css.gridItemCard} tool={i} onClick={() => onClickTool(i.id)} explore />
               <Nameplate className={css.gridItemPlate} label={i.label} />
             </div>
           ))}

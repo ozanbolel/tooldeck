@@ -1,28 +1,25 @@
-export type THome = {
-  tabs: Array<any>;
+import { TStoreAction } from "core/types";
+
+export type TStoreTabs = {
+  opened: any[];
   currentTabId: string;
 };
 
-type action = {
-  type: string;
-  payload: any;
-};
-
-const initialState: THome = {
-  tabs: [],
+const initialState: TStoreTabs = {
+  opened: [],
   currentTabId: ""
 };
 
-export default function userReducer(state = initialState, action: action) {
+export default function(state = initialState, action: TStoreAction) {
   switch (action.type) {
     case "ADD_TAB":
       return Object.assign({}, state, {
-        tabs: [action.payload, ...state.tabs]
+        opened: [action.payload, ...state.opened]
       });
 
     case "REMOVE_TAB":
       return Object.assign({}, state, {
-        tabs: state.tabs.filter((i) => i.id !== action.payload)
+        opened: state.opened.filter((i) => i.id !== action.payload)
       });
 
     case "SET_CURRENT_TAB_ID":
