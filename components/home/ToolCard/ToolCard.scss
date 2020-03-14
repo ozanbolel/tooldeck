@@ -29,17 +29,19 @@
 
 .innerAdd {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: $g-xs;
+  left: $g-xs;
+  right: $g-xs;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30%;
+  height: 22%;
   background: rgba($c-dark, 0.4);
   backdrop-filter: blur(10px);
+  border-radius: $r-100;
   font-size: 1.2rem;
   font-weight: $b;
+  box-shadow: $s-button;
 }
 
 .cover {
