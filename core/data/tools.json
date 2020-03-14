@@ -23,6 +23,22 @@
       "sub_cat": "docs",
       "external": true,
       "url": "reactjs.org/docs/getting-started.html"
+    },
+    {
+      "id": "brumm",
+      "label": "brumm.af",
+      "cat": "design",
+      "sub_cat": "shadow",
+      "external": false,
+      "url": "brumm.af/shadows"
+    },
+    {
+      "id": "compressjpg",
+      "label": "Compress JPEG",
+      "cat": "dev",
+      "sub_cat": "image",
+      "external": false,
+      "url": "compressjpeg.com"
     }
   ]
 }

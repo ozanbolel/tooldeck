@@ -41,23 +41,35 @@ $card-width: 200px;
   justify-content: center;
   align-items: center;
   height: 60vh;
+  @include no-select;
 }
 
 .emptyImg {
   width: 350px;
   height: 350px;
-  cursor: pointer;
   margin-bottom: $g-m;
 }
 
-.emptyText {
+.emptyText,
+.emptyTextHightlight {
   font-size: 2rem;
   line-height: 3rem;
   font-weight: 100;
-  cursor: pointer;
+  text-align: center;
 }
 
 .emptyTextHightlight {
+  margin-top: $g-m;
+  display: flex;
+  align-items: center;
   color: $c-main;
   font-weight: $b;
+  cursor: pointer;
+}
+
+.emptyTextHightlightIcon {
+  margin-left: $g-xs;
+  width: 1.75rem;
+  height: 1.75rem;
+  stroke-width: 3px;
 }

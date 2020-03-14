@@ -12,7 +12,7 @@ const HomeContainer: React.FC = () => {
 
   return (
     <div className={css.home}>
-      <div className={css.tabs}>
+      <div>
         <Tabs />
       </div>
 

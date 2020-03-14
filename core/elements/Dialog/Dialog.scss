@@ -1,0 +1,127 @@
+@import "core/styles/head";
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialogOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes innerIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes innerOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+.dialog {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba($c-dark, 0.75);
+  animation: dialogIn $d $eio;
+}
+
+.hasAutoclose {
+  cursor: pointer;
+}
+
+.closing {
+  animation: dialogOut $d $eio forwards;
+  cursor: default;
+
+  .inner {
+    animation: innerOut $d $eio forwards;
+
+    .actions {
+      div {
+        cursor: default;
+      }
+    }
+  }
+}
+
+.inner {
+  min-width: 60%;
+  max-width: 90%;
+  background: $c-light;
+  color: $c-dark;
+  padding: $g-s;
+  border-radius: $r;
+  animation: innerIn $d $eio;
+  overflow: hidden;
+  cursor: default;
+}
+
+.innerContent {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  text-align: center;
+  padding: $g-s 0 $g-m 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  @include no-select;
+}
+
+.actionItem {
+  flex: 1;
+  margin-bottom: $g-s;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.actionItemInner {
+  font-size: 1.1rem;
+  font-weight: $b;
+  padding: $g-s;
+  text-align: center;
+  border-radius: $r-100;
+  cursor: pointer;
+}
+
+.highlight {
+  background: $c-main;
+  box-shadow: 0 1px 5.3px rgba(0, 0, 0, 0.04), 0 3.4px 17.9px rgba(0, 0, 0, 0.06), 0 15px 80px rgba(0, 0, 0, 0.1);
+}
+
+// Responsive
+
+@media only screen and (min-width: 768px) {
+  .inner {
+    min-width: 250px;
+    max-width: 300px;
+  }
+}

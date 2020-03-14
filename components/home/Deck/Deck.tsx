@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Icon } from "core/elements";
 import { TTool, TStore } from "core/types";
 import { tools } from "core/data";
 import css from "./Deck.scss";
@@ -52,11 +53,12 @@ const Deck: React.FC = () => {
   } else {
     return (
       <div className={css.empty}>
-        <img src="/static/taken.svg" className={css.emptyImg} />
+        <img src="/static/taken.svg" className={css.emptyImg} draggable="false" />
 
         <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
-        <div className={css.emptyText}>
-          Don't worry, we have plenty 😉 <span className={css.emptyTextHightlight}>Click to Explore</span> now!
+        <div className={css.emptyText}>Don't worry, we have plenty 😉</div>
+        <div className={css.emptyTextHightlight}>
+          Click to Explore <Icon name="arrow-right" className={css.emptyTextHightlightIcon} />
         </div>
       </div>
     );

@@ -7,6 +7,7 @@ import { withRedux } from "core/tools";
 import "core/styles/app.scss";
 
 import Startup from "components/app/Startup/Startup";
+import DialogMapper from "core/elements/Dialog/DialogMapper";
 
 const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Store }) => {
   return (
@@ -19,6 +20,7 @@ const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Stor
 
       <Startup />
       <Component {...pageProps} />
+      <DialogMapper />
     </Provider>
   );
 };
