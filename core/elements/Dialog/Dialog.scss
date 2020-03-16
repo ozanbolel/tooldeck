@@ -47,7 +47,7 @@
   justify-content: center;
   align-items: center;
   background: rgba($c-dark, 0.5);
-  animation: dialogIn $d $eio;
+  animation: dialogIn $d $e-io;
 }
 
 .hasAutoclose {
@@ -55,11 +55,11 @@
 }
 
 .closing {
-  animation: dialogOut $d $eio forwards;
+  animation: dialogOut $d $e-io forwards;
   cursor: default;
 
   .inner {
-    animation: innerOut $d $eio forwards;
+    animation: innerOut $d $e-io forwards;
 
     .actions {
       div {
@@ -70,22 +70,22 @@
 }
 
 .inner {
-  min-width: 250px;
-  max-width: 280px;
+  width: 250px;
   background: $c-light;
   color: $c-dark;
   padding: $g-s;
   border-radius: $r;
-  animation: innerIn $d $eio;
+  animation: innerIn $d $e-io;
   overflow: hidden;
   cursor: default;
 }
 
 .innerContent {
   font-size: 1.2rem;
-  line-height: 1.5rem;
+  font-weight: $b;
+  line-height: 2.2rem;
   text-align: center;
-  padding: $g-s 0 $g-m 0;
+  padding: $g-s $g-s $g-m $g-s;
 }
 
 .actions {
@@ -106,10 +106,16 @@
 .actionItemInner {
   font-size: 1.1rem;
   font-weight: $b;
-  padding: $g-s;
+  padding: ($g-s - 2px);
   text-align: center;
+  border: solid 2px transparent;
   border-radius: $r-100;
+  transition: border-color $de;
   cursor: pointer;
+
+  &:hover {
+    border-color: $c-dark;
+  }
 }
 
 .highlight {

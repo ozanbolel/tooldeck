@@ -1,6 +1,7 @@
 // Text
 
 $f: "Roboto", sans-serif;
+$t: 100;
 $b: 700;
 
 // Color
@@ -38,10 +39,10 @@ $s-button: 0 1px 5.3px rgba(0, 0, 0, 0.04), 0 3.4px 17.9px rgba(0, 0, 0, 0.06), 
 
 // Easing
 
-$eio: ease-in-out;
-$ei: ease-in;
-$eo: ease-out;
-$el: linear;
+$e-io: ease-in-out;
+$e-i: ease-in;
+$e-o: ease-out;
+$e-l: linear;
 
 // Duration
 
@@ -51,7 +52,7 @@ $d: 0.4s;
 $d-l: 0.6s;
 $d-xl: 0.8s;
 
-$de: $d $eo;
+$de: $d $e-o;
 
 // Mixins
 

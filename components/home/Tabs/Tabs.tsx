@@ -5,9 +5,32 @@ import { TStore } from "core/types";
 import css from "./Tabs.scss";
 
 const Tabs: React.FC = () => {
-  const tabs = useSelector((store: TStore) => store.tabs.opened);
-  const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
+  const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);
+  const [tabWidth, setTabWidth] = React.useState(0);
+  const refInnerTabs = React.useRef<any>(null);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const numTabs = tabs.length;
+
+    if (numTabs !== 0) {
+      const calculateTabWidth = () => {
+        const maxTabWidth = 175;
+        const widthInnerTabs = refInnerTabs.current.getBoundingClientRect().width;
+
+        if (widthInnerTabs - numTabs * maxTabWidth > 0) {
+          setTabWidth(maxTabWidth);
+        } else {
+          setTabWidth(widthInnerTabs / numTabs);
+        }
+      };
+
+      calculateTabWidth();
+
+      window.addEventListener("resize", calculateTabWidth, { passive: true });
+      return () => window.removeEventListener("resize", calculateTabWidth);
+    }
+  }, [tabs]);
 
   const closeTab = (id: string) => {
     const deletedTabIndex = tabs.findIndex((i) => i.id === id);
@@ -31,24 +54,31 @@ const Tabs: React.FC = () => {
     dispatch({ type: "SET_CURRENT_TAB_ID", payload: id });
   };
 
+  const renderTabs = () =>
+    tabs.map((i) => (
+      <div key={i.id} className={css.tab + (currentTabId === i.id ? " " + css.tabActive : "")} style={{ width: tabWidth }} onClick={() => onClickTab(i.id)}>
+        <span>{i.label}</span>
+
+        <div className={css.tabCloseIcon} onClick={() => closeTab(i.id)}>
+          <Icon name="x" />
+        </div>
+      </div>
+    ));
+
   return (
-    <div className={css.tabContainer + (currentTabId !== "" ? " " + css.borderNone : "")}>
-      <div
-        className={css.tab + " " + css.tabDeck + (currentTabId === "" ? " " + css.tabActive : "")}
-        onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}
-      >
-        Deck
+    <div className={css.container + (currentTabId !== "" ? " " + css.borderNone : "")}>
+      <div className={css.innerDeck}>
+        <div
+          className={css.tab + " " + css.tabDeck + (currentTabId === "" ? " " + css.tabActive : "")}
+          onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}
+        >
+          <span>Deck</span>
+        </div>
       </div>
 
-      {tabs.map((i) => (
-        <div key={i.id} className={css.tab + (currentTabId === i.id ? " " + css.tabActive : "")} onClick={() => onClickTab(i.id)}>
-          {i.label}
-
-          <div className={css.tabCloseIcon} onClick={() => closeTab(i.id)}>
-            <Icon name="x" />
-          </div>
-        </div>
-      ))}
+      <div ref={refInnerTabs} className={css.innerTabs}>
+        {renderTabs()}
+      </div>
     </div>
   );
 };

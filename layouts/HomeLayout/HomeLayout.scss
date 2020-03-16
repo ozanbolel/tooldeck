@@ -16,12 +16,14 @@
   overflow-y: auto;
 
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $c-divider;
+    background: $c-content;
+    border: solid 1px $c-divider;
+    border-radius: $r-100;
   }
 
   &::-webkit-scrollbar-track,
