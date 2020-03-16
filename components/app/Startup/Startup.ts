@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { TStore } from "core/types";
 
 const Startup: React.FC = () => {
-  const tabs = useSelector((store: TStore) => store.tabs.opened);
+  const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);
   const toolIds = useSelector((store: TStore) => store.deck.toolIds);
   const dispatch = useDispatch();
 
@@ -39,6 +39,26 @@ const Startup: React.FC = () => {
       }
     }
   }, [tabs]);
+
+  // Handle Last Tab
+
+  const [isLastTabOpsDone, setIsLastTabOpsDone] = React.useState(false);
+
+  React.useEffect(() => {
+    const storedLastTab = localStorage.getItem("LAST_TAB");
+
+    if (storedLastTab) {
+      dispatch({ type: "SET_CURRENT_TAB_ID", payload: storedLastTab });
+    }
+
+    setIsLastTabOpsDone(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (isLastTabOpsDone) {
+      localStorage.setItem("LAST_TAB", currentTabId);
+    }
+  }, [currentTabId]);
 
   // Handle Stored Tools
 
