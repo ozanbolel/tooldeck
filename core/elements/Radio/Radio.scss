@@ -17,7 +17,7 @@
   border: solid 2px $c-divider;
   border-left-width: 0;
   border-right-width: 0;
-  transition: background $de, color $de, border-color $d-l $eo;
+  transition: background $de, color $de, border-color $de;
   cursor: pointer;
 
   &:first-of-type {

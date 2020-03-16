@@ -1,19 +1,10 @@
 import * as React from "react";
-import Router from "next/router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Dialog } from "core/elements";
 import { TStore } from "core/types";
 
 export default function DialogMapper() {
   const dialogs = useSelector((store: TStore) => store.app.uiDialogs);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    const removeAll = () => dispatch({ type: "RESET_DIALOGS" });
-
-    Router.events.on("routeChangeStart", removeAll);
-    return () => Router.events.off("routeChangeStart", removeAll);
-  }, []);
 
   return (
     <>

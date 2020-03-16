@@ -6,6 +6,12 @@ $card-width: 200px;
   margin-bottom: $g-xl;
 }
 
+.sectionTitle {
+  font-size: 4rem;
+  font-weight: $b;
+  margin-bottom: $g-xl;
+}
+
 .grid {
   display: grid;
   justify-content: space-between;
@@ -22,7 +28,7 @@ $card-width: 200px;
   position: absolute;
   top: $card-width / 2;
   left: 50%;
-  box-shadow: 0 0 150px 50px $c-light;
+  box-shadow: 0 0 120px 40px $c-light;
 }
 
 .gridItemCard {
@@ -38,9 +44,7 @@ $card-width: 200px;
 .empty {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 60vh;
   @include no-select;
 }
 
@@ -53,18 +57,19 @@ $card-width: 200px;
 .emptyText,
 .emptyTextHightlight {
   font-size: 2rem;
-  line-height: 3rem;
+  line-height: 2.75rem;
   font-weight: 100;
-  text-align: center;
 }
 
 .emptyTextHightlight {
   margin-top: $g-m;
-  display: flex;
-  align-items: center;
-  color: $c-main;
-  font-weight: $b;
-  cursor: pointer;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: $c-main;
+    font-weight: $b;
+  }
 }
 
 .emptyTextHightlightIcon {

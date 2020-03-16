@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { useDialog } from "core/tools";
 import { TStore } from "core/types";
@@ -12,12 +13,13 @@ const Explore: React.FC = () => {
   const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
   const dispatch = useDispatch();
   const dialog = useDialog();
+  const router = useRouter();
 
   const onClickTool = (id: string) => {
     if (addedToolIds.findIndex((i) => i === id) === -1) {
       dispatch({ type: "ADD_TOOL_ID", payload: id });
 
-      dialog("Tool added to your Deck!", [{ label: "Back to Deck", highlight: true }, { label: "Keep Exploring" }]);
+      dialog("Tool added to your Deck!", [{ label: "Back to Deck", callback: () => router.push("/"), highlight: true }, { label: "Keep Exploring" }]);
     } else {
       dialog("This tool is already in your Deck.", { label: "Ok", highlight: true });
     }

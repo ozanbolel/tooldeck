@@ -6,6 +6,11 @@
   height: 100%;
 }
 
+.radio {
+  padding: $g-l 0;
+  text-align: center;
+}
+
 .switch {
   flex: 1;
   overflow-y: auto;
@@ -24,4 +29,12 @@
   &::-webkit-resizer {
     background: $c-dark;
   }
+}
+
+.hidden {
+  display: none;
+}
+
+.page {
+  height: 100%;
 }

@@ -46,7 +46,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba($c-dark, 0.75);
+  background: rgba($c-dark, 0.5);
   animation: dialogIn $d $eio;
 }
 
@@ -70,8 +70,8 @@
 }
 
 .inner {
-  min-width: 60%;
-  max-width: 90%;
+  min-width: 250px;
+  max-width: 280px;
   background: $c-light;
   color: $c-dark;
   padding: $g-s;
@@ -115,13 +115,4 @@
 .highlight {
   background: $c-main;
   box-shadow: $s-button;
-}
-
-// Responsive
-
-@media only screen and (min-width: 768px) {
-  .inner {
-    min-width: 250px;
-    max-width: 300px;
-  }
 }

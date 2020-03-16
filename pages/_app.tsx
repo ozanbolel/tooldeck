@@ -10,6 +10,8 @@ import Startup from "components/app/Startup/Startup";
 import DialogMapper from "core/elements/Dialog/DialogMapper";
 
 const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Store }) => {
+  const Layout = (Component as any).Layout ? (Component as any).Layout : React.Fragment;
+
   return (
     <Provider store={reduxStore}>
       <Head>
@@ -19,7 +21,11 @@ const App = ({ Component, pageProps, reduxStore }: AppProps & { reduxStore: Stor
       </Head>
 
       <Startup />
-      <Component {...pageProps} />
+
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+
       <DialogMapper />
     </Provider>
   );

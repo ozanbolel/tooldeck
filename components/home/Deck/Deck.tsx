@@ -1,6 +1,8 @@
 import * as React from "react";
+import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "core/elements";
+import { useDialog } from "core/tools";
 import { TTool, TStore } from "core/types";
 import { tools } from "core/data";
 import css from "./Deck.scss";
@@ -12,6 +14,7 @@ const Deck: React.FC = () => {
   const tabs = useSelector((store: TStore) => store.tabs.opened);
   const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
   const dispatch = useDispatch();
+  const dialog = useDialog();
 
   const onClickTool = (tool: TTool) => {
     if (!tool.external) {
@@ -23,6 +26,12 @@ const Deck: React.FC = () => {
     } else {
       window.open("https://" + tool.url);
     }
+  };
+
+  const onClickDel = (id: string) => {
+    const callback = () => dispatch({ type: "REMOVE_TOOL_ID", payload: id });
+
+    dialog("Are you sure you want to delete this Tool from your Deck?", [{ label: "Delete", callback, highlight: true }, { label: "Cancel" }]);
   };
 
   const renderAddedTools = () => {
@@ -38,7 +47,7 @@ const Deck: React.FC = () => {
           <div className={css.gridItemShadow} />
 
           <ToolCard className={css.gridItemCard} tool={tool} onClick={() => onClickTool(tool)} />
-          <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => dispatch({ type: "REMOVE_TOOL_ID", payload: tool.id })} />
+          <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
         </div>
       );
     });
@@ -47,6 +56,8 @@ const Deck: React.FC = () => {
   if (addedToolIds.length !== 0) {
     return (
       <div className={css.section}>
+        <div className={css.sectionTitle}>Your Deck</div>
+
         <div className={css.grid}>{renderAddedTools()}</div>
       </div>
     );
@@ -57,8 +68,13 @@ const Deck: React.FC = () => {
 
         <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
         <div className={css.emptyText}>Don't worry, we have plenty 😉</div>
+
         <div className={css.emptyTextHightlight}>
-          Click to Explore <Icon name="arrow-right" className={css.emptyTextHightlightIcon} />
+          <Link href="/explore">
+            <a>
+              Click to Explore <Icon name="arrow-right" className={css.emptyTextHightlightIcon} />
+            </a>
+          </Link>
         </div>
       </div>
     );

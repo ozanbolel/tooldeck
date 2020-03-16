@@ -5,3 +5,8 @@
   box-sizing: border-box;
   padding: $g-xl 15%;
 }
+
+.noVerticalPadding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
