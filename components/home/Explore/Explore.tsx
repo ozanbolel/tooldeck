@@ -19,7 +19,7 @@ const Explore: React.FC = () => {
     if (addedToolIds.findIndex((i) => i === id) === -1) {
       dispatch({ type: "ADD_TOOL_ID", payload: id });
 
-      dialog("Tool added to your Deck!", [{ label: "Back to Deck", callback: () => router.push("/"), highlight: true }, { label: "Keep Exploring" }]);
+      dialog("Tool added to your Deck!", [{ label: "Back to Deck", callback: () => router.push("/deck"), highlight: true }, { label: "Keep Exploring" }]);
     } else {
       dialog("This tool is already in your Deck.", { label: "Ok", highlight: true });
     }

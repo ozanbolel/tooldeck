@@ -11,12 +11,7 @@ import WebFrame from "components/home/WebFrame/WebFrame";
 const HomeLayout: React.FC = ({ children }) => {
   const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
   const router = useRouter();
-
-  const getRadioValue = () => {
-    const path = router.pathname.split("/")[1];
-
-    return path === "" ? "deck" : path;
-  };
+  const pathname = router.pathname.split("/")[1];
 
   return (
     <div className={css.home}>
@@ -30,9 +25,9 @@ const HomeLayout: React.FC = ({ children }) => {
             { label: "Deck", value: "deck" },
             { label: "Explore", value: "explore" }
           ]}
-          initial={getRadioValue()}
-          value={getRadioValue()}
-          onChange={(v: string) => (v === "deck" ? router.push("/") : router.push("/" + v))}
+          initial={pathname}
+          value={pathname}
+          onChange={(v: string) => router.push("/" + v)}
         />
       </div>
 

@@ -1,18 +1,12 @@
 import * as React from "react";
-import { Nest } from "core/elements";
 import { TPage } from "core/types";
-
-import HomeLayout from "layouts/HomeLayout/HomeLayout";
-import Deck from "components/home/Deck/Deck";
 
 const IndexPage: TPage = () => {
   return (
-    <Nest noVerticalPadding>
-      <Deck />
-    </Nest>
+    <a href="https://github.com/login/oauth/authorize?client_id=1bb4dcdce67b173ece58" target="_self">
+      login with github
+    </a>
   );
 };
-
-IndexPage.Layout = HomeLayout;
 
 export default IndexPage;
