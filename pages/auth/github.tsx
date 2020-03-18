@@ -7,9 +7,7 @@ import { TPage } from "core/types";
 
 const LOGIN_WITH_GITHUB = gql`
   query($code: String) {
-    loginWithGithub(code: $code) {
-      name
-    }
+    loginWithGithub(code: $code)
   }
 `;
 
