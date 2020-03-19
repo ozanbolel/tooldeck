@@ -67,9 +67,9 @@ export const Dialog: TDialog = ({ id, content, actions, config }) => {
 
   // Return
 
-  const createButton = (i: TDialogAction, index?: number) => (
+  const createButton = (i: TDialogAction) => (
     <div
-      key={index ? index : undefined}
+      key={i.label}
       onClick={() => {
         i.callback ? i.callback() : null;
         close();
@@ -82,7 +82,7 @@ export const Dialog: TDialog = ({ id, content, actions, config }) => {
 
   const renderButtons = () => {
     if (isArray) {
-      return (actions as TDialogAction[]).map((i, index) => createButton(i, index));
+      return (actions as TDialogAction[]).map((i) => createButton(i));
     } else {
       return createButton(actions as TDialogAction);
     }

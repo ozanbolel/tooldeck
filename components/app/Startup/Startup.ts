@@ -1,11 +1,15 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TStore } from "core/types";
+import { useRouter } from "next/router";
+import { useLazyQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
 const Startup: React.FC = () => {
   const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);
   const toolIds = useSelector((store: TStore) => store.deck.toolIds);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // Handle View Height
 
@@ -15,6 +19,48 @@ const Startup: React.FC = () => {
     window.addEventListener("resize", resizeOps, { passive: true });
     return () => window.removeEventListener("resize", resizeOps);
   }, []);
+
+  // Handle Auth
+
+  const isAuthRoute = router.pathname.includes("/auth");
+  const isRouteProtected = router.pathname === "/" ? false : !isAuthRoute;
+
+  const USER = gql`
+    query {
+      user {
+        name
+        avatarUrl
+      }
+    }
+  `;
+
+  const [fetchUser, { data: dataUser, error: errorUser }] = useLazyQuery(USER, { fetchPolicy: "no-cache" });
+
+  React.useEffect(() => {
+    const login = localStorage.getItem("LOGIN");
+
+    if (login) {
+      if (!isAuthRoute) {
+        if (!isRouteProtected) {
+          router.replace("/deck");
+        }
+
+        fetchUser();
+      }
+    } else {
+      if (isRouteProtected && !isAuthRoute) {
+        router.replace("/");
+      }
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const user = dataUser?.user;
+
+    if (user) {
+      dispatch({ type: "SET_USER", payload: user });
+    }
+  }, [dataUser]);
 
   // Handle Stored Tabs
 

@@ -11,6 +11,7 @@ import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 
 const Deck: React.FC = () => {
+  const user = useSelector((store: TStore) => store.user);
   const tabs = useSelector((store: TStore) => store.tabs.opened);
   const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
   const dispatch = useDispatch();
@@ -64,6 +65,8 @@ const Deck: React.FC = () => {
   } else {
     return (
       <div className={css.empty}>
+        <img src={user.avatarUrl} draggable="false" />
+
         <img src="/static/taken.svg" className={css.emptyImg} draggable="false" />
 
         <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
