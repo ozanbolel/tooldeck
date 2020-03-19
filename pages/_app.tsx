@@ -15,7 +15,12 @@ import DialogMapper from "core/elements/Dialog/DialogMapper";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const Layout = (Component as any).Layout ? (Component as any).Layout : React.Fragment;
-  const client = new ApolloClient({ uri: server.uri, fetch });
+
+  const client = new ApolloClient({
+    uri: server.uri,
+    fetch,
+    credentials: "include"
+  });
 
   const getStore = () => {
     if (typeof window === "undefined") {
