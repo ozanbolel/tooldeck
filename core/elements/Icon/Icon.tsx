@@ -1,5 +1,5 @@
 import * as React from "react";
-import css from "./Icon.scss";
+import css from "./Icon.module.scss";
 
 type TIcon = React.FC<{
   name: string;

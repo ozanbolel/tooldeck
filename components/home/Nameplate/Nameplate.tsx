@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Icon } from "core/elements";
-import css from "./Nameplate.scss";
+import css from "./Nameplate.module.scss";
 
 type TNameplate = React.FC<{
   label: string;

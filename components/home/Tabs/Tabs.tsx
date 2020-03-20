@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "core/elements";
 import { TStore } from "core/types";
-import css from "./Tabs.scss";
+import css from "./Tabs.module.scss";
 
 const Tabs: React.FC = () => {
   const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);

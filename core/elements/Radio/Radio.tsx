@@ -1,5 +1,5 @@
 import * as React from "react";
-import css from "./Radio.scss";
+import css from "./Radio.module.scss";
 
 type TItem = {
   label: string;

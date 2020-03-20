@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { Radio } from "core/elements";
 import { TStore } from "core/types";
-import css from "./HomeLayout.scss";
+import css from "./HomeLayout.module.scss";
 
 import Tabs from "components/home/Tabs/Tabs";
 import WebFrame from "components/home/WebFrame/WebFrame";

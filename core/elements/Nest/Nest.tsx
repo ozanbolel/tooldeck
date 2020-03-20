@@ -1,5 +1,5 @@
 import * as React from "react";
-import css from "./Nest.scss";
+import css from "./Nest.module.scss";
 
 type TNest = React.FC<{
   className?: string;

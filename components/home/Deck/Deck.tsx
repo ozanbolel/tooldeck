@@ -5,7 +5,7 @@ import { Icon } from "core/elements";
 import { useDialog } from "core/tools";
 import { TTool, TStore } from "core/types";
 import { tools } from "core/data";
-import css from "./Deck.scss";
+import css from "./Deck.module.scss";
 
 import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";

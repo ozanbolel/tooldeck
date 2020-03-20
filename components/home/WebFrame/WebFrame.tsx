@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { TStore } from "core/types";
 import { Web } from "core/elements";
-import css from "./WebFrame.scss";
+import css from "./WebFrame.module.scss";
 
 const WebFrame: React.FC<{ hidden: boolean }> = ({ hidden }) => {
   const tabs = useSelector((store: TStore) => store.tabs.opened);

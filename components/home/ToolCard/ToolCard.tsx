@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSpring, animated, interpolate } from "react-spring";
 import { Icon } from "core/elements";
 import { TTool } from "core/types";
-import css from "./ToolCard.scss";
+import css from "./ToolCard.module.scss";
 
 import useCardHandlers from "./utils/useCardHandlers";
 

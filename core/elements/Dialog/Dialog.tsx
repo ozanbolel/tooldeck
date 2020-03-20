@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { TDialogObject, TDialogConfig, TDialogAction } from "core/types";
-import css from "./Dialog.scss";
+import css from "./Dialog.module.scss";
 
 type TDialog = React.FC<{
   id: TDialogObject["id"];

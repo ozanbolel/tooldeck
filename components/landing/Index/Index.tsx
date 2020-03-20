@@ -1,5 +1,5 @@
 import * as React from "react";
-import css from "./Index.scss";
+import css from "./Index.module.scss";
 
 const Index: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import * as React from "react";
-import css from "./Web.scss";
+import css from "./Web.module.scss";
 
 type props = {
   url: string;

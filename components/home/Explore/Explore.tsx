@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useDialog } from "core/tools";
 import { TStore } from "core/types";
 import { tools } from "core/data";
-import css from "./Explore.scss";
+import css from "./Explore.module.scss";
 
 import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";

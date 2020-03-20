@@ -2,6 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "ToolDeck Client Dev",
       "type": "npm",
       "script": "start",
       "group": {
