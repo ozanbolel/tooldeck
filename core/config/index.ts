@@ -1,3 +1,2 @@
-import server from "./server.json";
-
-export { server };
+export * from "./isProduction";
+export * from "./server";
