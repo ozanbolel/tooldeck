@@ -1,6 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import fetch from "isomorphic-fetch";
@@ -15,11 +16,21 @@ import DialogMapper from "core/elements/Dialog/DialogMapper";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const Layout = (Component as any).Layout ? (Component as any).Layout : React.Fragment;
+  const router = useRouter();
 
   const client = new ApolloClient({
     uri: server.uri,
     fetch,
-    credentials: "include"
+    credentials: "include",
+    onError: (error) => {
+      if (typeof window !== "undefined") {
+        if (error.graphQLErrors?.findIndex((i: any) => i.code === "INVALID_TOKEN") !== -1) {
+          localStorage.removeItem("LOGIN");
+
+          router.replace("/");
+        }
+      }
+    }
   });
 
   const getStore = () => {

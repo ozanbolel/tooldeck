@@ -1,26 +1,15 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 import { useDialog } from "core/tools";
 import { TPage } from "core/types";
-import { useDispatch } from "react-redux";
-
-const LOGIN_WITH_GITHUB = gql`
-  query($code: String) {
-    loginWithGithub(code: $code) {
-      name
-      avatarUrl
-    }
-  }
-`;
+import { LOGIN_WITH_GITHUB } from "core/mutations";
 
 const GithubRedirect: TPage = () => {
   const router = useRouter();
   const { code } = router.query;
-  const [loginWithGithub, { data, error }] = useLazyQuery(LOGIN_WITH_GITHUB, { variables: { code }, fetchPolicy: "no-cache" });
+  const [loginWithGithub, { data, error }] = useMutation(LOGIN_WITH_GITHUB, { variables: { code } });
   const dialog = useDialog();
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (code) {
@@ -31,9 +20,6 @@ const GithubRedirect: TPage = () => {
   React.useEffect(() => {
     if (data) {
       localStorage.setItem("LOGIN", new Date().getTime().toString());
-
-      const user = data.loginWithGithub;
-      dispatch({ type: "SET_USER", payload: { name: user.name, avatarUrl: user.avatarUrl } });
 
       router.replace("/deck");
     }

@@ -2,14 +2,31 @@
 
 $card-width: 200px;
 
-.section {
+.deck {
   margin-bottom: $g-xl;
 }
 
-.sectionTitle {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $g-xl;
+}
+
+.headerTitle {
   font-size: 4rem;
   font-weight: $b;
-  margin-bottom: $g-xl;
+}
+
+.headerProfile {
+  cursor: pointer;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: $r-100;
+    border: solid 1px $c-divider;
+  }
 }
 
 .grid {
@@ -49,8 +66,8 @@ $card-width: 200px;
 }
 
 .emptyImg {
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   margin-bottom: $g-m;
 }
 
