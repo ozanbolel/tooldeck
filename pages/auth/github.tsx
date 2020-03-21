@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { useDialog } from "core/tools";
 import { TPage } from "core/types";
 import { LOGIN_WITH_GITHUB } from "core/mutations";
+import AuthRedirect from "components/app/AuthRedirect/AuthRedirect";
 
 const GithubRedirect: TPage = () => {
   const router = useRouter();
@@ -34,7 +35,7 @@ const GithubRedirect: TPage = () => {
     }
   }, [error]);
 
-  return null;
+  return <AuthRedirect />;
 };
 
 export default GithubRedirect;
