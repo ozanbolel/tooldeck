@@ -21,11 +21,16 @@ $card-width: 200px;
 .headerProfile {
   cursor: pointer;
 
+  &:hover img {
+    border-color: $c-main;
+  }
+
   img {
     width: 4rem;
     height: 4rem;
     border-radius: $r-100;
-    border: solid 1px $c-divider;
+    border: solid 3px $c-divider;
+    transition: border-color $de;
   }
 }
 

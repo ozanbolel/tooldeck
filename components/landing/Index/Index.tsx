@@ -26,7 +26,7 @@ const Index: React.FC = () => {
     <div className={css.container}>
       <div className={css.title}>Welcome to ToolDeck</div>
 
-      <div className={css.desc}>We don't have a landing page, just login for now...</div>
+      <div className={css.desc}>We don't have a landing page, but we have login buttons...</div>
 
       <div className={css.login}>
         <button className={css.withGithub} onClick={() => onClickGithub()}>

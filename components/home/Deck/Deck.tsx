@@ -81,7 +81,7 @@ const Deck: React.FC = () => {
             className={css.headerProfile}
             onClick={() =>
               dialog(
-                data.user.name,
+                "Name: " + data.user.name,
                 [
                   {
                     label: "Logout",
