@@ -28,14 +28,13 @@ const GithubRedirect: TPage = () => {
 
   React.useEffect(() => {
     if (error) {
-      console.log(error);
       dialog("Sorry, we couldn’t log you in.", { label: "Ok", highlight: true });
 
       router.replace("/");
     }
   }, [error]);
 
-  return <AuthRedirect />;
+  return <AuthRedirect serviceName="GitHub" />;
 };
 
 export default GithubRedirect;

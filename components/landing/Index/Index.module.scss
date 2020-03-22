@@ -1,8 +1,63 @@
 @import "core/styles/head";
 
-.withGithub {
-  background: $c-main;
-  color: $c-dark;
-  padding: $g-s;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 3.5rem;
   font-weight: $b;
+  margin-bottom: $g-s;
+}
+
+.desc {
+  font-size: 2.5rem;
+  font-weight: $t;
+  margin-bottom: $g-xl;
+}
+
+.login {
+  button {
+    $icon-width: 22px;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: $b;
+    padding: 1.6rem $icon-width 1.6rem ($icon-width * 2.5);
+    border-radius: $r-100;
+    transition: background $de, color $de;
+    margin-right: $g-m;
+
+    svg {
+      position: absolute;
+      left: $icon-width;
+      width: $icon-width;
+      height: $icon-width;
+      margin-right: $g-xs;
+    }
+
+    &:hover {
+      background: $c-main;
+      color: $c-dark;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.withGithub {
+  background: #24292e;
+}
+
+.withTwitter {
+  background: #1da1f2;
 }
