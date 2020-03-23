@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { Icon } from "core/elements";
+import { Icon, Button } from "core/elements";
 import { useDialog } from "core/tools";
 import { LOGOUT } from "core/mutations";
 import { TTool, TStore } from "core/types";
@@ -59,16 +59,14 @@ const Deck: React.FC = () => {
       addedTools.push(tools.find((tool) => tool.id === addedToolIds[index]));
     }
 
-    return addedTools.map((tool: any) => {
-      return (
-        <div key={tool.id} className={css.gridItemContainer}>
-          <div className={css.gridItemShadow} />
+    return addedTools.map((tool: any) => (
+      <div key={tool.id} className={css.gridItemContainer}>
+        <div className={css.gridItemShadow} />
 
-          <ToolCard className={css.gridItemCard} tool={tool} onClick={() => onClickTool(tool)} />
-          <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
-        </div>
-      );
-    });
+        <ToolCard className={css.gridItemCard} id={tool.id} external={tool.external} onClick={() => onClickTool(tool)} />
+        <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
+      </div>
+    ));
   };
 
   return (
@@ -76,32 +74,32 @@ const Deck: React.FC = () => {
       <div className={css.header}>
         <div className={css.headerTitle}>Your Deck</div>
 
-        {data?.user ? (
-          <div
-            className={css.headerProfile}
-            onClick={() =>
-              dialog(
-                "Name: " + data.user.name,
-                [
-                  {
-                    label: "Logout",
-                    callback: () => {
-                      logout();
+        <div
+          className={css.headerProfile}
+          onClick={() =>
+            dialog(
+              "Name: " + data.user.name,
+              [
+                {
+                  label: "Logout",
+                  callback: () => {
+                    logout();
 
-                      localStorage.removeItem("LOGIN");
+                    localStorage.removeItem("LOGIN");
 
-                      router.push("/");
-                    }
-                  },
-                  { label: "Close" }
-                ],
-                { autoclose: true }
-              )
-            }
-          >
-            <img src={data.user.avatarUrl} draggable="false" />
+                    router.push("/");
+                  }
+                },
+                { label: "Close" }
+              ],
+              { autoclose: true }
+            )
+          }
+        >
+          <div className={css.headerProfileAvatar}>
+            {data && data.user.avatarUrl ? <img src={data.user.avatarUrl} draggable="false" /> : <Icon name="user" />}
           </div>
-        ) : null}
+        </div>
       </div>
 
       {addedToolIds.length !== 0 ? (
@@ -113,13 +111,11 @@ const Deck: React.FC = () => {
           <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
           <div className={css.emptyText}>Don't worry, we have plenty 😉</div>
 
-          <div className={css.emptyTextHightlight}>
-            <Link href="/explore">
-              <a>
-                Click to Explore <Icon name="arrow-right" className={css.emptyTextHightlightIcon} />
-              </a>
-            </Link>
-          </div>
+          <Link href="/explore">
+            <a>
+              <Button label="Explore" iconName="arrow-right" className={css.emptyButton} />
+            </a>
+          </Link>
         </div>
       )}
     </div>

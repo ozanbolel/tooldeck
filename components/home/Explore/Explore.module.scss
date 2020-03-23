@@ -1,42 +1,67 @@
 @import "core/styles/head";
 
-$card-width: 200px;
-
 .section {
   margin-bottom: $g-xxl;
 }
 
-.sectionTitle {
-  font-size: 4rem;
+.title {
+  font-size: $h1;
   font-weight: $b;
   margin-bottom: $g-xl;
 }
 
 .grid {
+  $column-num: 3;
+  $column-gap: 3%;
+  $column-width: (100% / $column-num) - $column-gap;
+
   display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
-  grid-gap: $g-xl;
+  grid-template-columns: repeat($column-num, $column-width);
+  column-gap: $column-gap;
+  row-gap: $g-l;
   @include no-select;
 }
 
-.gridItemContainer {
-  position: relative;
+.gridItem {
+  display: flex;
+  align-items: center;
+  background: $c-content;
+  padding: $g-s;
+  border-radius: $r;
+  overflow: hidden;
+
+  .cover {
+    width: 100px;
+    height: 100px;
+    border-radius: $r;
+    object-position: left;
+    object-fit: cover;
+    border: solid 3px $c-divider;
+    transition: border-color $de;
+    margin-right: $g-m;
+
+    &:hover {
+      border-color: $c-main;
+    }
+  }
 }
 
-.gridItemShadow {
-  position: absolute;
-  top: $card-width / 2;
-  left: 50%;
-  box-shadow: 0 0 120px 40px $c-light;
-}
+.gridItemInfo {
+  .label {
+    font-size: $h4;
+    font-weight: $b;
+  }
 
-.gridItemCard {
-  width: 100%;
-  height: $card-width;
-}
+  .desc {
+    margin-top: $g-xxs;
+  }
 
-.gridItemPlate {
-  margin-top: $g-m;
-  position: relative;
+  button {
+    margin-top: $g-s;
+    background: $c-main;
+    color: $c-dark;
+    font-weight: $b;
+    padding: $g-xxs $g-s;
+    border-radius: $r-100;
+  }
 }

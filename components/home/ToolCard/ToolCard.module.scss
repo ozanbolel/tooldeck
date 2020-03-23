@@ -27,30 +27,6 @@
   height: 1.75rem;
 }
 
-.innerAdd {
-  position: absolute;
-  bottom: $g-xs;
-  left: $g-xs;
-  right: $g-xs;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 22%;
-  box-sizing: border-box;
-  background: rgba($c-dark, 0.5);
-  backdrop-filter: blur(12px);
-  border: solid 2px transparent;
-  border-radius: $r-100;
-  font-size: 1.2rem;
-  font-weight: $b;
-  box-shadow: $s-button;
-  transition: border-color $de;
-}
-
-.card:hover .innerAdd {
-  border-color: $c-dark;
-}
-
 .cover {
   width: 100%;
   height: 100%;

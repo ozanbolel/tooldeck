@@ -81,7 +81,7 @@
 }
 
 .innerContent {
-  font-size: 1.2rem;
+  font-size: $h4;
   font-weight: $b;
   line-height: 2.2rem;
   text-align: center;
@@ -104,7 +104,7 @@
 }
 
 .actionItemInner {
-  font-size: 1.1rem;
+  font-size: $h5;
   font-weight: $b;
   padding: ($g-s - 2px);
   text-align: center;

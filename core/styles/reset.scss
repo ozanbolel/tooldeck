@@ -23,6 +23,7 @@ body > div {
 a {
   color: unset;
   text-decoration: none;
+  -webkit-user-drag: none;
 }
 
 button {

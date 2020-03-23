@@ -1,0 +1,28 @@
+@import "core/styles/head";
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: $c-main;
+  color: $c-dark;
+  font-size: $h4;
+  font-weight: $b;
+  padding: ($g-s - 2px) ($g-l - $g-xs) ($g-s - 2px) $g-l;
+  border: solid 2px $c-divider;
+  border-radius: $r-100;
+  transition: background $de, color $de;
+  cursor: pointer;
+
+  &:hover {
+    background: $c-content;
+    color: $c-main;
+  }
+
+  svg {
+    margin-left: $g-s;
+    width: 1.6rem;
+    height: 1.6rem;
+    transform: translateY(0.05rem);
+  }
+}
