@@ -1,2 +1,2 @@
-export * from "./useTransition";
 export * from "./useDialog";
+export * from "./useModal";

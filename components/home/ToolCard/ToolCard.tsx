@@ -1,19 +1,18 @@
 import * as React from "react";
 import { useSpring, animated, interpolate } from "react-spring";
 import { Icon } from "core/elements";
-import { TTool } from "core/types";
 import css from "./ToolCard.module.scss";
-
+import { TTool } from "core/types";
 import useCardHandlers from "./utils/useCardHandlers";
 
 type TToolCard = React.FC<{
-  id: string;
-  external?: boolean;
+  src: TTool["iconUrl"];
+  external?: TTool["external"];
   className?: string;
   onClick?: Function;
 }>;
 
-const ToolCard: TToolCard = ({ id, external, className, onClick }) => {
+const ToolCard: TToolCard = ({ src, external, className, onClick }) => {
   const [spring, setSpring] = useSpring(() => ({ x: 0, y: 0, s: 1 }));
   const cardHandlers = useCardHandlers(spring, setSpring);
 
@@ -21,7 +20,7 @@ const ToolCard: TToolCard = ({ id, external, className, onClick }) => {
     React.useMemo(
       () => (
         <div className={css.inner}>
-          <img className={css.cover} src={`/static/${id}.jpg`} draggable="false" />
+          <img className={css.cover} src={"https://" + src} draggable="false" />
 
           {external ? (
             <div className={css.innerExternal}>
@@ -30,7 +29,7 @@ const ToolCard: TToolCard = ({ id, external, className, onClick }) => {
           ) : null}
         </div>
       ),
-      [id, external]
+      [src, external]
     );
 
   return (

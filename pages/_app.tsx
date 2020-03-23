@@ -13,6 +13,7 @@ import "core/styles/app.scss";
 import reducerRoot from "core/store/reducerRoot";
 import Startup from "components/app/Startup/Startup";
 import DialogMapper from "core/elements/Dialog/DialogMapper";
+import ModalMapper from "core/elements/Modal/ModalMapper";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const Layout = (Component as any).Layout ? (Component as any).Layout : React.Fragment;
@@ -60,6 +61,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Component {...pageProps} />
         </Layout>
 
+        <ModalMapper />
         <DialogMapper />
       </Provider>
     </ApolloProvider>

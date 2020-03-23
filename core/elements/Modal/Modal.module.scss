@@ -1,0 +1,35 @@
+@import "core/styles/head";
+@import "core/styles/animation";
+
+.container {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba($c-dark, 0.9);
+  animation: fadeIn $d $e-io;
+
+  &.hasAutoclose {
+    cursor: pointer;
+  }
+
+  &.closing {
+    animation: fadeOut $d $e-io forwards;
+    cursor: default;
+
+    .content {
+      animation: scaleOut $d $e-io forwards;
+    }
+  }
+}
+
+.content {
+  position: relative;
+  animation: scaleIn $d $e-io;
+  cursor: default;
+}

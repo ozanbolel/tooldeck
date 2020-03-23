@@ -63,7 +63,7 @@ const Deck: React.FC = () => {
       <div key={tool.id} className={css.gridItemContainer}>
         <div className={css.gridItemShadow} />
 
-        <ToolCard className={css.gridItemCard} id={tool.id} external={tool.external} onClick={() => onClickTool(tool)} />
+        <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
         <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
       </div>
     ));

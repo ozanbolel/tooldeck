@@ -1,18 +1,11 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { TDialogObject, TDialogConfig, TDialogAction } from "core/types";
+import { TDialogObject, TDialogAction } from "core/types";
 import css from "./Dialog.module.scss";
 
-type TDialog = React.FC<{
-  id: TDialogObject["id"];
-  content: TDialogObject["content"];
-  actions: TDialogObject["actions"];
-  config?: TDialogConfig;
-}>;
+type TDialog = React.FC<TDialogObject>;
 
 export const Dialog: TDialog = ({ id, content, actions, config }) => {
-  const autoclose = config ? config.autoclose : undefined;
-
   const [isClosing, setIsClosing] = React.useState(false);
   const dispatch = useDispatch();
 
@@ -20,7 +13,7 @@ export const Dialog: TDialog = ({ id, content, actions, config }) => {
 
   // Close on key press
 
-  if (autoclose) {
+  if (config?.autoclose) {
     React.useEffect(() => {
       function handleKeyPress(e: KeyboardEvent) {
         e.preventDefault();
@@ -58,10 +51,8 @@ export const Dialog: TDialog = ({ id, content, actions, config }) => {
   };
 
   const closeFromOut = (e: React.MouseEvent) => {
-    if (autoclose) {
-      if ((e.target as HTMLElement).classList.contains(css.dialog)) {
-        close();
-      }
+    if ((e.target as HTMLElement).classList.contains(css.dialog)) {
+      close();
     }
   };
 
@@ -89,7 +80,10 @@ export const Dialog: TDialog = ({ id, content, actions, config }) => {
   };
 
   return (
-    <div className={css.dialog + (autoclose ? " " + css.hasAutoclose : "") + (isClosing ? " " + css.closing : "")} onClick={(e) => closeFromOut(e)}>
+    <div
+      className={css.dialog + (config?.autoclose ? " " + css.hasAutoclose : "") + (isClosing ? " " + css.closing : "")}
+      onClick={config?.autoclose ? (e) => closeFromOut(e) : undefined}
+    >
       <div className={css.inner}>
         <div className={css.innerContent}>{typeof content === "string" ? <span>{content}</span> : content}</div>
 

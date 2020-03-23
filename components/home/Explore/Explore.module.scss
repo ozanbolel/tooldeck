@@ -54,14 +54,19 @@
 
   .desc {
     margin-top: $g-xxs;
+    margin-bottom: $g-s;
   }
 
   button {
-    margin-top: $g-s;
     background: $c-main;
     color: $c-dark;
     font-weight: $b;
     padding: $g-xxs $g-s;
     border-radius: $r-100;
+    margin-right: $g-xs;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
 }
