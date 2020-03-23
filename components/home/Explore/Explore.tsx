@@ -2,14 +2,11 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { useDialog, useModal } from "core/tools";
-import { TStore, TModalComponent } from "core/types";
+import { TStore, TTool } from "core/types";
 import { tools } from "core/data";
 import css from "./Explore.module.scss";
 import ToolCard from "../ToolCard/ToolCard";
-
-const Selam: TModalComponent = ({ closeModal }) => {
-  return <div style={{ background: "white", color: "black", padding: 30, borderRadius: 10 }}>ljdafjkdskj</div>;
-};
+import ToolDetails from "../ToolDetails/ToolDetails";
 
 const Explore: React.FC = () => {
   const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
@@ -28,7 +25,7 @@ const Explore: React.FC = () => {
     }
   };
 
-  const onClickView = (id: string) => modal(Selam, { autoclose: true });
+  const onClickView = (tool: TTool) => modal(ToolDetails, { autoclose: true, payload: { tool, onClickAdd } });
 
   return (
     <>
@@ -38,14 +35,14 @@ const Explore: React.FC = () => {
         <div className={css.grid}>
           {tools.map((tool) => (
             <div key={tool.id} className={css.gridItem}>
-              <ToolCard src={tool.coverUrl || tool.iconUrl} className={css.cover} onClick={() => onClickView(tool.id)} />
+              <ToolCard src={tool.coverUrl || tool.iconUrl} className={css.cover} onClick={() => onClickView(tool)} />
 
               <div className={css.gridItemInfo}>
                 <div className={css.label}>{tool.label}</div>
                 <div className={css.desc}>{tool.desc}</div>
 
                 <button onClick={() => onClickAdd(tool.id)}>ADD</button>
-                <button onClick={() => onClickView(tool.id)}>VIEW</button>
+                <button onClick={() => onClickView(tool)}>VIEW</button>
               </div>
             </div>
           ))}

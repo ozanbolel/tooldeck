@@ -3,7 +3,7 @@
     {
       "id": "coolors",
       "label": "Coolors",
-      "desc": "Renk seç.",
+      "desc": "Color palettes for your projects.",
       "cat": "design",
       "sub_cat": "colors",
       "url": "coolors.co/browser/latest/1",
@@ -14,7 +14,7 @@
     {
       "id": "ihateregex",
       "label": "iHateRegex",
-      "desc": "Renk seç.",
+      "desc": "Stop hating and start learning.",
       "cat": "dev",
       "sub_cat": "regex",
       "url": "ihateregex.io",
@@ -25,7 +25,7 @@
     {
       "id": "reactdocs",
       "label": "React Docs",
-      "desc": "Renk seç.",
+      "desc": "React documentation and related resources.",
       "cat": "dev",
       "sub_cat": "docs",
       "url": "reactjs.org/docs/getting-started.html",
@@ -36,7 +36,7 @@
     {
       "id": "brumm",
       "label": "brumm.af",
-      "desc": "Renk seç.",
+      "desc": "CSS shadow generator.",
       "cat": "design",
       "sub_cat": "shadow",
       "url": "brumm.af/shadows",
@@ -47,7 +47,7 @@
     {
       "id": "compressjpg",
       "label": "Compress JPEG",
-      "desc": "Renk seç.",
+      "desc": "Compress JPEG images.",
       "cat": "dev",
       "sub_cat": "image",
       "url": "compressjpeg.com",

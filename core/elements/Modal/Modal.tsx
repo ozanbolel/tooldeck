@@ -21,7 +21,7 @@ export const Modal: TModal = ({ id, content, config }) => {
     }
   };
 
-  const renderContent = () => React.useMemo(() => React.createElement(content, { closeModal }), []);
+  const renderContent = () => React.useMemo(() => React.createElement(content, { closeModal, payload: config?.payload }), []);
 
   return (
     <div

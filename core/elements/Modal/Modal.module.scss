@@ -12,7 +12,7 @@
   justify-content: center;
   align-items: center;
   background: rgba($c-dark, 0.9);
-  animation: fadeIn $d $e-io;
+  animation: fadeIn $de;
 
   &.hasAutoclose {
     cursor: pointer;
@@ -30,6 +30,6 @@
 
 .content {
   position: relative;
-  animation: scaleIn $d $e-io;
+  animation: scaleIn $de;
   cursor: default;
 }
