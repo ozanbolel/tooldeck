@@ -5,7 +5,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon, Button } from "core/elements";
 import { useDialog } from "core/tools";
-import { LOGOUT } from "core/mutations";
+import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
 import { tools } from "core/data";
 import { GET_USER } from "core/queries";
@@ -16,8 +16,8 @@ import Nameplate from "../Nameplate/Nameplate";
 
 const Deck: React.FC = () => {
   const { data } = useQuery(GET_USER);
+  const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const tabs = useSelector((store: TStore) => store.tabs.opened);
-  const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
   const dispatch = useDispatch();
   const dialog = useDialog();
   const router = useRouter();
@@ -36,7 +36,13 @@ const Deck: React.FC = () => {
   };
 
   const onClickDel = (id: string) => {
-    const callback = () => dispatch({ type: "REMOVE_TOOL_ID", payload: id });
+    const newDataDeckToolIds = data.deck.toolIds.filter((i: string) => i !== id);
+
+    const callback = () =>
+      removeFromDeck({
+        variables: { toolId: id },
+        update: (cache) => cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newDataDeckToolIds } } })
+      });
 
     dialog(
       "Are you sure you want to delete this Tool from your Deck?",
@@ -55,8 +61,8 @@ const Deck: React.FC = () => {
   const renderAddedTools = () => {
     let addedTools = [];
 
-    for (let index = 0; index < addedToolIds.length; index++) {
-      addedTools.push(tools.find((tool) => tool.id === addedToolIds[index]));
+    for (let index = 0; index < data?.deck.toolIds.length; index++) {
+      addedTools.push(tools.find((tool) => tool.id === data?.deck.toolIds[index]));
     }
 
     return addedTools.map((tool: any) => (
@@ -102,7 +108,7 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      {addedToolIds.length !== 0 ? (
+      {data?.deck.toolIds.length !== 0 ? (
         <div className={css.grid}>{renderAddedTools()}</div>
       ) : (
         <div className={css.empty}>

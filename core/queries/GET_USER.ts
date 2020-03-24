@@ -6,5 +6,8 @@ export const GET_USER = gql`
       name
       avatarUrl
     }
+    deck {
+      toolIds
+    }
   }
 `;

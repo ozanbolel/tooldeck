@@ -1,29 +1,32 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from "react-redux";
 import { useDialog, useModal } from "core/tools";
-import { TStore, TTool } from "core/types";
+import { TTool } from "core/types";
 import { tools } from "core/data";
 import css from "./Explore.module.scss";
 import ToolCard from "../ToolCard/ToolCard";
 import ToolDetails from "../ToolDetails/ToolDetails";
+import { useMutation } from "@apollo/react-hooks";
+import { ADD_TO_DECK } from "core/mutations";
 
 const Explore: React.FC = () => {
-  const addedToolIds = useSelector((store: TStore) => store.deck.toolIds);
-  const dispatch = useDispatch();
+  const [addToDeck] = useMutation(ADD_TO_DECK);
   const dialog = useDialog();
   const modal = useModal();
   const router = useRouter();
 
-  const onClickAdd = (id: string) => {
-    if (addedToolIds.findIndex((i) => i === id) === -1) {
-      dispatch({ type: "ADD_TOOL_ID", payload: id });
-
-      dialog("Tool added to your Deck!", [{ label: "Back to Deck", callback: () => router.push("/deck"), highlight: true }, { label: "Keep Exploring" }]);
-    } else {
-      dialog("This tool is already in your Deck.", { label: "Ok", highlight: true });
-    }
-  };
+  const onClickAdd = async (id: string) =>
+    addToDeck({ variables: { toolId: id } })
+      .then(() => {
+        dialog("Tool added to your Deck!", [{ label: "Back to Deck", callback: () => router.push("/deck"), highlight: true }, { label: "Keep Exploring" }]);
+      })
+      .catch((e) => {
+        if (e.graphQLErrors[0].code === "ALREADY_IN_DECK") {
+          dialog("This tool is already in your Deck.", { label: "Ok", highlight: true });
+        } else {
+          dialog("Error: Please try again.", { label: "Ok", highlight: true });
+        }
+      });
 
   const onClickView = (tool: TTool) => modal(ToolDetails, { autoclose: true, payload: { tool, onClickAdd } });
 
