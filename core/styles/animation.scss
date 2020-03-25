@@ -33,3 +33,18 @@
     transform: scale(0.5);
   }
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Mixins
+
+@mixin a-spin {
+  animation: spin 1.2s linear infinite;
+}

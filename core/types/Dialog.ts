@@ -4,6 +4,7 @@ export type TDialogAction = {
   label: string;
   callback?: Function;
   highlight?: boolean;
+  warn?: boolean;
 };
 
 export type TDialogConfig = {

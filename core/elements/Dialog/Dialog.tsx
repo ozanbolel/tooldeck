@@ -67,7 +67,7 @@ export const Dialog: TDialog = ({ id, content, actions, config }) => {
       }}
       className={css.actionItem}
     >
-      <div className={css.actionItemInner + (i.highlight ? " " + css.highlight : "")}>{i.label}</div>
+      <div className={css.actionItemInner + (i.highlight ? " " + css.highlight : "") + (i.warn ? " " + css.warn : "")}>{i.label}</div>
     </div>
   );
 

@@ -45,11 +45,13 @@
   }
 }
 
-.add {
+.addButton {
   position: absolute;
   top: $g-m;
   left: $g-m;
-  padding: $g-xs $g-m;
+  width: 12rem;
+  font-size: $h5;
+  padding: $g-xs 0;
   box-shadow: $s-button;
 }
 

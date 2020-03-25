@@ -5,3 +5,4 @@ export * from "./Radio/Radio";
 export * from "./Dialog/Dialog";
 export * from "./Button/Button";
 export * from "./Modal/Modal";
+export * from "./Loading/Loading";

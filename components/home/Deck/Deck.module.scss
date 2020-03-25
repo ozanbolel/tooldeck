@@ -110,4 +110,13 @@ $card-width: 200px;
 
 .emptyButton {
   margin-top: $g-l;
+  font-size: $h4;
+  padding: ($g-s - 2px) ($g-l - $g-xs) ($g-s - 2px) $g-l;
+
+  .emptyButtonIcon {
+    margin-left: $g-s;
+    width: 1.6rem;
+    height: 1.6rem;
+    transform: translateY(0.05rem);
+  }
 }

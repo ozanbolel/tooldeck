@@ -1,28 +1,56 @@
 @import "core/styles/head";
 
 .button {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   background: $c-main;
   color: $c-dark;
-  font-size: $h4;
   font-weight: $b;
-  padding: ($g-s - 2px) ($g-l - $g-xs) ($g-s - 2px) $g-l;
   border: solid 2px $c-divider;
   border-radius: $r-100;
   transition: background $de, color $de;
-  cursor: pointer;
+  overflow: hidden;
 
-  &:hover {
-    background: $c-content;
-    color: $c-main;
+  &:disabled {
+    cursor: not-allowed;
   }
+}
 
-  svg {
-    margin-left: $g-s;
-    width: 1.6rem;
-    height: 1.6rem;
-    transform: translateY(0.05rem);
+.button:hover,
+.button:disabled,
+.shade {
+  background: $c-content;
+  color: $c-main;
+}
+
+.shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loaderIcon {
+    width: 25%;
+    fill: $c-light;
   }
 }

@@ -2,7 +2,7 @@ import { FC } from "react";
 
 export type TModalComponent = FC<{
   closeModal: Function;
-  payload?: any;
+  payload?: { [key: string]: any };
 }>;
 
 export type TModalConfig = {

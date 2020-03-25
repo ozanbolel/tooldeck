@@ -16,24 +16,10 @@
 .innerText {
   font-size: $h2;
   font-weight: $b;
-  margin-bottom: $g-xl;
+  margin-bottom: $g-l;
 }
 
-.innerSpinner {
-  text-align: center;
-
-  svg {
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    width: 5rem;
-    height: 5rem;
-    animation: spin 1.2s linear infinite;
-  }
+.innerLoading {
+  width: 5rem;
+  fill: $c-main;
 }

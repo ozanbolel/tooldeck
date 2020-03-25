@@ -1,19 +1,39 @@
 import * as React from "react";
 import css from "./Button.module.scss";
 import { Icon } from "../Icon/Icon";
+import { Loading } from "../Loading/Loading";
+
+type TButtonIcon = {
+  name: string;
+  position: "left" | "right";
+  className?: string;
+};
 
 type TButton = React.FC<{
   label: string;
-  iconName?: string;
+  icon?: TButtonIcon;
+  loading?: boolean;
   className?: string;
   onClick?: Function;
+  disabled?: boolean;
 }>;
 
-export const Button: TButton = ({ label, iconName, className, onClick }) => {
+export const Button: TButton = ({ label, icon, className, loading, onClick, disabled }) => {
   return (
-    <div className={css.button + (className ? " " + className : "")} onClick={onClick ? () => onClick() : undefined}>
+    <button className={css.button + (className ? " " + className : "")} onClick={onClick ? () => onClick() : undefined} disabled={loading || disabled}>
+      {icon?.position === "left" ? <Icon name={icon.name} className={icon.className} /> : null}
+
       {label}
-      {iconName ? <Icon name={iconName} /> : null}
-    </div>
+
+      {icon?.position === "right" ? <Icon name={icon.name} className={icon.className} /> : null}
+
+      <div className={css.shade + (loading ? " " + css.active : "")} />
+
+      {loading ? (
+        <div className={css.loader}>
+          <Loading className={css.loaderIcon} />
+        </div>
+      ) : null}
+    </button>
   );
 };

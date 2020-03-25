@@ -41,7 +41,8 @@ const Deck: React.FC = () => {
     const callback = () =>
       removeFromDeck({
         variables: { toolId: id },
-        update: (cache) => cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newDataDeckToolIds } } })
+        update: (cache) =>
+          cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newDataDeckToolIds, __typename: data.deck.__typename } } })
       });
 
     dialog(
@@ -50,7 +51,7 @@ const Deck: React.FC = () => {
         {
           label: "Delete",
           callback,
-          highlight: true
+          warn: true
         },
         { label: "Cancel" }
       ],
@@ -119,7 +120,7 @@ const Deck: React.FC = () => {
 
           <Link href="/explore">
             <a>
-              <Button label="Explore" iconName="arrow-right" className={css.emptyButton} />
+              <Button label="Explore" icon={{ name: "arrow-right", position: "right", className: css.emptyButtonIcon }} className={css.emptyButton} />
             </a>
           </Link>
         </div>
