@@ -24,7 +24,7 @@ const Explore: React.FC = () => {
 
         <div className={css.grid}>
           {tools.map((tool) => (
-            <ToolGridItem tool={tool} />
+            <ToolGridItem key={tool.id} tool={tool} />
           ))}
         </div>
       </div>
