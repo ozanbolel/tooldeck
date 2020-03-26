@@ -1,9 +1,8 @@
 import * as React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { Icon, Button } from "core/elements";
+import { Icon } from "core/elements";
 import { useDialog } from "core/tools";
 import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
@@ -13,6 +12,7 @@ import css from "./Deck.module.scss";
 
 import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
+import DeckEmpty from "../DeckEmpty/DeckEmpty";
 
 const Deck: React.FC = () => {
   const { data } = useQuery(GET_USER);
@@ -109,22 +109,7 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      {data?.deck.toolIds.length !== 0 ? (
-        <div className={css.grid}>{renderAddedTools()}</div>
-      ) : (
-        <div className={css.empty}>
-          <img src="/static/taken.svg" className={css.emptyImg} draggable="false" />
-
-          <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
-          <div className={css.emptyText}>Don't worry, we have plenty 😉</div>
-
-          <Link href="/explore">
-            <a>
-              <Button label="Explore" icon={{ name: "arrow-right", position: "right", className: css.emptyButtonIcon }} className={css.emptyButton} />
-            </a>
-          </Link>
-        </div>
-      )}
+      {data?.deck.toolIds.length !== 0 ? <div className={css.grid}>{renderAddedTools()}</div> : <DeckEmpty />}
     </div>
   );
 };

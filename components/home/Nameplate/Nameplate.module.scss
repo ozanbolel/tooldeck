@@ -1,13 +1,19 @@
 @import "core/styles/head";
 
 .container {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
 }
 
-.label {
+.label,
+.options {
+  display: flex;
+  align-items: center;
   background: $c-content;
   font-weight: $b;
-  padding: $g-xs $g-m;
+  padding: 0 $g-m;
+  box-sizing: border-box;
   border: solid 1px $c-divider;
   border-radius: $r-100;
 }
@@ -22,11 +28,9 @@
   &:hover {
     background: $c-warn;
   }
-}
 
-.optionsIcon {
-  width: 1.25rem;
-  height: 1rem;
-  stroke-width: 3px;
-  transform: translateY(1px);
+  .icon {
+    width: 1.2rem;
+    stroke-width: 3px;
+  }
 }

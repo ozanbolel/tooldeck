@@ -2,6 +2,7 @@ import { FC } from "react";
 
 export type TModalComponent = FC<{
   closeModal: Function;
+  isAnimationDone: boolean;
   payload?: { [key: string]: any };
 }>;
 

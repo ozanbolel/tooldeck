@@ -56,7 +56,7 @@ $card-width: 200px;
   display: grid;
   justify-content: space-between;
   grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
-  grid-gap: $g-xl;
+  gap: $g-xl;
   @include no-select;
 }
 
@@ -85,38 +85,4 @@ $card-width: 200px;
 .gridItemPlate {
   margin-top: $g-m;
   position: relative;
-}
-
-// Empty
-
-.empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @include no-select;
-}
-
-.emptyImg {
-  width: 300px;
-  height: 300px;
-  margin-bottom: $g-xs;
-}
-
-.emptyText {
-  font-size: $h3;
-  line-height: 3rem;
-  font-weight: $t;
-}
-
-.emptyButton {
-  margin-top: $g-l;
-  font-size: $h4;
-  padding: ($g-s - 2px) ($g-l - $g-xs) ($g-s - 2px) $g-l;
-
-  .emptyButtonIcon {
-    margin-left: $g-s;
-    width: 1.6rem;
-    height: 1.6rem;
-    transform: translateY(0.05rem);
-  }
 }

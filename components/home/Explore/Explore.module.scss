@@ -11,56 +11,9 @@
 }
 
 .grid {
-  $column-num: 3;
-  $column-gap: 3%;
-  $column-width: (100% / $column-num) - $column-gap;
-
   display: grid;
-  grid-template-columns: repeat($column-num, $column-width);
-  column-gap: $column-gap;
-  row-gap: $g-l;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: $g-l;
   @include no-select;
-}
-
-.gridItem {
-  display: flex;
-  align-items: center;
-  background: $c-content;
-  padding: $g-s;
-  border-radius: $r;
-  overflow: hidden;
-}
-
-.gridItemCover {
-  width: 8rem;
-  height: 8rem;
-  border-radius: $r;
-  object-position: left;
-  object-fit: cover;
-  box-sizing: border-box;
-  border: solid 3px $c-divider;
-  transition: border-color $de;
-  margin-right: $g-s * 1.5;
-
-  &:hover {
-    border-color: $c-main;
-  }
-}
-
-.gridItemInfo {
-  flex: 1;
-
-  .label {
-    font-size: $h4;
-    font-weight: $b;
-  }
-
-  .desc {
-    margin-top: $g-xxs;
-    margin-bottom: $g-s;
-  }
-
-  .button {
-    padding: $g-xxs $g-s;
-  }
 }

@@ -1,0 +1,51 @@
+@import "core/styles/head";
+
+.item {
+  display: flex;
+  align-items: center;
+  background: $c-content;
+  box-sizing: border-box;
+  padding: $g-s;
+  border-radius: $r;
+  overflow: hidden;
+}
+
+.cover {
+  width: 8.2rem;
+  height: 8.2rem;
+  border-radius: $r;
+  object-position: left;
+  object-fit: cover;
+  box-sizing: border-box;
+  border: solid 3px $c-divider;
+  transition: border-color $de;
+  margin-right: $g-s * 1.5;
+
+  &:hover {
+    border-color: $c-main;
+  }
+}
+
+.info {
+  flex: 1;
+
+  .label {
+    font-size: $h4;
+    font-weight: $b;
+  }
+
+  .desc {
+    margin-top: $g-xxs;
+    margin-bottom: $g-s;
+  }
+
+  .button {
+    width: 5.5rem;
+    padding: $g-xxs 0;
+    margin-right: $g-xxs;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

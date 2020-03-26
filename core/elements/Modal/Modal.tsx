@@ -7,7 +7,12 @@ type TModal = React.FC<TModalObject>;
 
 export const Modal: TModal = ({ id, content, config }) => {
   const [isClosing, setIsClosing] = React.useState(false);
+  const [isAnimationDone, setIsAnimationDone] = React.useState(false);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    setTimeout(() => setIsAnimationDone(true), 400);
+  }, []);
 
   const closeModal = () => {
     setIsClosing(true);
@@ -21,7 +26,7 @@ export const Modal: TModal = ({ id, content, config }) => {
     }
   };
 
-  const renderContent = () => React.useMemo(() => React.createElement(content, { closeModal, payload: config?.payload }), []);
+  const renderContent = () => React.useMemo(() => React.createElement(content, { closeModal, isAnimationDone, payload: config?.payload }), [isAnimationDone]);
 
   return (
     <div

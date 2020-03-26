@@ -14,8 +14,8 @@ const Nameplate: TNameplate = ({ label, className, onClickDel }) => {
       <span className={css.label}>{label}</span>
 
       {onClickDel ? (
-        <span className={css.label + " " + css.options} onClick={() => onClickDel()}>
-          <Icon name="trash-2" className={css.optionsIcon} />
+        <span className={css.options} onClick={() => onClickDel()}>
+          <Icon name="trash-2" className={css.icon} />
         </span>
       ) : null}
     </div>
