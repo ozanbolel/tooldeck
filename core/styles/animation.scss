@@ -45,6 +45,22 @@
 
 // Mixins
 
+@mixin a-fadeIn {
+  animation: fadeIn $de;
+}
+
+@mixin a-fadeOut {
+  animation: fadeOut $de;
+}
+
+@mixin a-scaleIn {
+  animation: scaleIn $de;
+}
+
+@mixin a-scaleOut {
+  animation: scaleOut $de;
+}
+
 @mixin a-spin {
   animation: spin 1.2s linear infinite;
 }

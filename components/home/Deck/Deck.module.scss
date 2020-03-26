@@ -19,7 +19,15 @@
 }
 
 .headerProfile {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+
+  &:hover {
+    .headerProfileAvatar {
+      border-color: $c-main;
+    }
+  }
 }
 
 .headerProfileAvatar {
@@ -33,10 +41,6 @@
   transition: border-color $de;
   overflow: hidden;
 
-  &:hover {
-    border-color: $c-main;
-  }
-
   svg {
     width: 45%;
     height: 45%;
@@ -48,17 +52,15 @@
   }
 }
 
-// Grid
-
-$card-width: 200px;
-
-.grid {
-  display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax($card-width, 1fr));
-  gap: $g-xl;
-  @include no-select;
+.headerProfileName {
+  margin-left: $g-xs;
+  font-size: $h4;
+  font-weight: $b;
 }
+
+// Grid Item
+
+$card-width: 230px;
 
 .gridItemContainer {
   position: relative;

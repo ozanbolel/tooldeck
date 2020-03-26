@@ -2,7 +2,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { Icon } from "core/elements";
+import { Icon, AnimatedGrid } from "core/elements";
 import { useDialog } from "core/tools";
 import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
@@ -85,7 +85,7 @@ const Deck: React.FC = () => {
           className={css.headerProfile}
           onClick={() =>
             dialog(
-              "Name: " + data.user.name,
+              data?.user.name,
               [
                 {
                   label: "Logout",
@@ -106,10 +106,12 @@ const Deck: React.FC = () => {
           <div className={css.headerProfileAvatar}>
             {data && data.user.avatarUrl ? <img src={data.user.avatarUrl} draggable="false" /> : <Icon name="user" />}
           </div>
+
+          <div className={css.headerProfileName}>{data?.user.name}</div>
         </div>
       </div>
 
-      {data?.deck.toolIds.length !== 0 ? <div className={css.grid}>{renderAddedTools()}</div> : <DeckEmpty />}
+      {data?.deck.toolIds.length !== 0 ? <AnimatedGrid>{renderAddedTools()}</AnimatedGrid> : <DeckEmpty />}
     </div>
   );
 };

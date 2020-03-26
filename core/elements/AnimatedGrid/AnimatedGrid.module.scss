@@ -1,0 +1,11 @@
+@import "core/styles/head";
+
+.grid {
+  position: relative;
+  width: 100%;
+}
+
+.item {
+  position: absolute;
+  transition: top $d-l $e-io, left $d-l $e-io;
+}
