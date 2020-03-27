@@ -1,6 +1,7 @@
 @import "core/styles/head";
 
 .card {
+  background: $c-content;
   border-radius: $r;
   backdrop-filter: blur(0);
   overflow: hidden;
