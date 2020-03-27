@@ -1,4 +1,5 @@
 @import "core/styles/head";
+@import "core/styles/animation";
 
 .item {
   display: flex;
@@ -8,6 +9,7 @@
   padding: $g-s;
   border-radius: $r;
   overflow: hidden;
+  @include a-fadeIn;
 }
 
 .cover {

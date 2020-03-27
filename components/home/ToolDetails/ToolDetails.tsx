@@ -4,7 +4,7 @@ import { TModalComponent, TTool } from "core/types";
 import useIsToolAdded from "../utils/useIsToolAdded";
 import css from "./ToolDetails.module.scss";
 
-const ToolDetails: TModalComponent = ({ closeModal, payload }) => {
+const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) => {
   const tool: TTool = payload?.tool;
   const callback: Function = payload?.callback;
   const { isAdded, onClickAdd, loading } = useIsToolAdded(tool.id, callback);
@@ -41,7 +41,7 @@ const ToolDetails: TModalComponent = ({ closeModal, payload }) => {
           <div className={css.section}>
             <div className={css.title}>Preview</div>
 
-            <iframe src={"https://" + tool.url} scrolling="no" draggable="false" />
+            {isAnimationDone && !isClosing ? <iframe src={"https://" + tool.url} scrolling="no" draggable="false" /> : null}
           </div>
         ) : null}
       </div>

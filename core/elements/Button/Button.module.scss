@@ -12,6 +12,7 @@
   border-radius: $r-100;
   transition: background $de, color $de;
   overflow: hidden;
+  @include no-select;
 
   &:disabled {
     cursor: not-allowed;

@@ -7,31 +7,44 @@ import ToolGridItem from "../ToolGridItem/ToolGridItem";
 
 const Explore: React.FC = () => {
   const { cache } = useApolloClient();
-  const [getUser] = useLazyQuery(GET_USER);
+  const [getUser, { data }] = useLazyQuery(GET_USER);
+  const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
     try {
       cache.readQuery({ query: GET_USER });
+
+      setLoaded(true);
     } catch {
       getUser();
     }
   }, []);
 
+  React.useEffect(() => {
+    if (data) {
+      setLoaded(true);
+    }
+  }, [data]);
+
   return (
     <>
       <div className={css.pageTitle}>Explore</div>
 
-      <div className={css.section}>
-        <div className={css.title}>For Developers</div>
+      {loaded ? (
+        <>
+          <div className={css.section}>
+            <div className={css.title}>For Developers</div>
 
-        <div className={css.grid}>{tools.map((tool) => (tool.cat === "dev" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
-      </div>
+            <div className={css.grid}>{tools.map((tool) => (tool.cat === "dev" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
+          </div>
 
-      <div className={css.section}>
-        <div className={css.title}>Better Designs</div>
+          <div className={css.section}>
+            <div className={css.title}>Better Designs</div>
 
-        <div className={css.grid}>{tools.map((tool) => (tool.cat === "design" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
-      </div>
+            <div className={css.grid}>{tools.map((tool) => (tool.cat === "design" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
+          </div>
+        </>
+      ) : null}
     </>
   );
 };

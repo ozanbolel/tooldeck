@@ -8,8 +8,6 @@
   height: 90vh;
   background: $c-light;
   color: $c-dark;
-  box-sizing: border-box;
-  padding: $g-s;
   border-radius: $r;
   overflow: hidden;
 }
@@ -19,10 +17,9 @@
   display: flex;
   color: $c-light;
   padding: $g-m;
-  border-radius: $r;
   box-shadow: $s-button;
   overflow: hidden;
-  margin-bottom: $g-s;
+  @include no-select;
 
   .cover {
     position: absolute;
@@ -64,6 +61,7 @@
   flex: 1;
   box-sizing: border-box;
   padding: $g-s $g-m;
+  margin: $g-s 0;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -72,8 +70,9 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $c-content;
+    background: $c-light;
     border-radius: $r-100;
+    border: solid 2px $c-divider;
   }
 
   &::-webkit-scrollbar-track,
@@ -84,7 +83,7 @@
 }
 
 .section {
-  margin-bottom: $g-m;
+  margin-bottom: $g-l;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -103,7 +102,9 @@
   iframe {
     width: 100%;
     height: 500px;
+    box-sizing: border-box;
     border-radius: $r;
+    box-shadow: $s-button;
     @include no-select;
     pointer-events: none;
   }

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon, AnimatedGrid } from "core/elements";
 import { useDialog } from "core/tools";
@@ -17,6 +17,7 @@ import DeckEmpty from "../DeckEmpty/DeckEmpty";
 const Deck: React.FC = () => {
   const { data } = useQuery(GET_USER, { fetchPolicy: "cache-first" });
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
+  const { cache } = useApolloClient();
   const tabs = useSelector((store: TStore) => store.tabs.opened);
   const dispatch = useDispatch();
   const dialog = useDialog();
@@ -36,14 +37,13 @@ const Deck: React.FC = () => {
   };
 
   const onClickDel = (id: string) => {
-    const newDataDeckToolIds = data.deck.toolIds.filter((i: string) => i !== id);
+    const callback = () => {
+      const newDataDeckToolIds = data.deck.toolIds.filter((i: string) => i !== id);
 
-    const callback = () =>
-      removeFromDeck({
-        variables: { toolId: id },
-        update: (cache) =>
-          cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newDataDeckToolIds, __typename: data.deck.__typename } } })
-      });
+      cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newDataDeckToolIds, __typename: data.deck.__typename } } });
+
+      removeFromDeck({ variables: { toolId: id } });
+    };
 
     dialog(
       "Are you sure you want to delete this Tool from your Deck?",
@@ -107,7 +107,7 @@ const Deck: React.FC = () => {
             {data && data.user.avatarUrl ? <img src={data.user.avatarUrl} draggable="false" /> : <Icon name="user" />}
           </div>
 
-          <div className={css.headerProfileName}>{data?.user.name}</div>
+          {data ? <div className={css.headerProfileName}>{data.user.name}</div> : null}
         </div>
       </div>
 

@@ -26,7 +26,8 @@ export const Modal: TModal = ({ id, content, config }) => {
     }
   };
 
-  const renderContent = () => React.useMemo(() => React.createElement(content, { closeModal, isAnimationDone, payload: config?.payload }), [isAnimationDone]);
+  const renderContent = () =>
+    React.useMemo(() => React.createElement(content, { closeModal, isAnimationDone, isClosing, payload: config?.payload }), [isAnimationDone, isClosing]);
 
   return (
     <div
