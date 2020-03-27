@@ -22,43 +22,37 @@
   margin-bottom: $g-xl;
 }
 
-.login {
-  button {
-    $icon-width: 22px;
+.withGithub,
+.withTwitter {
+  $icon-width: 22px;
 
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    font-size: $h5;
-    font-weight: $b;
-    padding: 1.5rem $icon-width 1.5rem ($icon-width * 2.5);
-    border-radius: $r-100;
-    transition: background $de, color $de;
-    margin-right: $g-m;
+  font-size: $h5;
+  color: $c-light !important;
+  padding: 1.4rem $icon-width 1.4rem ($icon-width * 2.5);
+  margin-right: $g-m;
 
-    svg {
-      position: absolute;
-      left: $icon-width;
-      width: $icon-width;
-      height: $icon-width;
-      margin-right: $g-xs;
-    }
+  &:last-of-type {
+    margin-right: 0;
+  }
 
-    &:hover {
-      background: $c-main;
-      color: $c-dark;
-    }
+  &:hover {
+    background: $c-main !important;
+    color: $c-dark !important;
+  }
 
-    &:last-of-type {
-      margin-right: 0;
-    }
+  .icon {
+    position: absolute;
+    left: $icon-width;
+    width: $icon-width;
+    height: $icon-width;
+    margin-right: $g-xs;
   }
 }
 
 .withGithub {
-  background: #24292e;
+  background: #24292e !important;
 }
 
 .withTwitter {
-  background: #1da1f2;
+  background: #1da1f2 !important;
 }

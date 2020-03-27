@@ -3,24 +3,26 @@ import css from "./Index.module.scss";
 import { oauth } from "core/config";
 import { useMutation } from "@apollo/react-hooks";
 import { GET_TWITTER_TOKEN } from "core/mutations";
-import { Icon } from "core/elements";
+import { Icon, Button } from "core/elements";
 
 const Index: React.FC = () => {
-  const [getTwitterToken, { data }] = useMutation(GET_TWITTER_TOKEN);
+  const [getTwitterToken] = useMutation(GET_TWITTER_TOKEN);
+  const [isGithubClicked, setIsGithubClicked] = React.useState(false);
+  const [isTwitterClicked, setIsTwitterClicked] = React.useState(false);
 
   const onClickGithub = () => {
+    setIsGithubClicked(true);
+
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${oauth.github.clientId}`;
   };
 
-  const onClickTwitter = () => {
-    getTwitterToken();
-  };
+  const onClickTwitter = async () => {
+    setIsTwitterClicked(true);
 
-  React.useEffect(() => {
-    if (data) {
-      window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${data.getTwitterToken}`;
-    }
-  }, [data]);
+    const { data } = await getTwitterToken();
+
+    window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${data.getTwitterToken}`;
+  };
 
   return (
     <div className={css.container}>
@@ -29,14 +31,23 @@ const Index: React.FC = () => {
       <div className={css.desc}>We don't have a landing page, but we have login buttons...</div>
 
       <div className={css.login}>
-        <button className={css.withGithub} onClick={() => onClickGithub()}>
-          <Icon name="github" /> Login with GitHub
-        </button>
+        <Button
+          label="Login with GitHub"
+          icon={{ name: "github", position: "left", className: css.icon }}
+          className={css.withGithub}
+          onClick={() => onClickGithub()}
+          loading={isGithubClicked}
+          disabled={isTwitterClicked || isGithubClicked}
+        />
 
-        <button className={css.withTwitter} onClick={() => onClickTwitter()}>
-          <Icon name="twitter" />
-          Login with Twitter
-        </button>
+        <Button
+          label="Login with Twitter"
+          icon={{ name: "twitter", position: "left", className: css.icon }}
+          className={css.withTwitter}
+          onClick={() => onClickTwitter()}
+          loading={isTwitterClicked}
+          disabled={isTwitterClicked || isGithubClicked}
+        />
       </div>
     </div>
   );
