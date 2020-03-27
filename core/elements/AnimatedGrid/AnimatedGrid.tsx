@@ -17,7 +17,7 @@ export const AnimatedGrid: React.FC = ({ children }) => {
         let newNum;
         let newGap;
 
-        if (innerWidth > 1440) {
+        if (innerWidth > 1600) {
           newNum = 5;
           newGap = 60;
         } else if (innerWidth > 1280) {
