@@ -11,23 +11,40 @@ const ToolDetails: TModalComponent = ({ closeModal, payload }) => {
 
   return (
     <div className={css.container}>
-      {tool.external ? <img src={"https://" + (tool.coverUrl || tool.iconUrl)} draggable="false" /> : <iframe src={"https://" + tool.url} scrolling="no" />}
+      <div className={css.header}>
+        <img src={"https://" + (tool.coverUrl || tool.iconUrl)} className={css.cover} draggable="false" />
+        <div className={css.shade} />
 
-      <div className={css.close} onClick={() => closeModal()}>
-        <Icon name="x" />
+        <div className={css.info}>
+          <div className={css.label}>{tool.label}</div>
+        </div>
+
+        <Button
+          label={isAdded ? "ADDED" : "ADD TO DECK"}
+          className={css.addButton}
+          onClick={() => {
+            onClickAdd();
+          }}
+          loading={loading}
+          disabled={isAdded}
+        />
       </div>
 
-      <Button
-        label={isAdded ? "ADDED" : "ADD TO DECK"}
-        className={css.addButton}
-        onClick={() => {
-          onClickAdd();
-        }}
-        loading={loading}
-        disabled={isAdded}
-      />
+      <div className={css.content}>
+        <div className={css.section}>
+          <div className={css.title}>Descripcion</div>
 
-      <div className={css.desc}>{tool.desc}</div>
+          <span>{tool.desc}</span>
+        </div>
+
+        {!tool.external ? (
+          <div className={css.section}>
+            <div className={css.title}>Preview</div>
+
+            <iframe src={"https://" + tool.url} scrolling="no" draggable="false" />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
