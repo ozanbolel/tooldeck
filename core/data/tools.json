@@ -37,7 +37,7 @@
       "id": "brumm",
       "label": "brumm.af",
       "desc": "CSS shadow generator.",
-      "cat": "design",
+      "cat": "dev",
       "sub_cat": "shadow",
       "url": "brumm.af/shadows",
       "external": false,

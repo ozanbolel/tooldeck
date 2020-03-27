@@ -19,14 +19,18 @@ const Explore: React.FC = () => {
 
   return (
     <>
+      <div className={css.pageTitle}>Explore</div>
+
       <div className={css.section}>
         <div className={css.title}>For Developers</div>
 
-        <div className={css.grid}>
-          {tools.map((tool) => (
-            <ToolGridItem key={tool.id} tool={tool} />
-          ))}
-        </div>
+        <div className={css.grid}>{tools.map((tool) => (tool.cat === "dev" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
+      </div>
+
+      <div className={css.section}>
+        <div className={css.title}>Better Designs</div>
+
+        <div className={css.grid}>{tools.map((tool) => (tool.cat === "design" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
       </div>
     </>
   );

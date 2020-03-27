@@ -49,7 +49,7 @@ export const AnimatedGrid: React.FC = ({ children }) => {
         resizeOps();
       }
 
-      window.addEventListener("resize", resizeOps, { passive: true });
+      window.addEventListener("resize", resizeOps);
       return () => window.removeEventListener("resize", resizeOps);
     }
   }, [children]);

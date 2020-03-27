@@ -15,7 +15,7 @@ import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
 
 const Deck: React.FC = () => {
-  const { data } = useQuery(GET_USER);
+  const { data } = useQuery(GET_USER, { fetchPolicy: "cache-first" });
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const tabs = useSelector((store: TStore) => store.tabs.opened);
   const dispatch = useDispatch();

@@ -1,13 +1,19 @@
 @import "core/styles/head";
 
-.section {
-  margin-bottom: $g-xxl;
-}
-
-.title {
+.pageTitle {
   font-size: $h1;
   font-weight: $b;
   margin-bottom: $g-xl;
+}
+
+.section {
+  margin-bottom: $g-xl;
+}
+
+.title {
+  font-size: $h2;
+  font-weight: $b;
+  margin-bottom: $g-l;
 }
 
 .grid {

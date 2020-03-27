@@ -1,4 +1,5 @@
 @import "core/styles/head";
+@import "core/styles/animation";
 
 .grid {
   position: relative;
@@ -7,4 +8,5 @@
 
 .item {
   position: absolute;
+  @include a-fadeIn;
 }
