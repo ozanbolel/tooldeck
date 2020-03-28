@@ -56,10 +56,20 @@
   font-weight: $b;
 }
 
-.upvotes {
-  margin-top: $g-xs;
+.numberContainer {
+  margin-top: $g-xxs;
   display: inline-flex;
   align-items: center;
+
+  .number {
+    display: flex;
+    align-items: center;
+    margin-right: $g-xs;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
 
   .icon {
     width: 1.6rem;
