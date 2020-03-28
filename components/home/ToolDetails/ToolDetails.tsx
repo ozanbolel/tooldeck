@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Icon } from "core/elements";
+import { Button, Icon, Loading } from "core/elements";
 import { TModalComponent, TTool } from "core/types";
 import useIsToolAdded from "../utils/useIsToolAdded";
 import css from "./ToolDetails.module.scss";
@@ -37,13 +37,23 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
           <span>{tool.desc}</span>
         </div>
 
-        {!tool.external ? (
-          <div className={css.section}>
-            <div className={css.title}>Preview</div>
+        <div className={css.section}>
+          <div className={css.title}>Preview</div>
 
-            {isAnimationDone && !isClosing ? <iframe src={"https://" + tool.url} scrolling="no" draggable="false" /> : null}
-          </div>
-        ) : null}
+          {!tool.external ? (
+            isAnimationDone && !isClosing ? (
+              <div className={css.previewContainer}>
+                <div className={css.loadingContainer}>
+                  <Loading className={css.loading} />
+                </div>
+
+                <iframe src={"https://" + tool.url} scrolling="no" draggable="false" />
+              </div>
+            ) : null
+          ) : (
+            <span>Preview not available.</span>
+          )}
+        </div>
       </div>
     </div>
   );
