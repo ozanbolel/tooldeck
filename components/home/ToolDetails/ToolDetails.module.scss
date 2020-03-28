@@ -6,15 +6,19 @@
   flex-direction: column;
   width: 90vw;
   height: 90vh;
+  height: calc(var(--vh, 1vh) * 90);
   background: $c-light;
   color: $c-dark;
   border-radius: $r;
   overflow: hidden;
 }
 
+// Header
+
 .header {
   position: relative;
   display: flex;
+  align-items: center;
   color: $c-light;
   padding: $g-m;
   box-shadow: $s-button;
@@ -28,6 +32,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
     filter: blur(20px);
   }
 
@@ -43,25 +48,49 @@
   .info {
     flex: 1;
     position: relative;
-
-    .label {
-      font-size: $h2;
-      font-weight: $b;
-    }
-  }
-
-  .addButton {
-    width: 10rem;
-    font-size: $h5;
-    padding: $g-xs 0;
   }
 }
+
+.label {
+  font-size: $h2;
+  font-weight: $b;
+}
+
+.upvotes {
+  margin-top: $g-xs;
+  display: inline-flex;
+  align-items: center;
+
+  .icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: $g-xxs;
+  }
+
+  span {
+    font-size: $h4;
+  }
+}
+
+.buttonUpvote {
+  width: 8rem;
+  font-size: $h5;
+  padding: $g-xs 0;
+  margin-right: $g-xs;
+}
+
+.buttonAdd {
+  width: 10rem;
+  font-size: $h5;
+  padding: $g-xs 0;
+}
+
+// Content
 
 .content {
   flex: 1;
   box-sizing: border-box;
-  padding: $g-s $g-m;
-  margin: $g-s 0;
+  padding: $g-m;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -100,10 +129,12 @@
   }
 }
 
+// Preview
+
 .previewContainer {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 480px;
   border-radius: $r;
   box-shadow: $s-divider;
   overflow: hidden;
@@ -120,7 +151,7 @@
   }
 
   .loading {
-    width: 70px;
+    width: 65px;
     fill: $c-dark;
   }
 
@@ -139,6 +170,7 @@
   .container {
     width: 50vw;
     height: 70vh;
+    height: calc(var(--vh, 1vh) * 70);
   }
 }
 
@@ -146,5 +178,6 @@
   .container {
     width: 40vw;
     height: 70vh;
+    height: calc(var(--vh, 1vh) * 70);
   }
 }

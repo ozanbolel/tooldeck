@@ -17,17 +17,27 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
 
         <div className={css.info}>
           <div className={css.label}>{tool.label}</div>
+
+          <div className={css.upvotes}>
+            <Icon name="thumbs-up" className={css.icon} />
+
+            <span>{React.useMemo(() => (Math.random() * 10).toFixed(), [])}</span>
+          </div>
         </div>
 
-        <Button
-          label={isAdded ? "ADDED" : "ADD TO DECK"}
-          className={css.addButton}
-          onClick={() => {
-            onClickAdd();
-          }}
-          loading={loading}
-          disabled={isAdded}
-        />
+        <div>
+          <Button label="UPVOTE" className={css.buttonUpvote} />
+
+          <Button
+            label={isAdded ? "ADDED" : "ADD TO DECK"}
+            className={css.buttonAdd}
+            onClick={() => {
+              onClickAdd();
+            }}
+            loading={loading}
+            disabled={isAdded}
+          />
+        </div>
       </div>
 
       <div className={css.content}>
