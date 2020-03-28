@@ -33,9 +33,7 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
           </div>
         </div>
 
-        <div>
-          <Button label="STAR" className={css.buttonUpvote} />
-
+        <div className={css.actions}>
           <Button
             label={isAdded ? "ADDED" : "ADD TO DECK"}
             className={css.buttonAdd}
@@ -45,6 +43,8 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
             loading={loading}
             disabled={isAdded}
           />
+
+          <Button label="" icon={{ name: "star", position: "left", className: css.icon }} className={css.buttonStar} />
         </div>
       </div>
 

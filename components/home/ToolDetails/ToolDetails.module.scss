@@ -82,17 +82,26 @@
   }
 }
 
-.buttonUpvote {
-  width: 8rem;
-  font-size: $h5;
-  padding: $g-xs 0;
-  margin-right: $g-xs;
-}
+.actions {
+  display: flex;
+  align-items: stretch;
+  height: 40px;
 
-.buttonAdd {
-  width: 10rem;
-  font-size: $h5;
-  padding: $g-xs 0;
+  .buttonAdd {
+    width: 10rem;
+    font-size: $h5;
+    margin-right: $g-xs;
+  }
+
+  .buttonStar {
+    width: 5rem;
+
+    .icon {
+      width: $h5;
+      height: $h5;
+      stroke-width: 3px;
+    }
+  }
 }
 
 // Content
