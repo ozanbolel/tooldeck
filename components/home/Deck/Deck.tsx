@@ -111,7 +111,13 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      {data?.deck.toolIds.length !== 0 ? <AnimatedGrid>{renderAddedTools()}</AnimatedGrid> : <DeckEmpty />}
+      {data?.deck.toolIds.length !== 0 ? (
+        <AnimatedGrid columns={[5, 4, 3, 2, 1]} gap={60}>
+          {renderAddedTools()}
+        </AnimatedGrid>
+      ) : (
+        <DeckEmpty />
+      )}
     </div>
   );
 };

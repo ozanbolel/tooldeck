@@ -2,7 +2,12 @@ import * as React from "react";
 import css from "./AnimatedGrid.module.scss";
 import AnimatedGridItem from "./AnimatedGridItem";
 
-export const AnimatedGrid: React.FC = ({ children }) => {
+type TAnimatedGrid = React.FC<{
+  columns: [number, number, number, number, number];
+  gap: number;
+}>;
+
+export const AnimatedGrid: TAnimatedGrid = ({ children, columns, gap }) => {
   const [dimensions, setDimensions] = React.useState({ width: 0, height: 0, gap: 0, num: 0 });
   const refGrid = React.useRef<any>(null);
   const refItem = React.useRef<any>(null);
@@ -15,32 +20,26 @@ export const AnimatedGrid: React.FC = ({ children }) => {
         const { innerWidth } = window;
 
         let newNum;
-        let newGap;
 
         if (innerWidth > 1600) {
-          newNum = 5;
-          newGap = 60;
+          newNum = columns[0];
         } else if (innerWidth > 1280) {
-          newNum = 4;
-          newGap = 60;
+          newNum = columns[1];
         } else if (innerWidth > 1024) {
-          newNum = 3;
-          newGap = 60;
+          newNum = columns[2];
         } else if (innerWidth > 720) {
-          newNum = 2;
-          newGap = 60;
+          newNum = columns[3];
         } else {
-          newNum = 1;
-          newGap = 60;
+          newNum = columns[4];
         }
 
         const widthGrid = refGrid.current.getBoundingClientRect().width;
         const heightItem = refItem.current.getBoundingClientRect().height;
 
         setDimensions({
-          width: (widthGrid - (newNum - 1) * newGap) / newNum,
+          width: (widthGrid - (newNum - 1) * gap) / newNum,
           height: heightItem,
-          gap: newGap,
+          gap,
           num: newNum
         });
       };
@@ -56,9 +55,8 @@ export const AnimatedGrid: React.FC = ({ children }) => {
 
   const containerHeight = React.useMemo(() => {
     if (dimensions.num !== 0) {
-      const childrenLength = (children as any).length;
-      const distance = childrenLength / dimensions.num;
-      const numRows = dimensions.num !== 1 ? (distance !== 1 ? 1 + parseInt(distance.toPrecision()) : 1) : childrenLength;
+      const lastIndex = (children as any).length - 1;
+      const numRows = Math.trunc(lastIndex / dimensions.num) + 1;
 
       return numRows * dimensions.height + (numRows - 1) * dimensions.gap;
     } else {
