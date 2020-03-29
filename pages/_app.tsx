@@ -30,6 +30,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 
           router.replace("/");
         }
+
+        if (error.graphQLErrors?.findIndex((i: any) => i.code === "ACCESS_DENIED") !== -1) {
+          router.replace("/deck");
+        }
       }
     }
   });
