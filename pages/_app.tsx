@@ -1,13 +1,9 @@
 import * as React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
-import fetch from "isomorphic-fetch";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { server } from "core/config";
+import { withApollo } from "core/tools";
 import "core/styles/app.scss";
 
 import reducerRoot from "core/store/reducerRoot";
@@ -17,26 +13,6 @@ import ModalMapper from "core/elements/Modal/ModalMapper";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const Layout = (Component as any).Layout ? (Component as any).Layout : React.Fragment;
-  const router = useRouter();
-
-  const client = new ApolloClient({
-    uri: server.uri,
-    fetch,
-    credentials: "include",
-    onError: (error) => {
-      if (typeof window !== "undefined") {
-        if (error.graphQLErrors?.findIndex((i: any) => i.code === "INVALID_TOKEN") !== -1) {
-          localStorage.removeItem("LOGIN");
-
-          router.replace("/");
-        }
-
-        if (error.graphQLErrors?.findIndex((i: any) => i.code === "ACCESS_DENIED") !== -1) {
-          router.replace("/deck");
-        }
-      }
-    }
-  });
 
   const getStore = () => {
     if (typeof window === "undefined") {
@@ -51,25 +27,23 @@ const App = ({ Component, pageProps }: AppProps) => {
   };
 
   return (
-    <ApolloProvider client={client}>
-      <Provider store={getStore()}>
-        <Head>
-          <title>ToolDeck</title>
-          <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
-          <base target="_blank" />
-        </Head>
+    <Provider store={getStore()}>
+      <Head>
+        <title>ToolDeck</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
+        <base target="_blank" />
+      </Head>
 
-        <Startup />
+      <Startup />
 
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
 
-        <ModalMapper />
-        <DialogMapper />
-      </Provider>
-    </ApolloProvider>
+      <ModalMapper />
+      <DialogMapper />
+    </Provider>
   );
 };
 
-export default App;
+export default withApollo()(App);
