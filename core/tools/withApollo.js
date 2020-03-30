@@ -2,36 +2,42 @@ import React from "react";
 import App from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { ApolloClient, HttpLink, InMemoryCache } from "apollo-boost";
+import { ApolloClient } from "apollo-client";
+import { HttpLink } from "apollo-link-http";
+import { onError } from "apollo-link-error";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloProvider } from "@apollo/react-common";
 import fetch from "isomorphic-unfetch";
 import { server } from "core/config";
 
 function createApolloClient(initialState, ctx) {
   const router = useRouter();
 
+  const httpLink = new HttpLink({
+    uri: server.uri,
+    credentials: "include",
+    fetch
+  });
+
+  const errorHandler = onError(({ graphQLErrors }) => {
+    if (typeof window !== "undefined") {
+      if (graphQLErrors?.findIndex((i) => i.code === "INVALID_TOKEN") !== -1) {
+        localStorage.removeItem("LOGIN");
+
+        router.replace("/");
+      }
+
+      if (graphQLErrors?.findIndex((i) => i.code === "ACCESS_DENIED") !== -1) {
+        router.replace("/deck");
+      }
+    }
+  });
+
   // The `ctx` (NextPageContext) will only be present on the server.
   // use it to extract auth headers (ctx.req) or similar.
   return new ApolloClient({
     ssrMode: Boolean(ctx),
-    link: new HttpLink({
-      uri: server.uri,
-      fetch,
-      credentials: "include",
-      onError: (error) => {
-        if (typeof window !== "undefined") {
-          if (error.graphQLErrors?.findIndex((i) => i.code === "INVALID_TOKEN") !== -1) {
-            localStorage.removeItem("LOGIN");
-
-            router.replace("/");
-          }
-
-          if (error.graphQLErrors?.findIndex((i) => i.code === "ACCESS_DENIED") !== -1) {
-            router.replace("/deck");
-          }
-        }
-      }
-    }),
+    link: errorHandler.concat(httpLink),
     cache: new InMemoryCache().restore(initialState)
   });
 }

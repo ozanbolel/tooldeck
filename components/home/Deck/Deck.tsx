@@ -22,6 +22,7 @@ const Deck: React.FC = () => {
   const dispatch = useDispatch();
   const dialog = useDialog();
   const router = useRouter();
+  const client = useApolloClient();
   const [logout] = useMutation(LOGOUT);
 
   const onClickTool = (tool: TTool) => {
@@ -90,11 +91,13 @@ const Deck: React.FC = () => {
                 {
                   label: "Logout",
                   callback: () => {
-                    logout();
+                    logout().then(() => {
+                      localStorage.removeItem("LOGIN");
 
-                    localStorage.removeItem("LOGIN");
+                      client.resetStore();
 
-                    router.push("/");
+                      router.push("/");
+                    });
                   }
                 },
                 { label: "Close" }
