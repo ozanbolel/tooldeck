@@ -7,7 +7,7 @@ import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 import { IS_STARRED, GET_TOOLS } from "core/queries";
 import { GIVE_STAR } from "core/mutations";
 
-const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) => {
+const ToolDetails: TModalComponent = ({ rerender, isAnimationDone, isClosing, payload }) => {
   const tool: TTool = payload?.tool;
   const callback: Function = payload?.callback;
   const { isAdded, onClickAdd, loading } = useIsToolAdded(tool.id, callback);
@@ -35,15 +35,15 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
 
           <div className={css.numberContainer}>
             <div className={css.number}>
-              <Icon name="star" className={css.icon} />
-
-              <span>{tool.stars}</span>
-            </div>
-
-            <div className={css.number}>
               <Icon name="user" className={css.icon} />
 
               <span>{tool.users}</span>
+            </div>
+
+            <div className={css.number}>
+              <Icon name="star" className={css.icon} />
+
+              <span>{tool.stars}</span>
             </div>
           </div>
         </div>
@@ -52,8 +52,10 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
           <Button
             label={isAdded ? "ADDED" : "ADD TO DECK"}
             className={css.buttonAdd}
-            onClick={() => {
-              onClickAdd();
+            onClick={async () => {
+              await onClickAdd();
+
+              rerender();
             }}
             loading={loading}
             disabled={isAdded}
