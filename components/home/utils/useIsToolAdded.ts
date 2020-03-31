@@ -1,14 +1,15 @@
 import * as React from "react";
 import { useQuery, useApolloClient, useMutation } from "@apollo/react-hooks";
-import { GET_USER_DATA } from "core/queries";
+import { GET_USER_DATA, GET_TOOLS } from "core/queries";
 import { ADD_TO_DECK } from "core/mutations";
 import { useDialog } from "core/tools";
+import { TTool } from "core/types";
 
 const useIsToolAdded = (id: string, callback?: Function) => {
   const [isAdded, setIsAdded] = React.useState(false);
   const { data } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-only" });
   const [addToDeck, { loading }] = useMutation(ADD_TO_DECK);
-  const { cache } = useApolloClient();
+  const cache = useApolloClient().cache;
   const dialog = useDialog();
 
   React.useEffect(() => {
@@ -22,6 +23,8 @@ const useIsToolAdded = (id: string, callback?: Function) => {
   const onClickAdd = async () =>
     addToDeck({ variables: { toolId: id } })
       .then(() => {
+        // Update local deck
+
         setIsAdded(true);
         callback ? callback() : null;
 
@@ -29,6 +32,15 @@ const useIsToolAdded = (id: string, callback?: Function) => {
         newToolIds.unshift(id);
 
         cache.writeQuery({ query: GET_USER_DATA, data: { user: data.user, deck: { toolIds: newToolIds, __typename: data.deck.__typename } } });
+
+        // Update local tool user count
+
+        let newTools = (cache.readQuery({ query: GET_TOOLS }) as any).tools as [TTool];
+        const toolIndex = newTools.findIndex((i) => i.id === id);
+
+        newTools[toolIndex].users = newTools[toolIndex].users + 1;
+
+        cache.writeQuery({ query: GET_TOOLS, data: { newTools } });
       })
       .catch((e) => {
         if (e.graphQLErrors[0].code === "ALREADY_IN_DECK") {

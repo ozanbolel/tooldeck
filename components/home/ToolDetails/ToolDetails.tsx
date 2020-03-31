@@ -3,11 +3,26 @@ import { Button, Icon, Loading } from "core/elements";
 import { TModalComponent, TTool } from "core/types";
 import useIsToolAdded from "../utils/useIsToolAdded";
 import css from "./ToolDetails.module.scss";
+import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
+import { IS_STARRED, GET_TOOLS } from "core/queries";
+import { GIVE_STAR } from "core/mutations";
 
 const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) => {
   const tool: TTool = payload?.tool;
   const callback: Function = payload?.callback;
   const { isAdded, onClickAdd, loading } = useIsToolAdded(tool.id, callback);
+  const { data: dataIsStarred, loading: loadingIsStarred } = useQuery(IS_STARRED, { variables: { toolId: tool.id }, fetchPolicy: "network-only" });
+  const [giveStar, { data: dataGiveStar, loading: loadingGiveStar }] = useMutation(GIVE_STAR, {
+    variables: { toolId: tool.id },
+    update: (cache) => {
+      let newTools = (cache.readQuery({ query: GET_TOOLS }) as any).tools as [TTool];
+      const toolIndex = newTools.findIndex((i) => i.id === tool.id);
+
+      newTools[toolIndex].stars = tool.stars + 1;
+
+      cache.writeQuery({ query: GET_TOOLS, data: { newTools } });
+    }
+  });
 
   return (
     <div className={css.container}>
@@ -44,7 +59,14 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
             disabled={isAdded}
           />
 
-          <Button label="" icon={{ name: "star", position: "left", className: css.icon }} className={css.buttonStar} />
+          <Button
+            label=""
+            icon={{ name: "star", position: "left", className: css.icon }}
+            className={css.buttonStar}
+            onClick={() => giveStar()}
+            loading={loadingIsStarred || loadingGiveStar}
+            disabled={dataIsStarred?.isStarred || dataGiveStar}
+          />
         </div>
       </div>
 

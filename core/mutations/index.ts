@@ -5,3 +5,4 @@ export * from "./LOGOUT";
 export * from "./ADD_TO_DECK";
 export * from "./REMOVE_FROM_DECK";
 export * from "./CREATE_TOOL";
+export * from "./GIVE_STAR";

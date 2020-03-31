@@ -17,7 +17,7 @@ const Deck: React.FC = () => {
   const { data: dataUser } = useQuery(GET_USER_DATA);
   const { data: dataTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
-  const { cache } = useApolloClient();
+  const cache = useApolloClient().cache;
   const tabs = useSelector((store: TStore) => store.tabs.opened);
   const dispatch = useDispatch();
   const dialog = useDialog();
@@ -39,11 +39,24 @@ const Deck: React.FC = () => {
 
   const onClickDel = (id: string) => {
     const callback = () => {
+      // Update local deck
+
       const newDataDeckToolIds = dataUser.deck.toolIds.filter((i: string) => i !== id);
 
       cache.writeQuery({ query: GET_USER_DATA, data: { user: dataUser.user, deck: { toolIds: newDataDeckToolIds, __typename: dataUser.deck.__typename } } });
 
+      // Update server
+
       removeFromDeck({ variables: { toolId: id } });
+
+      // Update local tool user count
+
+      let newTools = (cache.readQuery({ query: GET_TOOLS }) as any).tools as [TTool];
+      const toolIndex = newTools.findIndex((i) => i.id === id);
+
+      newTools[toolIndex].users = newTools[toolIndex].users - 1;
+
+      cache.writeQuery({ query: GET_TOOLS, data: { newTools } });
     };
 
     dialog(
