@@ -22,13 +22,13 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
             <div className={css.number}>
               <Icon name="star" className={css.icon} />
 
-              <span>{React.useMemo(() => (Math.random() * 10).toFixed(), [])}</span>
+              <span>{tool.stars}</span>
             </div>
 
             <div className={css.number}>
               <Icon name="user" className={css.icon} />
 
-              <span>{React.useMemo(() => (Math.random() * 10).toFixed(), [])}</span>
+              <span>{tool.users}</span>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@ const ToolDetails: TModalComponent = ({ isAnimationDone, isClosing, payload }) =
         <div className={css.section}>
           <div className={css.title}>Descripcion</div>
 
-          <span>{tool.desc}</span>
+          <span>{tool.desc || tool.shortDesc}</span>
         </div>
 
         <div className={css.section}>

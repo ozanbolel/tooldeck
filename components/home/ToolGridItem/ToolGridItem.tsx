@@ -23,7 +23,7 @@ const ToolGridItem: TToolGridItem = ({ tool }) => {
 
       <div className={css.info}>
         <div className={css.label}>{tool.label}</div>
-        <div className={css.desc}>{tool.desc}</div>
+        <div className={css.desc}>{tool.shortDesc}</div>
 
         <Button label={isAdded ? "ADDED" : "ADD"} className={css.button} onClick={() => onClickAdd()} loading={loading} disabled={isAdded} />
         <Button label="VIEW" className={css.button} onClick={() => onClickView()} />

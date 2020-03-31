@@ -1,11 +1,14 @@
 export type TTool = {
   id: string;
   label: string;
-  desc: string;
+  shortDesc: string;
+  desc?: string;
   cat: string;
-  sub_cat: string;
+  subCat: string;
   url: string;
+  iconUrl: string;
+  coverUrl?: string;
   external: boolean;
-  iconUrl: string | null;
-  coverUrl: string | null;
+  users: number;
+  stars: number;
 };

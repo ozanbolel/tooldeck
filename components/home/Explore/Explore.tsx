@@ -1,47 +1,60 @@
 import * as React from "react";
-import { tools } from "core/data";
 import css from "./Explore.module.scss";
-import { useApolloClient, useLazyQuery } from "@apollo/react-hooks";
-import { GET_USER_DATA } from "core/queries";
+import { useApolloClient, useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { GET_USER_DATA, GET_TOOLS } from "core/queries";
 import ToolGridItem from "../ToolGridItem/ToolGridItem";
+import { TTool } from "core/types";
 
 const Explore: React.FC = () => {
+  const { data } = useQuery(GET_TOOLS);
+  const [getUser, { data: dataUser }] = useLazyQuery(GET_USER_DATA);
+  const [isUserLoaded, setIsUserLoaded] = React.useState(false);
   const { cache } = useApolloClient();
-  const [getUser, { data }] = useLazyQuery(GET_USER_DATA);
-  const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
     try {
       cache.readQuery({ query: GET_USER_DATA });
 
-      setLoaded(true);
+      setIsUserLoaded(true);
     } catch {
       getUser();
     }
   }, []);
 
   React.useEffect(() => {
-    if (data) {
-      setLoaded(true);
+    if (dataUser) {
+      setIsUserLoaded(true);
     }
-  }, [data]);
+  }, [dataUser]);
 
   return (
     <>
       <div className={css.pageTitle}>Explore</div>
 
-      {loaded ? (
+      {data && isUserLoaded ? (
         <>
           <div className={css.section}>
             <div className={css.title}>For Developers</div>
 
-            <div className={css.grid}>{tools.map((tool) => (tool.cat === "dev" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
+            <div className={css.grid}>
+              {(data.tools as [TTool])
+                .filter((i) => i.cat === "development")
+                .map((tool) => (
+                  <ToolGridItem key={tool.id} tool={tool} />
+                ))}
+            </div>
           </div>
 
           <div className={css.section}>
             <div className={css.title}>Better Designs</div>
 
-            <div className={css.grid}>{tools.map((tool) => (tool.cat === "design" ? <ToolGridItem key={tool.id} tool={tool} /> : null))}</div>
+            <div className={css.grid}>
+              {(data.tools as [TTool])
+                .filter((i) => i.cat === "design")
+                .map((tool) => (
+                  <ToolGridItem key={tool.id} tool={tool} />
+                ))}
+            </div>
           </div>
         </>
       ) : null}
