@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { Radio } from "core/elements";
+import { Radio, Footer } from "core/elements";
 import { TStore } from "core/types";
 import css from "./HomeLayout.module.scss";
 
@@ -36,6 +36,8 @@ const HomeLayout: React.FC = ({ children }) => {
 
         <WebFrame hidden={currentTabId === ""} />
       </div>
+
+      <Footer />
     </div>
   );
 };

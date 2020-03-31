@@ -7,7 +7,7 @@ import { useDialog } from "core/tools";
 import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
 import { tools } from "core/data";
-import { GET_USER } from "core/queries";
+import { GET_USER_DATA } from "core/queries";
 import css from "./Deck.module.scss";
 
 import ToolCard from "../ToolCard/ToolCard";
@@ -15,7 +15,7 @@ import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
 
 const Deck: React.FC = () => {
-  const { data } = useQuery(GET_USER, { fetchPolicy: "cache-first" });
+  const { data } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-first" });
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const { cache } = useApolloClient();
   const tabs = useSelector((store: TStore) => store.tabs.opened);
@@ -41,7 +41,7 @@ const Deck: React.FC = () => {
     const callback = () => {
       const newDataDeckToolIds = data.deck.toolIds.filter((i: string) => i !== id);
 
-      cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newDataDeckToolIds, __typename: data.deck.__typename } } });
+      cache.writeQuery({ query: GET_USER_DATA, data: { user: data.user, deck: { toolIds: newDataDeckToolIds, __typename: data.deck.__typename } } });
 
       removeFromDeck({ variables: { toolId: id } });
     };

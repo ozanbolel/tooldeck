@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useQuery, useApolloClient, useMutation } from "@apollo/react-hooks";
-import { GET_USER } from "core/queries";
+import { GET_USER_DATA } from "core/queries";
 import { ADD_TO_DECK } from "core/mutations";
 import { useDialog } from "core/tools";
 
 const useIsToolAdded = (id: string, callback?: Function) => {
   const [isAdded, setIsAdded] = React.useState(false);
-  const { data } = useQuery(GET_USER, { fetchPolicy: "cache-only" });
+  const { data } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-only" });
   const [addToDeck, { loading }] = useMutation(ADD_TO_DECK);
   const { cache } = useApolloClient();
   const dialog = useDialog();
@@ -28,7 +28,7 @@ const useIsToolAdded = (id: string, callback?: Function) => {
         let newToolIds = data.deck.toolIds;
         newToolIds.unshift(id);
 
-        cache.writeQuery({ query: GET_USER, data: { user: data.user, deck: { toolIds: newToolIds, __typename: data.deck.__typename } } });
+        cache.writeQuery({ query: GET_USER_DATA, data: { user: data.user, deck: { toolIds: newToolIds, __typename: data.deck.__typename } } });
       })
       .catch((e) => {
         if (e.graphQLErrors[0].code === "ALREADY_IN_DECK") {

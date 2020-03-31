@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "core/elements";
 import { TStore } from "core/types";
 import css from "./Tabs.module.scss";
+import { useRouter } from "next/router";
 
 const Tabs: React.FC = () => {
   const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);
   const [tabWidth, setTabWidth] = React.useState(0);
   const refInnerTabs = React.useRef<any>(null);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   React.useEffect(() => {
     const numTabs = tabs.length;
@@ -72,7 +74,8 @@ const Tabs: React.FC = () => {
           className={css.tab + " " + css.tabDeck + (currentTabId === "" ? " " + css.tabActive : "")}
           onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}
         >
-          <span>Deck</span>
+          <img src="/favicon.png" draggable="false" />
+          <span>{router.pathname.split("/")[1] === "deck" ? "Deck" : "Explore"}</span>
         </div>
       </div>
 

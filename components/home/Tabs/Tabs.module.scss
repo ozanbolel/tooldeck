@@ -14,7 +14,7 @@
 }
 
 .innerDeck {
-  width: 100px;
+  width: 125px;
 }
 
 .innerTabs {
@@ -61,10 +61,16 @@
 
 .tabDeck {
   width: 100%;
-  padding: 0 0 0 $g-s;
+  padding: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   animation: none;
+
+  img {
+    width: 22px;
+    height: 22px;
+    margin: 0 $g-s;
+  }
 }
 
 .tabActive {

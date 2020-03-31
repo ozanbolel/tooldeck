@@ -2,17 +2,17 @@ import * as React from "react";
 import { tools } from "core/data";
 import css from "./Explore.module.scss";
 import { useApolloClient, useLazyQuery } from "@apollo/react-hooks";
-import { GET_USER } from "core/queries";
+import { GET_USER_DATA } from "core/queries";
 import ToolGridItem from "../ToolGridItem/ToolGridItem";
 
 const Explore: React.FC = () => {
   const { cache } = useApolloClient();
-  const [getUser, { data }] = useLazyQuery(GET_USER);
+  const [getUser, { data }] = useLazyQuery(GET_USER_DATA);
   const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
     try {
-      cache.readQuery({ query: GET_USER });
+      cache.readQuery({ query: GET_USER_DATA });
 
       setLoaded(true);
     } catch {
