@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TPage } from "core/types";
-import { Nest, Button } from "core/elements";
+import { Nest, Button, Radio } from "core/elements";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CREATE_TOOL } from "core/mutations";
 import { GET_USER } from "core/queries";
@@ -47,58 +47,80 @@ const AdminIndexPage: TPage = () => {
       })
       .catch((error) => dialog(error.message, { label: "Ok" }));
 
+  const inputStyles = {
+    width: 420,
+    padding: 5,
+    border: "solid 1px #fff"
+  };
+
   if (data) {
     return (
       <Nest>
         <div style={{ fontSize: "3rem", fontWeight: 700, marginBottom: 60 }}>Welcome Master 🧛‍♀️</div>
 
-        <div style={{ fontSize: "1.6rem" }}>
+        <div style={{ fontSize: "1.4rem" }}>
           <div style={{ marginBottom: 20 }}>
             <span>label: </span>
-            <input value={label} onChange={(e) => setLabel(e.target.value)} />
+            <input value={label} style={inputStyles} onChange={(e) => setLabel(e.target.value)} />
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>shortDesc: </span>
-            <input value={shortDesc} onChange={(e) => setShortDesc(e.target.value)} />
+            <input value={shortDesc} style={inputStyles} onChange={(e) => setShortDesc(e.target.value)} />
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>desc: </span>
-            <input value={desc} onChange={(e) => setDesc(e.target.value)} />
+            <input value={desc} style={inputStyles} onChange={(e) => setDesc(e.target.value)} />
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>cat: </span>
-            <input value={cat} onChange={(e) => setCat(e.target.value)} />
+            <Radio
+              items={[
+                { label: "development", value: "development" },
+                { label: "design", value: "design" }
+              ]}
+              onChange={(v: string) => setCat(v)}
+            />
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>subCat: </span>
-            <input value={subCat} onChange={(e) => setSubCat(e.target.value)} />
+            {cat === "development" ? (
+              <Radio
+                items={[
+                  { label: "styling", value: "styling" },
+                  { label: "documents", value: "documents" },
+                  { label: "snippets", value: "snippets" }
+                ]}
+                onChange={(v: string) => setSubCat(v)}
+              />
+            ) : null}
+            {cat === "design" ? <Radio items={[{ label: "palettes", value: "palettes" }]} onChange={(v: string) => setSubCat(v)} /> : null}
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>url: </span>
-            <input value={url} onChange={(e) => setUrl(e.target.value)} />
+            <input value={url} style={inputStyles} onChange={(e) => setUrl(e.target.value)} />
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>iconUrl: </span>
-            <input value={iconUrl} onChange={(e) => setIconUrl(e.target.value)} />
+            <input value={iconUrl} style={inputStyles} onChange={(e) => setIconUrl(e.target.value)} />
           </div>
 
           <div style={{ marginBottom: 20 }}>
             <span>coverUrl: </span>
-            <input value={coverUrl} onChange={(e) => setCoverUrl(e.target.value)} />
+            <input value={coverUrl} style={inputStyles} onChange={(e) => setCoverUrl(e.target.value)} />
           </div>
 
           <div style={{ marginBottom: 60 }}>
             <span>external: </span>
-            <input type="checkbox" onChange={(e) => setExternal(e.target.checked)} />
+            <input type="checkbox" style={{ width: 30, height: 30 }} onChange={(e) => setExternal(e.target.checked)} />
           </div>
 
-          <Button label="Create Tool" loading={loading} onClick={() => onClickCreateTool()} />
+          <Button label="Create Tool" loading={loading} style={{ padding: "10px 30px" }} onClick={() => onClickCreateTool()} />
         </div>
       </Nest>
     );
