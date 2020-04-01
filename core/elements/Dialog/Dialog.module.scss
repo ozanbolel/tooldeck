@@ -103,12 +103,14 @@
   }
 }
 
+$border-width: 1px;
+
 .actionItemInner {
   font-size: $h5;
   font-weight: $b;
-  padding: ($g-s - 2px);
+  padding: ($g-s - $border-width);
   text-align: center;
-  border: solid 2px transparent;
+  border: solid $border-width transparent;
   border-radius: $r-100;
   transition: border-color $de;
   cursor: pointer;

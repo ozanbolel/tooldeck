@@ -6,15 +6,16 @@
   @include no-select;
 }
 
+$border-width: 2px;
+
 .item {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $c-content;
   color: $c-main;
   font-weight: $b;
   padding: 0 $g-l;
-  border: solid 2px $c-divider;
+  border: solid $border-width $c-divider;
   border-left-width: 0;
   border-right-width: 0;
   transition: background $de, color $de, border-color $de;
@@ -23,13 +24,13 @@
   &:first-of-type {
     border-top-left-radius: $r-100;
     border-bottom-left-radius: $r-100;
-    border-left-width: 2px;
+    border-left-width: $border-width;
   }
 
   &:last-of-type {
     border-top-right-radius: $r-100;
     border-bottom-right-radius: $r-100;
-    border-right-width: 2px;
+    border-right-width: $border-width;
   }
 }
 

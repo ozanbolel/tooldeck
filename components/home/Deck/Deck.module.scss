@@ -38,7 +38,7 @@
   width: $h1;
   height: $h1;
   border-radius: 100%;
-  border: solid 3px $c-divider;
+  border: solid 2px $c-divider;
   transition: border-color $de;
   overflow: hidden;
 
@@ -78,7 +78,7 @@ $card-width: 200px;
   width: 100%;
   height: $card-width;
   box-sizing: border-box;
-  border: solid 3px $c-divider;
+  border: solid 2px $c-divider;
   transition: border-color $de;
 
   &:hover {

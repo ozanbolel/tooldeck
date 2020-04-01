@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { TStore } from "core/types";
-import { Web } from "core/elements";
+import { Web, Loading } from "core/elements";
 import css from "./WebFrame.module.scss";
 
 const WebFrame: React.FC<{ hidden: boolean }> = ({ hidden }) => {
@@ -10,9 +10,15 @@ const WebFrame: React.FC<{ hidden: boolean }> = ({ hidden }) => {
 
   return (
     <div className={css.webFrame + (hidden ? " " + css.hidden : "")}>
-      {tabs.map((i) => (
-        <Web key={i.id} url={i.url} show={currentTabId === i.id} />
-      ))}
+      <div className={css.loadingContainer}>
+        <Loading className={css.loading} />
+      </div>
+
+      <div className={css.content}>
+        {tabs.map((i) => (
+          <Web key={i.id} url={i.url} show={currentTabId === i.id} />
+        ))}
+      </div>
     </div>
   );
 };
