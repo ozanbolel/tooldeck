@@ -19,6 +19,12 @@ const HomeLayout: React.FC = ({ children }) => {
         <Tabs />
       </div>
 
+      {currentTabId === "" ? (
+        <div className={css.tile}>
+          <div className={css.shade} />
+        </div>
+      ) : null}
+
       <div className={css.radio + (currentTabId !== "" ? " " + css.hidden : "")}>
         <Radio
           items={[
@@ -28,6 +34,7 @@ const HomeLayout: React.FC = ({ children }) => {
           initial={pathname}
           value={pathname}
           onChange={(v: string) => router.push("/" + v)}
+          noTopBorder
         />
       </div>
 

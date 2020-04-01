@@ -4,6 +4,22 @@
   display: inline-flex;
   height: $h-input;
   @include no-select;
+
+  &.noTopBorder {
+    .item {
+      border-top-width: 0;
+
+      &:first-of-type {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: $r;
+      }
+
+      &:last-of-type {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: $r;
+      }
+    }
+  }
 }
 
 $border-width: 2px;
@@ -12,6 +28,7 @@ $border-width: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: $c-dark;
   color: $c-main;
   font-weight: $b;
   padding: 0 $g-l;

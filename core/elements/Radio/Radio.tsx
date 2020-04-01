@@ -11,9 +11,10 @@ type TRadio = React.FC<{
   initial?: string;
   value?: string;
   onChange?: Function;
+  noTopBorder?: boolean;
 }>;
 
-export const Radio: TRadio = ({ items, initial, value, onChange }) => {
+export const Radio: TRadio = ({ items, initial, value, onChange, noTopBorder }) => {
   const [localValue, setLocalValue] = React.useState(initial ? initial : "");
 
   if (value) {
@@ -27,7 +28,7 @@ export const Radio: TRadio = ({ items, initial, value, onChange }) => {
   };
 
   return (
-    <div className={css.container}>
+    <div className={css.container + (noTopBorder ? " " + css.noTopBorder : "")}>
       {items.map((i) => (
         <div key={i.value} className={css.item + (i.value === localValue ? " " + css.selected : "")} onClick={() => controller(i.value)}>
           {i.label}

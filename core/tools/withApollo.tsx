@@ -42,7 +42,8 @@ function createApolloClient(initialState: NormalizedCacheObject, ctx?: TContext)
   return new ApolloClient({
     ssrMode: Boolean(ctx),
     link: errorHandler.concat(httpLink),
-    cache: new InMemoryCache().restore(initialState)
+    cache: new InMemoryCache().restore(initialState),
+    assumeImmutableResults: true
   });
 }
 
