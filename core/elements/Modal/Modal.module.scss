@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba($c-dark, 0.9);
+  background: rgba($c-dark, 0.75);
   animation: fadeIn $de;
 
   &.hasAutoclose {

@@ -26,28 +26,34 @@ const Index: React.FC = () => {
 
   return (
     <div className={css.container}>
-      <div className={css.title}>Welcome to ToolDeck</div>
+      <div className={css.shade} />
 
-      <div className={css.desc}>We don't have a landing page, but we have login buttons...</div>
+      <div className={css.inner}>
+        <img className={css.logo} src="/favicon.png" draggable="false" />
 
-      <div className={css.login}>
-        <Button
-          label="Login with GitHub"
-          icon={{ name: "github", position: "left", className: css.icon }}
-          className={css.withGithub}
-          onClick={() => onClickGithub()}
-          loading={isGithubClicked}
-          disabled={isTwitterClicked || isGithubClicked}
-        />
+        <div className={css.title}>Welcome to ToolDeck</div>
 
-        <Button
-          label="Login with Twitter"
-          icon={{ name: "twitter", position: "left", className: css.icon }}
-          className={css.withTwitter}
-          onClick={() => onClickTwitter()}
-          loading={isTwitterClicked}
-          disabled={isTwitterClicked || isGithubClicked}
-        />
+        <div className={css.desc}>Color Palettes, Code Snippets, Utilities and More...</div>
+
+        <div className={css.login}>
+          <Button
+            label="Login with GitHub"
+            icon={{ name: "github", position: "left", className: css.icon }}
+            className={css.withGithub}
+            onClick={() => onClickGithub()}
+            loading={isGithubClicked}
+            disabled={isTwitterClicked || isGithubClicked}
+          />
+
+          <Button
+            label="Login with Twitter"
+            icon={{ name: "twitter", position: "left", className: css.icon }}
+            className={css.withTwitter}
+            onClick={() => onClickTwitter()}
+            loading={isTwitterClicked}
+            disabled={isTwitterClicked || isGithubClicked}
+          />
+        </div>
       </div>
     </div>
   );
