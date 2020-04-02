@@ -15,31 +15,31 @@ const HomeLayout: React.FC = ({ children }) => {
 
   return (
     <div className={css.home}>
-      <div>
-        <Tabs />
-      </div>
+      <Tabs />
 
       {currentTabId === "" ? (
-        <div className={css.tile}>
-          <div className={css.shade} />
-        </div>
+        <>
+          <div className={css.tile}>
+            <div className={css.shade} />
+          </div>
+
+          <div className={css.radio}>
+            <Radio
+              items={[
+                { label: "Deck", value: "deck" },
+                { label: "Explore", value: "explore" }
+              ]}
+              initial={pathname}
+              value={pathname}
+              onChange={(v: string) => router.push("/" + v)}
+              noTopBorder
+            />
+          </div>
+        </>
       ) : null}
 
-      <div className={css.radio + (currentTabId !== "" ? " " + css.hidden : "")}>
-        <Radio
-          items={[
-            { label: "Deck", value: "deck" },
-            { label: "Explore", value: "explore" }
-          ]}
-          initial={pathname}
-          value={pathname}
-          onChange={(v: string) => router.push("/" + v)}
-          noTopBorder
-        />
-      </div>
-
       <div className={css.switch}>
-        <div className={css.page + (currentTabId !== "" ? " " + css.hidden : "")}>{children}</div>
+        {currentTabId === "" ? children : null}
 
         <WebFrame hidden={currentTabId === ""} />
       </div>
