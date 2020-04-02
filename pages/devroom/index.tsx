@@ -122,6 +122,8 @@ const AdminIndexPage: TPage = () => {
 
           <Button label="Create Tool" loading={loading} style={{ padding: "10px 30px" }} onClick={() => onClickCreateTool()} />
         </div>
+
+        <iframe src={"https://" + url} style={{ marginTop: 60, marginBottom: 60, width: 300, height: 300 }} />
       </Nest>
     );
   } else {
