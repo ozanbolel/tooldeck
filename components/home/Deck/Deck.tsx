@@ -14,7 +14,7 @@ import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
 
 const Deck: React.FC = () => {
-  const { data: dataUser } = useQuery(GET_USER_DATA);
+  const { data: dataUser } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-and-network" });
   const { data: dataTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const cache = useApolloClient().cache;
