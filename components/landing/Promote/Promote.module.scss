@@ -20,11 +20,10 @@
     object-position: top;
     object-fit: cover;
     border-radius: $r;
-    border: solid 1px $c-divider;
   }
 
   .text {
-    padding: $g-m 0;
+    margin-top: $g-m;
     text-align: center;
 
     span {

@@ -4,7 +4,7 @@ import css from "./LandingFooter.module.scss";
 const LandingFooter: React.FC = () => {
   return (
     <div className={css.footer}>
-      <div>#StaySafe</div>
+      <div></div>
 
       <div>ToolDeck © 2020</div>
     </div>
