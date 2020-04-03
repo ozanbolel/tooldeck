@@ -1,15 +1,35 @@
 @import "core/styles/head";
 
 .topbar {
+  z-index: 10;
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: $g-s $g-xxs;
+  background: $c-dark;
+  height: 70px;
+  padding: 0 $g-xxs;
+  box-sizing: border-box;
   border-bottom: solid 1px $c-divider;
   @include no-select;
 }
 
 .logo {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.loginButtons {
+  opacity: 0;
+  transform: translateY(40%);
+  pointer-events: none;
+  transition: opacity $d-s $e-o, transform $d-s $e-o;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: unset;
+  }
 }

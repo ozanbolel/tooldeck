@@ -1,0 +1,14 @@
+@import "core/styles/head";
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  font-size: $h5;
+  font-weight: $b;
+  box-sizing: border-box;
+  padding: 0 $g-xxs $g-xs $g-xxs;
+  border-top: solid 1px $c-divider;
+  @include no-select;
+}

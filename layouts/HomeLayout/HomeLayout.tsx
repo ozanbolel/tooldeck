@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { Radio, Footer } from "core/elements";
+import { Radio } from "core/elements";
 import { TStore } from "core/types";
 import css from "./HomeLayout.module.scss";
-
 import Tabs from "components/home/Tabs/Tabs";
 import WebFrame from "components/home/WebFrame/WebFrame";
+import Footer from "components/app/Footer/Footer";
 
 const HomeLayout: React.FC = ({ children }) => {
   const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);

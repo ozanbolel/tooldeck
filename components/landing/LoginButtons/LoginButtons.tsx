@@ -5,10 +5,20 @@ import { GET_TWITTER_TOKEN } from "core/mutations";
 import { Button } from "core/elements";
 import css from "./LoginButtons.module.scss";
 
-const LoginButtons: React.FC = () => {
+export type TLoginButtonsController = {
+  isGithubClicked: boolean;
+  setIsGithubClicked: Function;
+  isTwitterClicked: boolean;
+  setIsTwitterClicked: Function;
+};
+
+type TLoginButtons = React.FC<{
+  controller: TLoginButtonsController;
+}>;
+
+const LoginButtons: TLoginButtons = ({ controller }) => {
   const [getTwitterToken] = useMutation(GET_TWITTER_TOKEN);
-  const [isGithubClicked, setIsGithubClicked] = React.useState(false);
-  const [isTwitterClicked, setIsTwitterClicked] = React.useState(false);
+  const { isGithubClicked, setIsGithubClicked, isTwitterClicked, setIsTwitterClicked } = controller;
 
   const onClickGithub = () => {
     setIsGithubClicked(true);

@@ -1,11 +1,11 @@
 import * as React from "react";
 import css from "./Header.module.scss";
 import { TextChanger } from "core/elements";
-import LoginButtons from "../LoginButtons/LoginButtons";
+import LoginButtons, { TLoginButtonsController } from "../LoginButtons/LoginButtons";
 
-const Header: React.FC = () => {
+const Header: React.FC<{ controller: TLoginButtonsController }> = ({ controller }) => {
   return (
-    <div className={css.header}>
+    <div id="header" className={css.header}>
       <div className={css.bg}>
         <div className={css.bgShade} />
       </div>
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
       <div className={css.motto}>A place for your favorite tools.</div>
 
       <div className={css.login}>
-        <LoginButtons />
+        <LoginButtons controller={controller} />
       </div>
     </div>
   );

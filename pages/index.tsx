@@ -1,9 +1,7 @@
 import * as React from "react";
 import { TPage } from "core/types";
 import { useRouter } from "next/router";
-import { Nest } from "core/elements";
-import Topbar from "components/landing/Topbar/Topbar";
-import Header from "components/landing/Header/Header";
+import Landing from "components/landing/Landing/Landing";
 
 const LandingPage: TPage = () => {
   const router = useRouter();
@@ -16,12 +14,7 @@ const LandingPage: TPage = () => {
     }
   }, []);
 
-  return (
-    <Nest>
-      <Topbar />
-      <Header />
-    </Nest>
-  );
+  return <Landing />;
 };
 
 export default LandingPage;
