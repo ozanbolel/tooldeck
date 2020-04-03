@@ -7,7 +7,7 @@ import Explore from "components/home/Explore/Explore";
 
 const ExplorePage: TPage = () => {
   return (
-    <Nest noVerticalPadding>
+    <Nest>
       <Explore />
     </Nest>
   );

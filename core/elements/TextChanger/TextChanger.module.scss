@@ -1,0 +1,39 @@
+@import "core/styles/head";
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.text {
+  @keyframes textIn {
+    from {
+      opacity: 0;
+      transform: translateY(-40%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes textOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(40%);
+    }
+  }
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: textIn $de;
+
+  &.hidden {
+    animation: textOut $de forwards;
+  }
+}

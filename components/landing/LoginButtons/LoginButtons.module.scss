@@ -1,0 +1,33 @@
+@import "core/styles/head";
+
+.withGithub,
+.withTwitter {
+  $icon-width: 22px;
+
+  color: $c-light !important;
+  padding: $g-s $icon-width $g-s ($icon-width * 2.5);
+  margin-right: $g-s;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &:hover {
+    background: $c-main-sub !important;
+  }
+
+  .icon {
+    position: absolute;
+    left: $icon-width;
+    width: $icon-width;
+    height: $icon-width;
+  }
+}
+
+.withGithub {
+  background: #24292e !important;
+}
+
+.withTwitter {
+  background: #1da1f2 !important;
+}

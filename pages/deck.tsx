@@ -7,7 +7,7 @@ import Deck from "components/home/Deck/Deck";
 
 const DeckPage: TPage = () => {
   return (
-    <Nest noVerticalPadding>
+    <Nest>
       <Deck />
     </Nest>
   );

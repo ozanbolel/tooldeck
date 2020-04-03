@@ -27,35 +27,28 @@ const Explore: React.FC = () => {
     }
   }, [dataUser]);
 
+  const Section = ({ title, cat }: { title: string; cat: string }) => (
+    <div className={css.section}>
+      <div className={css.title}>{title}</div>
+
+      <div className={css.grid}>
+        {(data.tools as [TTool])
+          .filter((i) => i.cat === cat)
+          .map((tool) => (
+            <ToolGridItem key={tool.id} tool={tool} />
+          ))}
+      </div>
+    </div>
+  );
+
   return (
     <>
       <div className={css.pageTitle}>Explore</div>
 
       {data && isUserLoaded ? (
         <>
-          <div className={css.section}>
-            <div className={css.title}>For Developers</div>
-
-            <div className={css.grid}>
-              {(data.tools as [TTool])
-                .filter((i) => i.cat === "development")
-                .map((tool) => (
-                  <ToolGridItem key={tool.id} tool={tool} />
-                ))}
-            </div>
-          </div>
-
-          <div className={css.section}>
-            <div className={css.title}>Better Designs</div>
-
-            <div className={css.grid}>
-              {(data.tools as [TTool])
-                .filter((i) => i.cat === "design")
-                .map((tool) => (
-                  <ToolGridItem key={tool.id} tool={tool} />
-                ))}
-            </div>
-          </div>
+          <Section title="For Developers" cat="development" />
+          <Section title="For Designers" cat="design" />
         </>
       ) : null}
     </>

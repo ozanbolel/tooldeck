@@ -1,0 +1,15 @@
+@import "core/styles/head";
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $g-s $g-xxs;
+  border-bottom: solid 1px $c-divider;
+  @include no-select;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+}

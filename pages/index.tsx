@@ -1,9 +1,11 @@
 import * as React from "react";
 import { TPage } from "core/types";
-import Index from "components/landing/Index/Index";
 import { useRouter } from "next/router";
+import { Nest } from "core/elements";
+import Topbar from "components/landing/Topbar/Topbar";
+import Header from "components/landing/Header/Header";
 
-const IndexPage: TPage = () => {
+const LandingPage: TPage = () => {
   const router = useRouter();
 
   React.useEffect(() => {
@@ -14,7 +16,12 @@ const IndexPage: TPage = () => {
     }
   }, []);
 
-  return <Index />;
+  return (
+    <Nest>
+      <Topbar />
+      <Header />
+    </Nest>
+  );
 };
 
-export default IndexPage;
+export default LandingPage;
