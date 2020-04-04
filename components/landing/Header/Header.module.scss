@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 28rem;
+  height: 38rem;
   padding: 0 $g-xxs;
   @include no-select;
 }
@@ -46,4 +46,12 @@
 
 .login {
   margin-top: $g-l;
+}
+
+// Responsive
+
+@media only screen and (min-width: 1024px) {
+  .header {
+    height: 28rem;
+  }
 }

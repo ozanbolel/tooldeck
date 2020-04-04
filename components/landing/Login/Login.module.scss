@@ -2,10 +2,39 @@
 
 .login {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: $c-content;
   padding: $g-l $g-m;
   border-radius: $r;
-  box-shadow: $s-button;
+}
+
+.title {
+  font-size: $h2;
+  font-weight: $b;
+
+  .highlight {
+    background-image: linear-gradient(45deg, $c-main 30%, $c-main-sub 100%);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.divider {
+  width: 10%;
+  height: 1px;
+  background: $c-divider;
+  margin: $g-m 0;
+}
+
+.info {
+  margin-top: $g-l;
+  font-size: $h4;
+  font-weight: $t;
+  text-align: center;
+
+  .highlight {
+    font-weight: $b;
+  }
 }

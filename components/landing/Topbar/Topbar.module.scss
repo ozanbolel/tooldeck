@@ -22,6 +22,7 @@
 }
 
 .loginButtons {
+  display: none;
   opacity: 0;
   transform: translateY(40%);
   pointer-events: none;
@@ -31,5 +32,13 @@
     opacity: 1;
     transform: translateY(0);
     pointer-events: unset;
+  }
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .loginButtons {
+    display: unset;
   }
 }

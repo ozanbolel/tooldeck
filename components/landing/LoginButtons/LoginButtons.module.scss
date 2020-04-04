@@ -6,10 +6,10 @@
 
   color: $c-light !important;
   padding: $g-s $icon-width $g-s ($icon-width * 2.5);
-  margin-right: $g-s;
+  margin-bottom: $g-s;
 
   &:last-of-type {
-    margin-right: 0;
+    margin-bottom: 0;
   }
 
   &:hover {
@@ -30,4 +30,19 @@
 
 .withTwitter {
   background: #1da1f2 !important;
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .withGithub,
+  .withTwitter {
+    margin-bottom: unset;
+    margin-right: $g-s;
+
+    &:last-of-type {
+      margin-bottom: unset;
+      margin-right: 0;
+    }
+  }
 }

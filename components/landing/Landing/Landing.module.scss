@@ -1,7 +1,7 @@
 @import "core/styles/head";
 
 .landing {
-  padding: 0 15%;
+  padding: 0 $g-m;
 }
 
 .section {
@@ -11,5 +11,19 @@
 
   &.first {
     margin-top: $margin;
+  }
+}
+
+// Responsive
+
+@media only screen and (min-width: 1280px) {
+  .landing {
+    padding: 0 10%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .landing {
+    padding: 0 15%;
   }
 }
