@@ -4,6 +4,12 @@
   padding: 0 15%;
 }
 
-.promote {
-  margin: $g-xl 0;
+.section {
+  $margin: $g-l;
+
+  margin-bottom: $margin;
+
+  &.first {
+    margin-top: $margin;
+  }
 }

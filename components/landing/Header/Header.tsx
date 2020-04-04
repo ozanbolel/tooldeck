@@ -12,7 +12,7 @@ const Header: React.FC<{ controller: TLoginButtonsController }> = ({ controller 
 
       <TextChanger data={["Color Palettes", "Code Snippets", "Utilities"]} containerClassName={css.changerContainer} textClassName={css.changer} />
 
-      <div className={css.motto}>A place for your favorite tools.</div>
+      <div className={css.motto}>Launchpad for your favorite tools.</div>
 
       <div className={css.login}>
         <LoginButtons controller={controller} />

@@ -21,6 +21,8 @@ const Topbar: React.FC<{ controller: TLoginButtonsController }> = ({ controller 
         }
       };
 
+      scrollOps();
+
       window.addEventListener("scroll", scrollOps);
       return () => window.removeEventListener("scroll", scrollOps);
     }

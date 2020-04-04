@@ -4,7 +4,9 @@ import css from "./LandingFooter.module.scss";
 const LandingFooter: React.FC = () => {
   return (
     <div className={css.footer}>
-      <div></div>
+      <div>
+        <a href="https://twitter.com/oznbll">Contact Me</a>
+      </div>
 
       <div>ToolDeck © 2020</div>
     </div>

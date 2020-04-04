@@ -1,37 +1,36 @@
 @import "core/styles/head";
 
 .promote {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $g-l;
   @include no-select;
 }
 
 .section {
-  margin-bottom: $g-xxl;
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $c-content;
+  padding: $g-m 0;
+  border-radius: $r;
+  box-shadow: $s-button;
+  overflow: hidden;
 
   img {
-    width: 384px;
-    height: 384px;
-    object-position: top;
-    object-fit: cover;
+    width: 350px;
+    height: 350px;
     border-radius: $r;
+    box-shadow: 0 10px 50px 10px $c-dark;
   }
 
-  .text {
+  .title {
     margin-top: $g-m;
-    text-align: center;
-
-    span {
-      font-size: $h2;
-      font-weight: $b;
-      background-image: linear-gradient(45deg, $c-main 30%, $c-main-sub 100%);
-      background-clip: text;
-      color: transparent;
-    }
+    font-size: $h2;
+    font-weight: $b;
+    background-image: linear-gradient(45deg, $c-main 30%, $c-main-sub 100%);
+    background-clip: text;
+    color: transparent;
   }
 }

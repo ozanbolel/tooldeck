@@ -1,0 +1,11 @@
+@import "core/styles/head";
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $c-content;
+  padding: $g-l $g-m;
+  border-radius: $r;
+  box-shadow: $s-button;
+}

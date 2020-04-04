@@ -4,6 +4,7 @@ import Topbar from "../Topbar/Topbar";
 import Header from "../Header/Header";
 import Promote from "../Promote/Promote";
 import LandingFooter from "../LandingFooter/LandingFooter";
+import Login from "../Login/Login";
 
 const Landing: React.FC = () => {
   const [isGithubClicked, setIsGithubClicked] = React.useState(false);
@@ -17,8 +18,12 @@ const Landing: React.FC = () => {
 
       <Header controller={controller} />
 
-      <div className={css.promote}>
+      <div className={css.section + " " + css.first}>
         <Promote />
+      </div>
+
+      <div className={css.section}>
+        <Login controller={controller} />
       </div>
 
       <LandingFooter />

@@ -1,40 +1,25 @@
 import * as React from "react";
 import css from "./Promote.module.scss";
 
+const Section: React.FC<{ title: string; image: string }> = ({ title, image }) => {
+  return (
+    <div className={css.section}>
+      <img src={`/landing/${image}.png`} draggable="false" />
+
+      <div className={css.title}>
+        <span>{title}</span>
+      </div>
+    </div>
+  );
+};
+
 const Promote: React.FC = () => {
   return (
     <div className={css.promote}>
-      <div className={css.section}>
-        <img src="/landing/explore.png" draggable="false" />
-
-        <div className={css.text}>
-          <span>Explore New Tools</span>
-        </div>
-      </div>
-
-      <div className={css.section}>
-        <img src="/landing/view.png" draggable="false" />
-
-        <div className={css.text}>
-          <span>Preview</span>
-        </div>
-      </div>
-
-      <div className={css.section}>
-        <img src="/landing/add.png" draggable="false" />
-
-        <div className={css.text}>
-          <span>Add to Your Deck</span>
-        </div>
-      </div>
-
-      <div className={css.section}>
-        <img src="/landing/launch.png" draggable="false" />
-
-        <div className={css.text}>
-          <span>Launch In-App Tabs</span>
-        </div>
-      </div>
+      <Section title="Discover New Tools" image="explore" />
+      <Section title="Preview" image="view" />
+      <Section title="Add to Your Deck" image="add" />
+      <Section title="Open In-App Tabs" image="tabs" />
     </div>
   );
 };
