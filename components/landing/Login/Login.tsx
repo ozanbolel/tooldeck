@@ -12,7 +12,9 @@ const Login: React.FC<{ controller: TLoginButtonsController }> = ({ controller }
 
         <div className={css.divider} />
 
-        <LoginButtons controller={controller} />
+        <div className={css.loginButtons}>
+          <LoginButtons controller={controller} />
+        </div>
       </div>
 
       <div className={css.info}>

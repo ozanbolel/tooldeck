@@ -8,11 +8,13 @@
   background: $c-content;
   padding: $g-l $g-m;
   border-radius: $r;
+  @include no-select;
 }
 
 .title {
   font-size: $h2;
   font-weight: $b;
+  text-align: center;
 
   .highlight {
     background-image: linear-gradient(45deg, $c-main 30%, $c-main-sub 100%);
@@ -28,10 +30,15 @@
   margin: $g-m 0;
 }
 
+.loginButtons {
+  text-align: center;
+}
+
 .info {
   margin-top: $g-l;
   font-size: $h4;
   font-weight: $t;
+  padding: 0 $g-m;
   text-align: center;
 
   .highlight {

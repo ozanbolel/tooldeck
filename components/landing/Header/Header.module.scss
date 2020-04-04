@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 38rem;
+  height: 42rem;
   padding: 0 $g-xxs;
   @include no-select;
 }
@@ -49,6 +49,12 @@
 }
 
 // Responsive
+
+@media only screen and (min-width: 360px) {
+  .header {
+    height: 38rem;
+  }
+}
 
 @media only screen and (min-width: 1024px) {
   .header {
