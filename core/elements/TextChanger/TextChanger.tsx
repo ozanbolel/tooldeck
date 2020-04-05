@@ -33,7 +33,9 @@ export const TextChanger: TTextChanger = ({ data, containerClassName, textClassN
   return (
     <div className={css.container + " " + containerClassName}>
       {data.map((text: string, index) => (
-        <div className={css.text + " " + textClassName + (currentIndex !== index ? " " + css.hidden : "")}>{text}</div>
+        <div key={text} className={css.text + " " + textClassName + (currentIndex !== index ? " " + css.hidden : "")}>
+          {text}
+        </div>
       ))}
     </div>
   );

@@ -43,6 +43,15 @@
   }
 }
 
+@keyframes breathe {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
 // Mixins
 
 @mixin a-fadeIn {
@@ -62,5 +71,9 @@
 }
 
 @mixin a-spin {
-  animation: spin 1.2s linear infinite;
+  animation: spin 1.2s $e-l infinite;
+}
+
+@mixin a-breathe {
+  animation: breathe 1.2s $e-i infinite alternate;
 }

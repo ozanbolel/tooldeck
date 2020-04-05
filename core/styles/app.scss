@@ -10,21 +10,5 @@ html {
 body {
   background: $c-dark;
   color: $c-light;
-
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $c-content;
-    border: solid 1px $c-divider;
-    border-radius: $r-100;
-  }
-
-  &::-webkit-scrollbar-track,
-  &::-webkit-scrollbar-corner,
-  &::-webkit-resizer {
-    background: $c-dark;
-  }
+  @include sb-dark;
 }

@@ -5,7 +5,6 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { withApollo } from "core/tools";
 import "core/styles/app.scss";
-
 import reducerRoot from "core/store/reducerRoot";
 import Startup from "components/app/Startup/Startup";
 import DialogMapper from "core/elements/Dialog/DialogMapper";
@@ -30,9 +29,11 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Provider store={getStore()}>
       <Head>
         <title>ToolDeck</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="icon" type="image/png" href="/static/logo/logo-192.png" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
-        <base target="_blank" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#252525" />
       </Head>
 
       <Startup />

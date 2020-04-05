@@ -1,0 +1,54 @@
+@import "core/styles/head";
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-bottom: $g-l;
+
+  button {
+    padding: 0 $g-m;
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $c-content;
+  padding: $g-s;
+  border-radius: $r;
+  margin-bottom: $g-m;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.itemSection {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: $r;
+    border: solid 2px $c-divider;
+    margin-right: $g-s * 1.5;
+  }
+
+  .label {
+    font-size: $h4;
+    font-weight: $b;
+  }
+
+  button {
+    padding: $g-xs $g-m;
+    margin-right: $g-s;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

@@ -31,7 +31,7 @@ const Topbar: React.FC<{ controller: TLoginButtonsController }> = ({ controller 
   return (
     <div className={css.topbar}>
       <div onClick={() => window.scroll({ top: 0 })}>
-        <img src="/favicon.png" className={css.logo} draggable="false" />
+        <img src="/static/logo/logo.svg" className={css.logo} draggable="false" />
       </div>
 
       <div className={css.loginButtons + (isScrolled ? " " + css.show : "")}>

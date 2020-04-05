@@ -74,3 +74,41 @@ $de: $d $e-o;
   -ms-user-select: none;
   user-select: none;
 }
+
+@mixin sb-dark {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $c-content;
+    border: solid 1px $c-divider;
+    border-radius: $r-100;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner,
+  &::-webkit-resizer {
+    background: $c-dark;
+  }
+}
+
+@mixin sb-light {
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $c-light;
+    border-radius: $r-100;
+    border: solid 2px $c-divider;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner,
+  &::-webkit-resizer {
+    background: $c-light;
+  }
+}

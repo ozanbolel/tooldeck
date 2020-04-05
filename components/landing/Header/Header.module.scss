@@ -1,16 +1,17 @@
 @import "core/styles/head";
 
 .header {
+  margin-top: $g-m;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 42rem;
   padding: 0 $g-xxs;
   @include no-select;
 }
 
 .bg {
+  display: none;
   z-index: -10;
   position: absolute;
   right: 0;
@@ -50,14 +51,13 @@
 
 // Responsive
 
-@media only screen and (min-width: 360px) {
-  .header {
-    height: 38rem;
-  }
-}
-
 @media only screen and (min-width: 1024px) {
+  .bg {
+    display: unset;
+  }
+
   .header {
+    margin-top: unset;
     height: 28rem;
   }
 }

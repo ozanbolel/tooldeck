@@ -111,23 +111,7 @@
   box-sizing: border-box;
   padding: $g-m;
   overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $c-light;
-    border-radius: $r-100;
-    border: solid 2px $c-divider;
-  }
-
-  &::-webkit-scrollbar-track,
-  &::-webkit-scrollbar-corner,
-  &::-webkit-resizer {
-    background: $c-light;
-  }
+  @include sb-light;
 }
 
 .section {

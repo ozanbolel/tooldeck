@@ -1,10 +1,33 @@
 import * as React from "react";
+import ReactGA from "react-ga";
+import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { TStore } from "core/types";
 
 const Startup: React.FC = () => {
   const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  // Analytics
+
+  if (typeof window !== "undefined") {
+    React.useEffect(() => {
+      ReactGA.initialize("UA-134207044-4");
+    }, []);
+
+    React.useEffect(() => {
+      ReactGA.pageview(router.pathname);
+    }, [router.pathname]);
+  }
+
+  // Service Worker
+
+  React.useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/serviceWorker.js", { scope: "/" });
+    }
+  }, []);
 
   // Handle View Height
 

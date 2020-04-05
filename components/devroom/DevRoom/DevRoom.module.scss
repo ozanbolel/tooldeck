@@ -1,0 +1,27 @@
+@import "core/styles/head";
+
+.devroom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: $g-m 0;
+  box-sizing: border-box;
+}
+
+.welcome {
+  font-size: $h1;
+  font-weight: $b;
+  margin-bottom: $g-m;
+
+  .highlight {
+    background-image: linear-gradient(45deg, $c-main 15%, $c-warn 100%);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.page {
+  flex: 1;
+  overflow-y: auto;
+  @include sb-dark;
+}

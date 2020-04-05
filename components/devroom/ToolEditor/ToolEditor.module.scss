@@ -1,0 +1,80 @@
+@import "core/styles/head";
+
+.container {
+  display: flex;
+  width: 60vw;
+  height: 80vh;
+  height: calc(var(--vh, 1vh) * 80);
+  background: $c-light;
+  color: $c-dark;
+  padding: $g-m;
+  box-sizing: border-box;
+  border-radius: $r;
+}
+
+.editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .form {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .buttons {
+    margin-top: $g-m;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      font-size: $h5;
+      padding: $g-xs $g-l;
+    }
+  }
+}
+
+.field {
+  margin-bottom: $g-m;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .label {
+    font-size: $h4;
+    font-weight: $b;
+    margin-bottom: $g-s;
+  }
+
+  input {
+    width: 100%;
+    line-height: $h-input;
+    font-size: $h4;
+    padding: 0 $g-s;
+    box-sizing: border-box;
+    border: solid 1px $c-divider;
+    border-radius: $r-100;
+  }
+
+  input[type="checkbox"] {
+    width: $h-input;
+    height: $h-input;
+  }
+}
+
+.gap {
+  width: $g-m;
+  height: $g-m;
+}
+
+.preview {
+  width: 375px;
+  height: 100%;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: $r;
+  }
+}
