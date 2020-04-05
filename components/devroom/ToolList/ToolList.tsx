@@ -1,20 +1,25 @@
 import * as React from "react";
 import css from "./ToolList.module.scss";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_TOOLS } from "core/queries";
+import { DELETE_TOOL } from "core/mutations";
 import { TTool } from "core/types";
 import { Button, Radio } from "core/elements";
 import { useModal, useDialog } from "core/tools";
 import ToolEditor from "../ToolEditor/ToolEditor";
 
 const ToolList: React.FC = () => {
-  const { data } = useQuery(GET_TOOLS);
+  const { data } = useQuery(GET_TOOLS, { fetchPolicy: "network-only" });
+  const [deleteTool] = useMutation(DELETE_TOOL);
   const [filter, setFilter] = React.useState("");
   const modal = useModal();
   const dialog = useDialog();
 
   const onClickDelete = (id: string) => {
-    const callback = () => {};
+    const callback = () =>
+      deleteTool({ variables: { toolId: id } })
+        .then((response) => dialog(response.data.deleteTool, { label: "Ok" }))
+        .catch((error) => dialog(error.message, { label: "Ok" }));
 
     const callbackYesYes = () =>
       dialog("Please reconsider your decision Master!", [
@@ -53,7 +58,7 @@ const ToolList: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={css.container}>
       <div className={css.filter}>
         <Radio
           items={[
@@ -67,8 +72,8 @@ const ToolList: React.FC = () => {
         <Button label="Create Tool" onClick={() => modal(ToolEditor)} />
       </div>
 
-      <div>{data ? renderItems() : null}</div>
-    </>
+      <div className={css.list}>{data ? renderItems() : null}</div>
+    </div>
   );
 };
 

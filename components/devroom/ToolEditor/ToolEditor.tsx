@@ -1,16 +1,17 @@
 import * as React from "react";
 import { Button, Radio } from "core/elements";
 import { useMutation } from "@apollo/react-hooks";
-import { CREATE_TOOL } from "core/mutations";
+import { CREATE_TOOL, UPDATE_TOOL } from "core/mutations";
 import { useDialog } from "core/tools";
 import { TModalComponent, TTool } from "core/types";
 import css from "./ToolEditor.module.scss";
 
 const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, payload }) => {
   const tool: TTool = payload?.tool;
+  const [createTool, { loading: loadingCreateTool }] = useMutation(CREATE_TOOL);
+  const [updateTool, { loading: loadingUpdateTool }] = useMutation(UPDATE_TOOL);
   const dialog = useDialog();
 
-  const [createTool, { loading }] = useMutation(CREATE_TOOL);
   const [label, setLabel] = React.useState(tool ? tool.label : "");
   const [shortDesc, setShortDesc] = React.useState(tool ? tool.shortDesc : "");
   const [desc, setDesc] = React.useState(tool ? tool.desc : "");
@@ -21,7 +22,27 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
   const [coverUrl, setCoverUrl] = React.useState(tool ? tool.coverUrl : "");
   const [external, setExternal] = React.useState(tool ? tool.external : false);
 
-  const onClickUpdate = () => {};
+  const onClickUpdate = () =>
+    updateTool({
+      variables: {
+        toolId: tool.id,
+        label,
+        shortDesc,
+        desc: desc && desc.replace(" ", "").length > 0 ? desc : undefined,
+        cat,
+        subCat,
+        url,
+        iconUrl,
+        coverUrl: coverUrl && coverUrl.replace(" ", "").length > 0 ? coverUrl : undefined,
+        external
+      }
+    })
+      .then((response) => {
+        closeModal();
+
+        dialog(response.data.updateTool, { label: "Ok" });
+      })
+      .catch((error) => dialog(error.message, { label: "Ok" }));
 
   const onClickCreate = () =>
     createTool({
@@ -123,9 +144,9 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
           <Button label="Cancel" onClick={() => closeModal()} />
 
           {tool ? (
-            <Button label="Update" loading={loading} onClick={() => onClickUpdate()} />
+            <Button label="Update" loading={loadingUpdateTool} onClick={() => onClickUpdate()} />
           ) : (
-            <Button label="Create" loading={loading} onClick={() => onClickCreate()} />
+            <Button label="Create" loading={loadingCreateTool} onClick={() => onClickCreate()} />
           )}
         </div>
       </div>

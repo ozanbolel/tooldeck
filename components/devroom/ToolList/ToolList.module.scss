@@ -1,14 +1,26 @@
 @import "core/styles/head";
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .filter {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  margin-bottom: $g-l;
+  margin-bottom: $g-m;
 
   button {
     padding: 0 $g-m;
   }
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  @include sb-dark;
 }
 
 .item {
