@@ -60,7 +60,7 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
   const createCatItems = (type: "cat" | "subcat") => {
     const subCats: { [key: string]: string[] } = {
       development: ["style", "document", "snippet"],
-      design: ["color", "icon", "asset", "illustration"],
+      design: ["color", "icon", "asset", "illustration", "mockup"],
       common: ["image", "document"]
     };
 

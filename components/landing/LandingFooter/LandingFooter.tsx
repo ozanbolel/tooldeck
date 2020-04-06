@@ -5,7 +5,7 @@ const LandingFooter: React.FC = () => {
   return (
     <div className={css.footer}>
       <div>
-        <a href="https://twitter.com/oznbll" target="_blank">
+        <a href="https://twitter.com/oznbll" target="_blank" rel="noreferrer">
           Contact Me
         </a>
       </div>
