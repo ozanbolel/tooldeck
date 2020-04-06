@@ -142,23 +142,6 @@
   box-shadow: $s-divider;
   overflow: hidden;
 
-  .loadingContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .loading {
-    width: 4.5rem;
-    height: 4.5rem;
-    fill: $c-dark;
-  }
-
   iframe {
     position: relative;
     width: 100%;
