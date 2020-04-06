@@ -8,8 +8,22 @@
   font-size: $h5;
   font-weight: $b;
   box-sizing: border-box;
-  margin: 0 15%;
+  margin: 0 $g-s;
   padding: 0 $g-xxs $g-xs $g-xxs;
   border-top: solid 1px $c-divider;
   @include no-select;
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .footer {
+    margin: 0 10%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .footer {
+    margin: 0 15%;
+  }
 }

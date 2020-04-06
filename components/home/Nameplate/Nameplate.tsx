@@ -11,12 +11,14 @@ type TNameplate = React.FC<{
 const Nameplate: TNameplate = ({ label, className, onClickDel }) => {
   return (
     <div className={css.container + (className ? " " + className : "")}>
-      <span className={css.label}>{label}</span>
+      <div className={css.label}>
+        <span>{label}</span>
+      </div>
 
       {onClickDel ? (
-        <span className={css.options} onClick={() => onClickDel()}>
+        <div className={css.options} onClick={() => onClickDel()}>
           <Icon name="trash-2" className={css.icon} />
-        </span>
+        </div>
       ) : null}
     </div>
   );

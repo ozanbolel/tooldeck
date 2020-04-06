@@ -18,6 +18,14 @@
   border-radius: $r-100;
 }
 
+.label span {
+  max-width: 80px;
+  white-space: nowrap;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .options {
   margin-left: $g-xxs;
   padding: $g-xs;

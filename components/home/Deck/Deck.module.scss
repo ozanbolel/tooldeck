@@ -8,7 +8,7 @@
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   margin-bottom: $g-xl;
 }
@@ -19,6 +19,7 @@
 }
 
 .headerProfile {
+  margin-top: $g-s;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -89,4 +90,18 @@ $card-width: 200px;
 .gridItemPlate {
   margin-top: $g-m;
   position: relative;
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .headerProfile {
+    margin-top: unset;
+  }
 }

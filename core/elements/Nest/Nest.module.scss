@@ -3,5 +3,19 @@
 .nest {
   height: 100%;
   box-sizing: border-box;
-  padding: 0 15%;
+  padding: 0 $g-s;
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .nest {
+    padding: 0 10%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .nest {
+    padding: 0 15%;
+  }
 }
