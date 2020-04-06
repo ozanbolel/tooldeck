@@ -9,7 +9,7 @@ export const DeckEmpty: React.FC = () => {
       <img src="/static/taken.svg" className={css.emptyImg} draggable="false" />
 
       <div className={css.emptyText}>Looks like aliens stole all the tools 😕</div>
-      <div className={css.emptyText}>Don't worry, we have plenty 😉</div>
+      <div className={css.emptyText}>Don't worry, ToolDeck has plenty 😉</div>
 
       <Link href="/explore">
         <a>

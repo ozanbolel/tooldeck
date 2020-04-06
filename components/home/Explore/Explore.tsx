@@ -47,8 +47,9 @@ const Explore: React.FC = () => {
 
       {data && isUserLoaded ? (
         <>
-          <Section title="For Developers" cat="development" />
-          <Section title="For Designers" cat="design" />
+          <Section title="For Development" cat="development" />
+          <Section title="For Designing" cat="design" />
+          <Section title="For Everyone" cat="common" />
         </>
       ) : null}
     </>

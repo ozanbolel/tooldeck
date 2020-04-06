@@ -35,27 +35,25 @@ const LoginButtons: TLoginButtons = ({ controller }) => {
   };
 
   return (
-    <>
-      <div className={css.login}>
-        <Button
-          label="Login with Twitter"
-          icon={{ name: "twitter", position: "left", className: css.icon }}
-          className={css.withTwitter}
-          onClick={() => onClickTwitter()}
-          loading={isTwitterClicked}
-          disabled={isTwitterClicked || isGithubClicked}
-        />
+    <div className={css.container}>
+      <Button
+        label="Login with Twitter"
+        icon={{ name: "twitter", position: "left", className: css.icon }}
+        className={css.withTwitter}
+        onClick={() => onClickTwitter()}
+        loading={isTwitterClicked}
+        disabled={isTwitterClicked || isGithubClicked}
+      />
 
-        <Button
-          label="Login with GitHub"
-          icon={{ name: "github", position: "left", className: css.icon }}
-          className={css.withGithub}
-          onClick={() => onClickGithub()}
-          loading={isGithubClicked}
-          disabled={isTwitterClicked || isGithubClicked}
-        />
-      </div>
-    </>
+      <Button
+        label="Login with GitHub"
+        icon={{ name: "github", position: "left", className: css.icon }}
+        className={css.withGithub}
+        onClick={() => onClickGithub()}
+        loading={isGithubClicked}
+        disabled={isTwitterClicked || isGithubClicked}
+      />
+    </div>
   );
 };
 

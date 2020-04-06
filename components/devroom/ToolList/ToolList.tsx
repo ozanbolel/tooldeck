@@ -18,7 +18,7 @@ const ToolList: React.FC = () => {
   const onClickDelete = (id: string) => {
     const callback = () =>
       deleteTool({ variables: { toolId: id } })
-        .then((response) => dialog(response.data.deleteTool, { label: "Ok" }))
+        .then(() => location.reload())
         .catch((error) => dialog(error.message, { label: "Ok" }));
 
     const callbackYesYes = () =>
@@ -46,7 +46,7 @@ const ToolList: React.FC = () => {
       <div key={tool.id} className={css.item}>
         <div className={css.itemSection}>
           <img src={"https://" + (tool.coverUrl || tool.iconUrl)} draggable="false" />
-          <div className={css.label}>{tool.label + (tool.external ? " (External)" : "")}</div>
+          <div className={css.label}>{tool.label + (tool.external ? " (E)" : "")}</div>
         </div>
 
         <div className={css.itemSection}>
@@ -64,7 +64,8 @@ const ToolList: React.FC = () => {
           items={[
             { label: "All", value: "" },
             { label: "Development", value: "development" },
-            { label: "Design", value: "design" }
+            { label: "Design", value: "design" },
+            { label: "Common", value: "common" }
           ]}
           onChange={(v: string) => setFilter(v)}
         />

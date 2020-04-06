@@ -9,14 +9,15 @@
 
 .emptyImg {
   width: 300px;
-  height: 300px;
-  margin-bottom: $g-xs;
+  margin-bottom: $g-m;
 }
 
 .emptyText {
   font-size: $h3;
   line-height: 3rem;
   font-weight: $t;
+  padding: 0 $g-s;
+  text-align: center;
 }
 
 .emptyButton {

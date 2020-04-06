@@ -37,12 +37,8 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
         external
       }
     })
-      .then((response) => {
-        closeModal();
-
-        dialog(response.data.updateTool, { label: "Ok" });
-      })
-      .catch((error) => dialog(error.message, { label: "Ok" }));
+      .then(() => location.reload())
+      .catch((error) => dialog(error.graphQLErrors[0]?.message || error.message, { label: "Ok" }));
 
   const onClickCreate = () =>
     createTool({
@@ -58,12 +54,32 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
         external
       }
     })
-      .then((response) => {
-        closeModal();
+      .then(() => location.reload())
+      .catch((error) => dialog(error.graphQLErrors[0]?.message || error.message, { label: "Ok" }));
 
-        dialog(response.data.createTool, { label: "Ok" });
-      })
-      .catch((error) => dialog(error.message, { label: "Ok" }));
+  const createCatItems = (type: "cat" | "subcat") => {
+    const subCats: { [key: string]: string[] } = {
+      development: ["style", "document", "snippet"],
+      design: ["color", "icon", "asset", "illustration"],
+      common: ["image", "document"]
+    };
+
+    const cats: string[] = Object.keys(subCats);
+
+    let result: any = [];
+
+    if (type === "cat") {
+      for (let i = 0; i < cats.length; i++) {
+        result.push({ label: cats[i].charAt(0).toUpperCase() + cats[i].slice(1), value: cats[i] });
+      }
+    } else {
+      for (let i = 0; i < subCats[cat].length; i++) {
+        result.push({ label: subCats[cat][i].charAt(0).toUpperCase() + subCats[cat][i].slice(1), value: subCats[cat][i] });
+      }
+    }
+
+    return result;
+  };
 
   return (
     <div className={css.container}>
@@ -90,29 +106,13 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
           <div className={css.field}>
             <div className={css.label}>cat:</div>
 
-            <Radio
-              items={[
-                { label: "development", value: "development" },
-                { label: "design", value: "design" }
-              ]}
-              onChange={(v: string) => setCat(v)}
-            />
+            <Radio items={createCatItems("cat")} onChange={(v: string) => setCat(v)} />
           </div>
 
           <div className={css.field}>
             <div className={css.label}>subCat:</div>
 
-            {cat === "development" ? (
-              <Radio
-                items={[
-                  { label: "styling", value: "styling" },
-                  { label: "documents", value: "documents" },
-                  { label: "snippets", value: "snippets" }
-                ]}
-                onChange={(v: string) => setSubCat(v)}
-              />
-            ) : null}
-            {cat === "design" ? <Radio items={[{ label: "palettes", value: "palettes" }]} onChange={(v: string) => setSubCat(v)} /> : null}
+            {cat && cat !== "" ? <Radio items={createCatItems("subcat")} onChange={(v: string) => setSubCat(v)} /> : null}
           </div>
 
           <div className={css.field}>

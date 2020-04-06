@@ -1,5 +1,11 @@
 @import "core/styles/head";
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .withGithub,
 .withTwitter {
   $icon-width: 22px;
@@ -35,6 +41,12 @@
 // Responsive
 
 @media only screen and (min-width: 720px) {
+  .container {
+    display: unset;
+    flex-direction: unset;
+    align-items: unset;
+  }
+
   .withGithub,
   .withTwitter {
     margin-bottom: unset;

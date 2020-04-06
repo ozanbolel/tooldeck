@@ -11,7 +11,7 @@ import Footer from "components/app/Footer/Footer";
 const HomeLayout: React.FC = ({ children }) => {
   const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
   const router = useRouter();
-  const pathname = router.pathname.split("/")[1];
+  const refSwitch = React.useRef<any>(null);
 
   return (
     <div className={css.home}>
@@ -26,19 +26,19 @@ const HomeLayout: React.FC = ({ children }) => {
           <div className={css.radio}>
             <Radio
               items={[
-                { label: "Deck", value: "deck" },
-                { label: "Explore", value: "explore" }
+                { label: "Deck", value: "/deck" },
+                { label: "Explore", value: "/explore" }
               ]}
-              initial={pathname}
-              value={pathname}
-              onChange={(v: string) => router.push("/" + v)}
+              initial={router.pathname}
+              value={router.pathname}
+              onChange={(v: string) => (router.pathname !== v ? router.push(v) : refSwitch.current.scroll({ top: 0, behavior: "smooth" }))}
               noTopBorder
             />
           </div>
         </>
       ) : null}
 
-      <div className={css.switch}>
+      <div ref={refSwitch} className={css.switch}>
         {currentTabId === "" ? children : null}
 
         <WebFrame hidden={currentTabId === ""} />
