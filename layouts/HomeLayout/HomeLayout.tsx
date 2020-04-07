@@ -31,7 +31,7 @@ const HomeLayout: React.FC = ({ children }) => {
               ]}
               initial={router.pathname}
               value={router.pathname}
-              onChange={(v: string) => (router.pathname !== v ? router.push(v) : refSwitch.current.scroll({ top: 0, behavior: "smooth" }))}
+              onChange={(v: string) => (router.pathname !== v ? router.push(v) : refSwitch.current.scroll({ top: 0 }))}
               noTopBorder
             />
           </div>

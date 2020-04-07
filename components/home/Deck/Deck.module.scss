@@ -62,22 +62,9 @@
 
 // Grid Item
 
-$card-width: 200px;
-
-.gridItemContainer {
-  position: relative;
-}
-
-.gridItemShadow {
-  position: absolute;
-  top: $card-width / 2;
-  left: 50%;
-  box-shadow: 0 0 120px 40px $c-light;
-}
-
 .gridItemCard {
   width: 100%;
-  height: $card-width;
+  height: 200px;
   box-sizing: border-box;
   border: solid 2px $c-divider;
   transition: border-color $de;

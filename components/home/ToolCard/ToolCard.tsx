@@ -20,7 +20,7 @@ const ToolCard: TToolCard = ({ src, external, className, onClick }) => {
     React.useMemo(
       () => (
         <div className={css.inner}>
-          <img className={css.cover} src={"https://" + src} draggable="false" />
+          <img className={css.cover} src={"https://" + src} loading="lazy" draggable="false" />
 
           {external ? (
             <div className={css.innerExternal}>

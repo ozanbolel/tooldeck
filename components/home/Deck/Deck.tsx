@@ -81,9 +81,7 @@ const Deck: React.FC = () => {
     }
 
     return addedTools.map((tool: any) => (
-      <div key={tool.id} className={css.gridItemContainer}>
-        <div className={css.gridItemShadow} />
-
+      <div key={tool.id}>
         <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
         <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
       </div>
