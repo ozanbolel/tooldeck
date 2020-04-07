@@ -4,7 +4,7 @@ import AnimatedGridItem from "./AnimatedGridItem";
 
 type TAnimatedGrid = React.FC<{
   columns: [number, number, number, number, number];
-  gap: number;
+  gap: [number, number, number, number, number];
 }>;
 
 export const AnimatedGrid: TAnimatedGrid = ({ children, columns, gap }) => {
@@ -20,26 +20,32 @@ export const AnimatedGrid: TAnimatedGrid = ({ children, columns, gap }) => {
         const { innerWidth } = window;
 
         let newNum;
+        let newGap;
 
         if (innerWidth > 1600) {
           newNum = columns[0];
+          newGap = gap[0];
         } else if (innerWidth > 1280) {
           newNum = columns[1];
+          newGap = gap[1];
         } else if (innerWidth > 1024) {
           newNum = columns[2];
+          newGap = gap[2];
         } else if (innerWidth > 720) {
           newNum = columns[3];
+          newGap = gap[3];
         } else {
           newNum = columns[4];
+          newGap = gap[4];
         }
 
         const widthGrid = refGrid.current.getBoundingClientRect().width;
         const heightItem = refItem.current.getBoundingClientRect().height;
 
         setDimensions({
-          width: (widthGrid - (newNum - 1) * gap) / newNum,
+          width: (widthGrid - (newNum - 1) * newGap) / newNum,
           height: heightItem,
-          gap,
+          gap: newGap,
           num: newNum
         });
       };

@@ -127,7 +127,7 @@ const Deck: React.FC = () => {
 
       {dataTools ? (
         dataUser?.deck.toolIds.length !== 0 ? (
-          <AnimatedGrid columns={[5, 4, 3, 2, 1]} gap={60}>
+          <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[90, 60, 60, 60, 60]}>
             {renderAddedTools()}
           </AnimatedGrid>
         ) : (
