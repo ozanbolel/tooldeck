@@ -21,8 +21,6 @@ const TwitterRedirect: TPage = () => {
   React.useEffect(() => {
     if (data) {
       localStorage.setItem("LOGIN", new Date().getTime().toString());
-
-      router.replace("/deck");
     }
   }, [data]);
 
@@ -34,7 +32,7 @@ const TwitterRedirect: TPage = () => {
     }
   }, [error]);
 
-  return <AuthRedirect serviceName="Twitter" />;
+  return <AuthRedirect serviceName="Twitter" isLoaded={typeof data !== "undefined"} />;
 };
 
 export default TwitterRedirect;

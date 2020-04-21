@@ -21,8 +21,6 @@ const GithubRedirect: TPage = () => {
   React.useEffect(() => {
     if (data) {
       localStorage.setItem("LOGIN", new Date().getTime().toString());
-
-      router.replace("/deck");
     }
   }, [data]);
 
@@ -34,7 +32,7 @@ const GithubRedirect: TPage = () => {
     }
   }, [error]);
 
-  return <AuthRedirect serviceName="GitHub" />;
+  return <AuthRedirect serviceName="GitHub" isLoaded={typeof data !== "undefined"} />;
 };
 
 export default GithubRedirect;

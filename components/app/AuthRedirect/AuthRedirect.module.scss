@@ -1,24 +1,73 @@
 @import "core/styles/head";
 
 .container {
-  padding: 0 $g-m;
-  padding-top: 40vh;
-  padding-top: calc(var(--vh, 1vh) * 40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   @include no-select;
 }
 
 .inner {
+  @keyframes containerIn {
+    from {
+      transform: scale(5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $c-main;
+  color: $c-dark;
+  box-sizing: border-box;
+  padding: $g-xl $g-s;
+  margin: $g-s;
   text-align: center;
+  border-radius: $r;
+  animation: containerIn $de;
+}
+
+.outro {
+  @keyframes containerOut {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(5);
+      opacity: 0;
+    }
+  }
+
+  animation: containerOut $d $e-io forwards;
 }
 
 .innerText {
   font-size: $h2;
   font-weight: $b;
   line-height: $h2 + 1rem;
-  margin-bottom: $g-l;
 }
 
 .innerLoading {
+  margin-top: $g-l;
   width: 5rem;
-  fill: $c-main;
+  fill: $c-dark;
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .inner {
+    padding: $g-xxl;
+    margin: unset;
+  }
 }
