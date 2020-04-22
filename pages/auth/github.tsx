@@ -32,7 +32,7 @@ const GithubRedirect: TPage = () => {
     }
   }, [error]);
 
-  return <AuthRedirect serviceName="GitHub" isLoaded={typeof data !== "undefined"} />;
+  return <AuthRedirect serviceName="github" isLoaded={typeof data !== "undefined"} />;
 };
 
 export default GithubRedirect;

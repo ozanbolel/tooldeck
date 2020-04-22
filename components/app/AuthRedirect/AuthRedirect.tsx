@@ -1,6 +1,6 @@
 import * as React from "react";
 import css from "./AuthRedirect.module.scss";
-import { Loading } from "core/elements";
+import { Loading, Icon } from "core/elements";
 import { useRouter } from "next/router";
 
 type TAuthRedirect = React.FC<{
@@ -12,14 +12,21 @@ const AuthRedirect: TAuthRedirect = ({ serviceName, isLoaded }) => {
   const router = useRouter();
 
   if (isLoaded) {
-    setTimeout(() => router.push("/deck"), 400);
+    setTimeout(() => router.push("/deck"), 600);
   }
 
   return (
     <div className={css.container}>
+      <div className={css.tile + (isLoaded ? " " + css.outro : "")}>
+        <div className={css.tileShade} />
+      </div>
+
       <div className={css.inner + (isLoaded ? " " + css.outro : "")}>
-        <div className={css.innerText}>Logging In with {serviceName}</div>
+        <img src="/static/logo/logo-192.png" className={css.innerLogo} draggable="false" />
+
         <Loading className={css.innerLoading} />
+
+        <Icon name={serviceName} className={css.innerService} />
       </div>
     </div>
   );

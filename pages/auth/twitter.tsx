@@ -32,7 +32,7 @@ const TwitterRedirect: TPage = () => {
     }
   }, [error]);
 
-  return <AuthRedirect serviceName="Twitter" isLoaded={typeof data !== "undefined"} />;
+  return <AuthRedirect serviceName="twitter" isLoaded={typeof data !== "undefined"} />;
 };
 
 export default TwitterRedirect;

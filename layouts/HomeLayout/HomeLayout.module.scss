@@ -9,7 +9,7 @@
 .tile {
   z-index: -100;
   position: absolute;
-  top: 46px;
+  top: $h-tabbar;
   background: url(/static/tile.svg) repeat;
   width: 100%;
   height: 35%;
