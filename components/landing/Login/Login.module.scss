@@ -1,5 +1,4 @@
 @import "core/styles/head";
-@import "core/styles/animation";
 
 .login {
   display: flex;
@@ -16,13 +15,6 @@
   font-size: $h2;
   font-weight: $b;
   text-align: center;
-  @include a-breathe;
-
-  .highlight {
-    background-image: linear-gradient(45deg, $c-main 30%, $c-main-sub 100%);
-    background-clip: text;
-    color: transparent;
-  }
 }
 
 .divider {

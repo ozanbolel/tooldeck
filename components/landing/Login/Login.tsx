@@ -6,9 +6,7 @@ const Login: React.FC<{ controller: TLoginButtonsController }> = ({ controller }
   return (
     <>
       <div className={css.login}>
-        <div className={css.title}>
-          Get Started, It's <span className={css.highlight}>Free</span>
-        </div>
+        <div className={css.title}>Get Started</div>
 
         <div className={css.divider} />
 
