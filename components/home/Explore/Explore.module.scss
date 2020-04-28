@@ -20,7 +20,7 @@
 .grid {
   display: grid;
   justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: 1fr;
   gap: $g-l;
   @include no-select;
 }
@@ -30,5 +30,11 @@
 @media only screen and (min-width: 720px) {
   .pageTitle {
     text-align: unset;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
   }
 }

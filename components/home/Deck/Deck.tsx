@@ -85,7 +85,9 @@ const Deck: React.FC = () => {
 
       localStorage.setItem("DECK", JSON.stringify(addedTools));
     } else {
-      addedTools = storedDeck;
+      if (storedDeck) {
+        addedTools = storedDeck;
+      }
     }
 
     return addedTools.map((tool: any) => (

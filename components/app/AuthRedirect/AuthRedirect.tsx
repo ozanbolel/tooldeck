@@ -12,7 +12,7 @@ const AuthRedirect: TAuthRedirect = ({ serviceName, isLoaded }) => {
   const router = useRouter();
 
   if (isLoaded) {
-    setTimeout(() => router.push("/deck"), 600);
+    setTimeout(() => router.push("/deck"), 800);
   }
 
   return (
