@@ -73,11 +73,19 @@ const Deck: React.FC = () => {
     );
   };
 
-  const renderAddedTools = () => {
+  const storedDeck = React.useMemo(() => (typeof window !== "undefined" ? JSON.parse(localStorage.getItem("DECK") as any) : undefined), []);
+
+  const storeAndRenderAddedTools = () => {
     let addedTools = [];
 
-    for (let index = 0; index < dataUser?.deck.toolIds.length; index++) {
-      addedTools.push(dataTools.tools.find((tool: TTool) => tool.id === dataUser?.deck.toolIds[index]));
+    if (dataTools && dataUser) {
+      for (let index = 0; index < dataUser?.deck.toolIds.length; index++) {
+        addedTools.push(dataTools.tools.find((tool: TTool) => tool.id === dataUser?.deck.toolIds[index]));
+      }
+
+      localStorage.setItem("DECK", JSON.stringify(addedTools));
+    } else {
+      addedTools = storedDeck;
     }
 
     return addedTools.map((tool: any) => (
@@ -125,13 +133,16 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      {dataTools ? (
+      {dataTools || storedDeck?.length > 0 ? (
         dataUser?.deck.toolIds.length !== 0 ? (
-          <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[90, 60, 60, 60, 60]}>
-            {renderAddedTools()}
+          <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
+            {storeAndRenderAddedTools()}
           </AnimatedGrid>
         ) : (
-          <DeckEmpty />
+          <>
+            {storeAndRenderAddedTools()}
+            <DeckEmpty />
+          </>
         )
       ) : null}
     </div>

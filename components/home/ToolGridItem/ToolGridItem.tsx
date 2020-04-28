@@ -9,16 +9,17 @@ import css from "./ToolGridItem.module.scss";
 
 type TToolGridItem = React.FC<{
   tool: TTool;
+  index: number;
 }>;
 
-const ToolGridItem: TToolGridItem = ({ tool }) => {
+const ToolGridItem: TToolGridItem = ({ tool, index }) => {
   const { isAdded, setIsAdded, onClickAdd, loading } = useIsToolAdded(tool.id);
   const modal = useModal();
 
   const onClickView = () => modal(ToolDetails, { autoclose: true, payload: { tool, isAdded, callback: () => setIsAdded(true) } });
 
   return (
-    <div key={tool.id} className={css.item}>
+    <div key={tool.id} className={css.item} style={{ animationDelay: index * 0.02 + "s" }}>
       <ToolCard src={tool.coverUrl || tool.iconUrl} className={css.cover} onClick={() => onClickView()} />
 
       <div className={css.info}>

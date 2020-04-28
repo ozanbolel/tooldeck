@@ -34,8 +34,8 @@ const Explore: React.FC = () => {
       <div className={css.grid}>
         {(data.tools as [TTool])
           .filter((i) => i.cat === cat)
-          .map((tool) => (
-            <ToolGridItem key={tool.id} tool={tool} />
+          .map((tool, index) => (
+            <ToolGridItem key={tool.id} tool={tool} index={index} />
           ))}
       </div>
     </div>

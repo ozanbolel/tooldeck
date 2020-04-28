@@ -2,14 +2,29 @@
 @import "core/styles/animation";
 
 .item {
+  $initial-scale: 0.75;
+
+  @keyframes itemIn {
+    from {
+      opacity: 0;
+      transform: scale($initial-scale);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  opacity: 0;
+  transform: scale($initial-scale);
   display: flex;
   align-items: center;
   background: $c-content;
   box-sizing: border-box;
   padding: $g-s;
   border-radius: $r;
+  animation: itemIn $d-s $e-io forwards;
   overflow: hidden;
-  @include a-fadeIn;
 }
 
 .cover {

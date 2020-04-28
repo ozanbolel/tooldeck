@@ -1,11 +1,14 @@
-self.addEventListener("install", (event) => {
-  const preLoaded = caches.open("cache-pages").then((cache) => cache.addAll(["/"]));
+addEventListener("install", (event) => {
+  const cachePages = caches.open("CACHE_PAGES").then((cache) => cache.addAll(["/", "/deck", "/explore"]));
 
-  event.waitUntil(preLoaded);
+  event.waitUntil(cachePages);
 });
 
-self.addEventListener("fetch", (event) => {
-  const response = caches.match(event.request).then((match) => match || fetch(event.request));
+addEventListener("fetch", (event) => {
+  const response = caches
+    .match(event.request)
+    .then((match) => match || fetch(event.request))
+    .catch(() => {});
 
   event.respondWith(response);
 });

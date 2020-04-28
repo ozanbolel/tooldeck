@@ -5,6 +5,7 @@ import Landing from "components/landing/Landing/Landing";
 import Head from "next/head";
 
 const LandingPage: TPage = () => {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -12,18 +13,24 @@ const LandingPage: TPage = () => {
 
     if (login) {
       router.replace("/deck");
+    } else {
+      setIsLoggedIn(false);
     }
   }, []);
 
-  return (
-    <>
-      <Head>
-        <title>ToolDeck - Launchpad for your favorite tools.</title>
-      </Head>
+  if (!isLoggedIn) {
+    return (
+      <>
+        <Head>
+          <title>ToolDeck - Launchpad for your favorite tools.</title>
+        </Head>
 
-      <Landing />
-    </>
-  );
+        <Landing />
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default LandingPage;

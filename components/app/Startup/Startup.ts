@@ -34,7 +34,7 @@ const Startup: React.FC = () => {
   React.useEffect(() => {
     const resizeOps = () => document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
 
-    window.addEventListener("resize", resizeOps, { passive: true });
+    window.addEventListener("resize", resizeOps);
     return () => window.removeEventListener("resize", resizeOps);
   }, []);
 
