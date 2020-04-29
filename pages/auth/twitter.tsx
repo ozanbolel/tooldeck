@@ -26,7 +26,7 @@ const TwitterRedirect: TPage = () => {
 
   React.useEffect(() => {
     if (error) {
-      dialog("Sorry, we couldn’t log you in.", { label: "Ok", highlight: true });
+      dialog("Sorry, we couldn’t log you in. Trying again will most likely resolve the problem.", { label: "Ok", highlight: true });
 
       router.replace("/");
     }

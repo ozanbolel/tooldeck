@@ -12,6 +12,16 @@
   padding: 0 $g-xxs $g-xs $g-xxs;
   border-top: solid 1px $c-divider;
   @include no-select;
+
+  a {
+    box-sizing: border-box;
+    border-bottom: solid 1px transparent;
+    transition: border-color $de;
+
+    &:hover {
+      border-color: $c-light;
+    }
+  }
 }
 
 // Responsive
