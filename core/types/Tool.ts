@@ -11,4 +11,5 @@ export type TTool = {
   external: boolean;
   users: number;
   stars: number;
+  createdAt?: Date;
 };

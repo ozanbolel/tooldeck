@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
           "#StaySafe"
         )}
       </div>
-      <div>ToolDeck v1.2</div>
+      <div>ToolDeck v1.3</div>
     </div>
   );
 };

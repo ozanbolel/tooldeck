@@ -10,19 +10,25 @@ import css from "./ToolGridItem.module.scss";
 type TToolGridItem = React.FC<{
   tool: TTool;
   index: number;
+  badge?: string;
 }>;
 
-const ToolGridItem: TToolGridItem = ({ tool, index }) => {
+const ToolGridItem: TToolGridItem = ({ tool, index, badge }) => {
   const { isAdded, setIsAdded, onClickAdd, loading } = useIsToolAdded(tool.id);
   const modal = useModal();
 
   const onClickView = () => modal(ToolDetails, { autoclose: true, payload: { tool, isAdded, callback: () => setIsAdded(true) } });
+
+  const isNew = tool.createdAt ? (new Date().getTime() - new Date(tool.createdAt).getTime()) / 86400000 <= 7 : false;
 
   return (
     <div key={tool.id} className={css.item} style={{ animationDelay: index * 0.02 + "s" }}>
       <ToolCard src={tool.coverUrl || tool.iconUrl} className={css.cover} onClick={() => onClickView()} />
 
       <div className={css.info}>
+        {isNew && !badge ? <div className={css.new}>NEW</div> : null}
+        {badge ? <div className={css.badge}>{(tool as any)[badge]}</div> : null}
+
         <div className={css.label}>{tool.label}</div>
         <div className={css.desc}>{tool.shortDesc}</div>
 

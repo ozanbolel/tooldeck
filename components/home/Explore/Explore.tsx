@@ -27,16 +27,48 @@ const Explore: React.FC = () => {
     }
   }, [dataUser]);
 
-  const Section = ({ title, cat }: { title: string; cat: string }) => (
+  const getTools = ({ cat, sortBy, num }: { cat?: string; sortBy?: string; num?: number }) => {
+    const tools: [TTool] = data.tools;
+
+    if (cat) {
+      return tools.filter((i) => i.cat === cat);
+    }
+
+    if (sortBy) {
+      const numTools = num ? num : 6;
+
+      let result = [tools[0]];
+
+      for (let iTool = 1; iTool < tools.length; iTool++) {
+        for (let iResult = 0; iResult < numTools; iResult++) {
+          if (result[iResult]) {
+            if ((tools as any)[iTool][sortBy] > (result as any)[iResult][sortBy]) {
+              result[iResult] = tools[iTool];
+
+              break;
+            }
+          } else {
+            result[iResult] = tools[iTool];
+
+            break;
+          }
+        }
+      }
+
+      return result;
+    }
+
+    return tools;
+  };
+
+  const Section = ({ title, cat, sortBy, num }: { title: string; cat?: string; sortBy?: string; num?: number }) => (
     <div className={css.section}>
       <div className={css.title}>{title}</div>
 
       <div className={css.grid}>
-        {(data.tools as [TTool])
-          .filter((i) => i.cat === cat)
-          .map((tool, index) => (
-            <ToolGridItem key={tool.id} tool={tool} index={index} />
-          ))}
+        {getTools({ cat, sortBy, num }).map((tool, index) => (
+          <ToolGridItem key={tool.id} tool={tool} index={index} badge={sortBy} />
+        ))}
       </div>
     </div>
   );
@@ -47,6 +79,8 @@ const Explore: React.FC = () => {
 
       {data && isUserLoaded ? (
         <>
+          <Section title="Most Added" sortBy="users" num={6} />
+          <Section title="Most Starred" sortBy="stars" num={4} />
           <Section title="For Development" cat="development" />
           <Section title="For Designing" cat="design" />
           <Section title="For Everyone" cat="common" />

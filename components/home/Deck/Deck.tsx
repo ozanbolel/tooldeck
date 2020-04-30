@@ -113,8 +113,8 @@ const Deck: React.FC = () => {
                   label: "Logout",
                   callback: () => {
                     logout().then(() => {
+                      setTimeout(() => localStorage.removeItem("DECK"), 0);
                       localStorage.removeItem("LOGIN");
-                      localStorage.removeItem("DECK");
                       localStorage.removeItem("LAST_TAB");
                       localStorage.removeItem("TABS");
 

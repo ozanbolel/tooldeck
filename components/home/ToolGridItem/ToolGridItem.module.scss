@@ -46,6 +46,23 @@
 .info {
   flex: 1;
 
+  .new,
+  .badge {
+    position: absolute;
+    top: $g-xs;
+    right: $g-xs;
+    background: $c-warn;
+    font-size: $h6;
+    font-weight: $b;
+    padding: $g-xxs $g-xs;
+    border-radius: $r;
+  }
+
+  .badge {
+    background: $c-main;
+    color: $c-dark;
+  }
+
   .label {
     font-size: $h4;
     font-weight: $b;

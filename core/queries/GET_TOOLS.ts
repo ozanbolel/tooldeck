@@ -15,6 +15,7 @@ export const GET_TOOLS = gql`
       external
       users
       stars
+      createdAt
     }
   }
 `;
