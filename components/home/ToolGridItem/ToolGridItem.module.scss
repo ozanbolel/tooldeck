@@ -51,10 +51,12 @@
     position: absolute;
     top: $g-xs;
     right: $g-xs;
+    width: 3.25rem;
     background: $c-warn;
     font-size: $h6;
     font-weight: $b;
-    padding: $g-xxs $g-xs;
+    text-align: center;
+    padding: $g-xxs 0;
     border-radius: $r;
   }
 

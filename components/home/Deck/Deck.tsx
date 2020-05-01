@@ -73,7 +73,7 @@ const Deck: React.FC = () => {
     );
   };
 
-  const storedDeck = React.useMemo(() => (typeof window !== "undefined" ? JSON.parse(localStorage.getItem("DECK") as any) : undefined), []);
+  const storedDeck = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("DECK") as any) : undefined;
 
   const storeAndRenderAddedTools = () => {
     let addedTools = [];
@@ -138,18 +138,16 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      {dataTools || storedDeck?.length > 0 ? (
-        dataUser?.deck.toolIds.length !== 0 ? (
-          <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
-            {storeAndRenderAddedTools()}
-          </AnimatedGrid>
-        ) : (
-          <>
-            {storeAndRenderAddedTools()}
-            <DeckEmpty />
-          </>
-        )
-      ) : null}
+      {dataUser?.deck.toolIds.length !== 0 || storedDeck?.length !== 0 ? (
+        <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
+          {storeAndRenderAddedTools()}
+        </AnimatedGrid>
+      ) : (
+        <>
+          {storeAndRenderAddedTools()}
+          <DeckEmpty />
+        </>
+      )}
     </div>
   );
 };

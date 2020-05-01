@@ -25,7 +25,7 @@ const Startup: React.FC = () => {
 
   React.useEffect(() => {
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/serviceWorker.js", { scope: "/" });
+      //navigator.serviceWorker.register("/sw.js", { scope: "/" });
     }
   }, []);
 

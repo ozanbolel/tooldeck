@@ -38,12 +38,14 @@
   align-items: center;
   width: $h1;
   height: $h1;
+  background: $c-dark;
   border-radius: 100%;
   border: solid 2px $c-divider;
   transition: border-color $de;
   overflow: hidden;
 
   svg {
+    position: relative;
     width: 45%;
     height: 45%;
   }

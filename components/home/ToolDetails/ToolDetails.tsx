@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Button, Icon, Loading, Web } from "core/elements";
+import { Button, Icon, Web } from "core/elements";
 import { TModalComponent, TTool } from "core/types";
 import useIsToolAdded from "../utils/useIsToolAdded";
 import css from "./ToolDetails.module.scss";
-import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { IS_STARRED, GET_TOOLS } from "core/queries";
 import { GIVE_STAR } from "core/mutations";
 
