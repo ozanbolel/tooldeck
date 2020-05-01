@@ -36,6 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/static/logo/logo-192.png" />
         <meta name="theme-color" content="#252525" />
+        <meta name="google-site-verification" content="NZ4vSuRDTec-TbYPtsw66ZJypUmIQrI4jEG4TCQcdYE" />
       </Head>
 
       <Startup />
