@@ -35,27 +35,10 @@ const Explore: React.FC = () => {
     }
 
     if (sortBy) {
-      const numTools = num ? num : 6;
+      let sortedTools = tools;
+      sortedTools.sort((a: any, b: any) => (a[sortBy] === b[sortBy] ? 0 : a[sortBy] < b[sortBy] ? 1 : -1));
 
-      let result = [tools[0]];
-
-      for (let iTool = 1; iTool < tools.length; iTool++) {
-        for (let iResult = 0; iResult < numTools; iResult++) {
-          if (result[iResult]) {
-            if ((tools as any)[iTool][sortBy] > (result as any)[iResult][sortBy]) {
-              result[iResult] = tools[iTool];
-
-              break;
-            }
-          } else {
-            result[iResult] = tools[iTool];
-
-            break;
-          }
-        }
-      }
-
-      return result;
+      return sortedTools.slice(0, num ? num : 6);
     }
 
     return tools;

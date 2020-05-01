@@ -7,13 +7,13 @@ import { useDialog } from "core/tools";
 import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
 import { GET_USER_DATA, GET_TOOLS } from "core/queries";
-import css from "./Deck.module.scss";
-
 import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
+import css from "./Deck.module.scss";
 
 const Deck: React.FC = () => {
+  const [addedTools, setAddedTools] = React.useState<TTool[]>([]);
   const { data: dataUser } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-and-network" });
   const { data: dataTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
@@ -24,6 +24,26 @@ const Deck: React.FC = () => {
   const router = useRouter();
   const client = useApolloClient();
   const [logout] = useMutation(LOGOUT);
+
+  React.useEffect(() => {
+    if (dataTools && dataUser) {
+      let newAddedTools = [];
+
+      for (let i = 0; i < dataUser.deck.toolIds.length; i++) {
+        newAddedTools.push(dataTools.tools.find((tool: TTool) => tool.id === dataUser.deck.toolIds[i]));
+      }
+
+      setAddedTools(newAddedTools);
+
+      localStorage.setItem("DECK", JSON.stringify(newAddedTools));
+    } else {
+      const storedDeck = JSON.parse(localStorage.getItem("DECK") as any);
+
+      if (storedDeck) {
+        setAddedTools(storedDeck);
+      }
+    }
+  }, [dataTools, dataUser]);
 
   const onClickTool = (tool: TTool) => {
     if (!tool.external) {
@@ -73,31 +93,6 @@ const Deck: React.FC = () => {
     );
   };
 
-  const storedDeck = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("DECK") as any) : undefined;
-
-  const storeAndRenderAddedTools = () => {
-    let addedTools = [];
-
-    if (dataTools && dataUser) {
-      for (let index = 0; index < dataUser?.deck.toolIds.length; index++) {
-        addedTools.push(dataTools.tools.find((tool: TTool) => tool.id === dataUser?.deck.toolIds[index]));
-      }
-
-      localStorage.setItem("DECK", JSON.stringify(addedTools));
-    } else {
-      if (storedDeck) {
-        addedTools = storedDeck;
-      }
-    }
-
-    return addedTools.map((tool: any) => (
-      <div key={tool.id}>
-        <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
-        <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
-      </div>
-    ));
-  };
-
   return (
     <div className={css.deck}>
       <div className={css.header}>
@@ -138,15 +133,17 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      {(dataUser && dataUser.deck.toolIds.length !== 0) || (storedDeck && storedDeck.length !== 0) ? (
+      {addedTools.length !== 0 ? (
         <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
-          {storeAndRenderAddedTools()}
+          {addedTools.map((tool: TTool) => (
+            <div key={tool.id}>
+              <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
+              <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
+            </div>
+          ))}
         </AnimatedGrid>
       ) : (
-        <>
-          {storeAndRenderAddedTools()}
-          <DeckEmpty />
-        </>
+        <DeckEmpty />
       )}
     </div>
   );
