@@ -1,5 +1,5 @@
-const SHELL_CACHE = "shell-v1";
-const DYNAMIC_CACHE = "dynamic-v1";
+const SHELL_CACHE = "shell-v2";
+const DYNAMIC_CACHE = "dynamic-v2";
 
 const assets = [
   "/",
@@ -33,7 +33,7 @@ addEventListener("fetch", (event) => {
       (asset) =>
         asset ||
         fetch(event.request).then((response) =>
-          caches.open("dynamic").then((cache) => {
+          caches.open(DYNAMIC_CACHE).then((cache) => {
             const url = event.request.url;
 
             if (url.includes("_next/static") || url.includes("fonts.googleapis.com") || url.includes("fonts.gstatic.com")) {
