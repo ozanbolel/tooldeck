@@ -23,7 +23,7 @@ addEventListener("install", (event) => {
 
 addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== SHELL_CACHE || key !== DYNAMIC_CACHE).map((key) => caches.delete(key))))
+    caches.keys().then((keys) => Promise.all(keys.filter((key) => (key !== SHELL_CACHE ? key !== DYNAMIC_CACHE : false)).map((key) => caches.delete(key))))
   );
 });
 
