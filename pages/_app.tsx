@@ -29,7 +29,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Provider store={getStore()}>
       <Head>
         <title>ToolDeck</title>
-        <meta name="description" content="Hand picked tools for designers and developers." />
+        <meta name="description" content="Carefully curated tools for you to discover." />
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
         <link rel="icon" type="image/png" href="/static/logo/logo-96.png" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
