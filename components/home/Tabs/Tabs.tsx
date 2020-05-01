@@ -74,7 +74,7 @@ const Tabs: React.FC = () => {
           className={css.tab + " " + css.tabDeck + (currentTabId === "" ? " " + css.tabActive : "")}
           onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}
         >
-          <img src="/static/logo/logo-192.png" draggable="false" />
+          <img src="/static/logo/logo-96.png" draggable="false" />
           <span>{router.pathname.split("/")[1] === "deck" ? "Deck" : "Explore"}</span>
         </div>
       </div>

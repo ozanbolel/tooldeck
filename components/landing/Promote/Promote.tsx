@@ -4,7 +4,7 @@ import css from "./Promote.module.scss";
 const Section: React.FC<{ title: string; image: string }> = ({ title, image }) => {
   return (
     <div className={css.section}>
-      <img src={`/static/landing/${image}.png`} draggable="false" />
+      <img src={`/static/landing/${image}.png`} alt={title} draggable="false" />
 
       <div className={css.title}>
         <span>{title}</span>

@@ -28,7 +28,10 @@ function createApolloClient(initialState: NormalizedCacheObject, ctx?: TContext)
   const errorHandler = onError(({ graphQLErrors }) => {
     if (typeof window !== "undefined") {
       if (graphQLErrors?.findIndex((i: any) => i.code === "INVALID_TOKEN") !== -1) {
+        setTimeout(() => localStorage.removeItem("DECK"), 0);
         localStorage.removeItem("LOGIN");
+        localStorage.removeItem("LAST_TAB");
+        localStorage.removeItem("TABS");
 
         router.replace("/");
       }
