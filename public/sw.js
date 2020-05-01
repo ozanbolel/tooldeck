@@ -1,4 +1,5 @@
-const CACHE_NAME = "shell-v1";
+const SHELL_CACHE = "shell-v1";
+const DYNAMIC_CACHE = "dynamic-v1";
 
 const assets = [
   "/",
@@ -17,11 +18,13 @@ const assets = [
 ];
 
 addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(assets)));
+  event.waitUntil(caches.open(SHELL_CACHE).then((cache) => cache.addAll(assets)));
 });
 
 addEventListener("activate", (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))));
+  event.waitUntil(
+    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== SHELL_CACHE || key !== DYNAMIC_CACHE).map((key) => caches.delete(key))))
+  );
 });
 
 addEventListener("fetch", (event) => {

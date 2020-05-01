@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
     <div className={css.footer}>
       <div className={currentTabId !== "" ? css.hidden : undefined}>
         {randomNum > 0.55 ? (
-          <a href="https://twitter.com/oznbll" target="_blank" rel="noreferrer">
-            Follow Me on Twitter
+          <a href="https://twitter.com/tooldeckhq" target="_blank" rel="noreferrer">
+            Follow on Twitter
           </a>
         ) : (
           "#StaySafe"

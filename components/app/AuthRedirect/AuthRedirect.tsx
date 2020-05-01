@@ -22,7 +22,7 @@ const AuthRedirect: TAuthRedirect = ({ serviceName, isLoaded }) => {
       </div>
 
       <div className={css.inner + (isLoaded ? " " + css.outro : "")}>
-        <img src="/static/logo/logo-192.png" className={css.innerLogo} draggable="false" />
+        <img src="/static/logo/logo-96.png" className={css.innerLogo} draggable="false" />
 
         <Loading className={css.innerLoading} />
 

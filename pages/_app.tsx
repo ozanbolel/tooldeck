@@ -36,6 +36,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/static/logo/logo-192.png" />
         <meta name="theme-color" content="#252525" />
+        <meta property="og:title" content="ToolDeck" />
+        <meta property="og:description" content="Launchpad for developers' and designers' favorite tools." />
+        <meta property="og:image" content="https://tooldeckhq.com/static/og.png" />
       </Head>
 
       <Startup />
