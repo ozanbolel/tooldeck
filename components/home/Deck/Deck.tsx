@@ -11,6 +11,7 @@ import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
 import css from "./Deck.module.scss";
+import { subCatOptions } from "core/config";
 
 const Deck: React.FC = () => {
   const [addedTools, setAddedTools] = React.useState<TTool[]>([]);
@@ -64,8 +65,16 @@ const Deck: React.FC = () => {
     }
   };
 
-  const onClickDel = (id: string) => {
+  const onClickDel = (id: string, subCat: string) => {
     const callback = () => {
+      // Change filter if last one
+
+      if (addedTools.filter((tool) => tool.subCat === subCat).length === 1) {
+        setFilter("");
+
+        localStorage.setItem("DECK_FILTER", "");
+      }
+
       // Update local deck
 
       const newDataDeckToolIds = dataUser.deck.toolIds.filter((i: string) => i !== id);
@@ -99,6 +108,12 @@ const Deck: React.FC = () => {
       { autoclose: true }
     );
   };
+
+  const filteredAddedTools = React.useMemo(() => addedTools.filter((i) => (filter ? i.subCat === filter : true)), [addedTools, filter]);
+  const filterOptions = React.useMemo(
+    () => [{ label: "All", value: "" }, ...subCatOptions.filter((i) => addedTools.findIndex((tool) => tool.subCat === i.value) !== -1)],
+    [addedTools]
+  );
 
   return (
     <div className={css.deck}>
@@ -136,44 +151,35 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
-      <div className={css.filter}>
-        <div className={css.filterLabel}>Filter:</div>
+      {addedTools.length !== 0 ? (
+        <div className={css.filter}>
+          <div className={css.filterLabel}>Filter:</div>
 
-        <Dropdown
-          className={css.filterDD}
-          options={[
-            { label: "All", value: "" },
-            { label: "Styling", value: "style" },
-            { label: "Documentations", value: "document" },
-            { label: "Code Snippets", value: "snippet" },
-            { label: "Color Palettes", value: "color" },
-            { label: "Icons", value: "icon" },
-            { label: "Assets", value: "asset" },
-            { label: "Illustrations", value: "illustration" },
-            { label: "Mockup Generators", value: "mockup" },
-            { label: "Image Processing", value: "image" }
-          ]}
-          value={filter as any}
-          onChange={(value) => {
-            localStorage.setItem("DECK_FILTER", value);
+          <Dropdown
+            className={css.filterDD}
+            options={filterOptions}
+            value={filter as any}
+            onChange={(value) => {
+              localStorage.setItem("DECK_FILTER", value);
 
-            setFilter(value);
-          }}
-        />
+              setFilter(value);
+            }}
+          />
 
-        <div className={css.filterNum}>{addedTools.filter((i) => (filter ? i.subCat === filter : true)).length} Tools</div>
-      </div>
+          <div className={css.filterNum}>
+            {filteredAddedTools.length} Tool{filteredAddedTools.length > 1 ? "s" : ""}
+          </div>
+        </div>
+      ) : null}
 
       {addedTools.length !== 0 ? (
         <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
-          {addedTools
-            .filter((i) => (filter ? i.subCat === filter : true))
-            .map((tool: TTool) => (
-              <div key={tool.id}>
-                <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
-                <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
-              </div>
-            ))}
+          {filteredAddedTools.map((tool: TTool) => (
+            <div key={tool.id}>
+              <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
+              <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.subCat)} />
+            </div>
+          ))}
         </AnimatedGrid>
       ) : (
         <DeckEmpty />

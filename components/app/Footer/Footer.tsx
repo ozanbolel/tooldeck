@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
         )}
       </div>
 
-      <div>ToolDeck v1.3.1</div>
+      <div>ToolDeck v1.3.2</div>
     </div>
   );
 };
