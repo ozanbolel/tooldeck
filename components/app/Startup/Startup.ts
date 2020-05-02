@@ -3,6 +3,7 @@ import ReactGA from "react-ga";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { TStore } from "core/types";
+import { isProduction } from "core/config";
 
 const Startup: React.FC = () => {
   const { opened: tabs, currentTabId } = useSelector((store: TStore) => store.tabs);
@@ -23,11 +24,13 @@ const Startup: React.FC = () => {
 
   // Service Worker
 
-  React.useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js", { scope: "/" });
-    }
-  }, []);
+  if (isProduction) {
+    React.useEffect(() => {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js", { scope: "/" });
+      }
+    }, []);
+  }
 
   // Handle View Height
 

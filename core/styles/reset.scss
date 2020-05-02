@@ -48,3 +48,13 @@ input {
 iframe {
   border: none;
 }
+
+select {
+  font: unset;
+  border: none;
+  appearance: none;
+}
+
+option {
+  font: unset;
+}

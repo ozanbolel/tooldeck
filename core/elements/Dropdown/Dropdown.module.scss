@@ -1,0 +1,46 @@
+@import "core/styles/head";
+
+.container {
+  position: relative;
+  display: inline-flex;
+  color: $c-dark;
+  align-items: center;
+  width: 150px;
+
+  &:hover {
+    svg {
+      transform: rotate(0deg);
+    }
+  }
+
+  svg {
+    position: absolute;
+    right: $g-xs;
+    width: 1.5em;
+    height: 1.5em;
+    color: $c-light;
+    transform: rotate(-90deg);
+    transition: transform $d-s $e-io;
+    pointer-events: none;
+  }
+}
+
+.dropdown {
+  width: 100%;
+  height: $h-input;
+  background: $c-dark;
+  color: $c-light;
+  font-weight: $b;
+  box-sizing: border-box;
+  padding: 0 2.25em 0 $g-s;
+  border: solid 1px $c-divider;
+  border-radius: $r-100;
+  cursor: pointer;
+
+  option {
+    font-size: $h4;
+    font-weight: $b;
+    background: $c-dark;
+    color: $c-light;
+  }
+}

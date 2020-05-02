@@ -2,7 +2,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { Icon, AnimatedGrid } from "core/elements";
+import { Icon, AnimatedGrid, Dropdown } from "core/elements";
 import { useDialog } from "core/tools";
 import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
@@ -14,6 +14,7 @@ import css from "./Deck.module.scss";
 
 const Deck: React.FC = () => {
   const [addedTools, setAddedTools] = React.useState<TTool[]>([]);
+  const [filter, setFilter] = React.useState<string | undefined>();
   const { data: dataUser } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-and-network" });
   const { data: dataTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
@@ -26,6 +27,12 @@ const Deck: React.FC = () => {
   const [logout] = useMutation(LOGOUT);
 
   React.useEffect(() => {
+    const storedDeckFilter = localStorage.getItem("DECK_FILTER");
+
+    if (storedDeckFilter) {
+      setFilter(storedDeckFilter);
+    }
+
     if (dataTools && dataUser) {
       let newAddedTools = [];
 
@@ -108,14 +115,10 @@ const Deck: React.FC = () => {
                   label: "Logout",
                   callback: () => {
                     logout().then(() => {
-                      setTimeout(() => localStorage.removeItem("DECK"), 0);
-                      localStorage.removeItem("LOGIN");
-                      localStorage.removeItem("LAST_TAB");
-                      localStorage.removeItem("TABS");
-
-                      client.resetStore();
-
                       router.push("/");
+
+                      localStorage.clear();
+                      client.resetStore();
                     });
                   }
                 },
@@ -133,14 +136,44 @@ const Deck: React.FC = () => {
         </div>
       </div>
 
+      <div className={css.filter}>
+        <div className={css.filterLabel}>Filter:</div>
+
+        <Dropdown
+          className={css.filterDD}
+          options={[
+            { label: "All", value: "" },
+            { label: "Styling", value: "style" },
+            { label: "Documentations", value: "document" },
+            { label: "Code Snippets", value: "snippet" },
+            { label: "Color Palettes", value: "color" },
+            { label: "Icons", value: "icon" },
+            { label: "Assets", value: "asset" },
+            { label: "Illustrations", value: "illustration" },
+            { label: "Mockup Generators", value: "mockup" },
+            { label: "Image Processing", value: "image" }
+          ]}
+          value={filter as any}
+          onChange={(value) => {
+            localStorage.setItem("DECK_FILTER", value);
+
+            setFilter(value);
+          }}
+        />
+
+        <div className={css.filterNum}>{addedTools.filter((i) => (filter ? i.subCat === filter : true)).length} Tools</div>
+      </div>
+
       {addedTools.length !== 0 ? (
         <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
-          {addedTools.map((tool: TTool) => (
-            <div key={tool.id}>
-              <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
-              <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
-            </div>
-          ))}
+          {addedTools
+            .filter((i) => (filter ? i.subCat === filter : true))
+            .map((tool: TTool) => (
+              <div key={tool.id}>
+                <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
+                <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id)} />
+              </div>
+            ))}
         </AnimatedGrid>
       ) : (
         <DeckEmpty />

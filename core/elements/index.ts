@@ -8,3 +8,4 @@ export * from "./Modal/Modal";
 export * from "./Loading/Loading";
 export * from "./AnimatedGrid/AnimatedGrid";
 export * from "./TextChanger/TextChanger";
+export * from "./Dropdown/Dropdown";

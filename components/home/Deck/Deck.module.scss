@@ -62,6 +62,33 @@
   font-weight: $b;
 }
 
+// Filter
+
+.filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: $g-m;
+}
+
+.filterLabel,
+.filterNum {
+  font-size: $h4;
+  font-weight: $b;
+}
+
+.filterLabel {
+  margin-right: $g-s;
+}
+
+.filterDD {
+  width: 180px;
+}
+
+.filterNum {
+  flex: 1;
+  text-align: right;
+}
+
 // Grid Item
 
 .gridItemCard {
