@@ -2,6 +2,8 @@ import * as React from "react";
 import css from "./AuthRedirect.module.scss";
 import { Loading, Icon } from "core/elements";
 import { useRouter } from "next/router";
+import { isProduction } from "core/config";
+import ReactGA from "react-ga";
 
 type TAuthRedirect = React.FC<{
   serviceName: string;
@@ -12,6 +14,10 @@ const AuthRedirect: TAuthRedirect = ({ serviceName, isLoaded }) => {
   const router = useRouter();
 
   if (isLoaded) {
+    if (isProduction) {
+      ReactGA.event({ category: "User", action: "Logged In", label: serviceName });
+    }
+
     setTimeout(() => router.push("/deck"), 800);
   }
 

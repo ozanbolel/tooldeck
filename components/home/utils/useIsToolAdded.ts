@@ -4,6 +4,8 @@ import { GET_USER_DATA, GET_TOOLS } from "core/queries";
 import { ADD_TO_DECK } from "core/mutations";
 import { useDialog } from "core/tools";
 import { TTool } from "core/types";
+import { isProduction } from "core/config";
+import ReactGA from "react-ga";
 
 const useIsToolAdded = (id: string, callback?: Function) => {
   const [isAdded, setIsAdded] = React.useState(false);
@@ -23,6 +25,10 @@ const useIsToolAdded = (id: string, callback?: Function) => {
   const onClickAdd = async () =>
     addToDeck({ variables: { toolId: id } })
       .then(() => {
+        if (isProduction) {
+          ReactGA.event({ category: "Usage", action: "Tool Added" });
+        }
+
         // Update local deck
 
         setIsAdded(true);

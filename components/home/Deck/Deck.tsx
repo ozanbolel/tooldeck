@@ -11,7 +11,8 @@ import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
 import css from "./Deck.module.scss";
-import { subCatOptions } from "core/config";
+import { subCatOptions, isProduction } from "core/config";
+import ReactGA from "react-ga";
 
 const Deck: React.FC = () => {
   const [addedTools, setAddedTools] = React.useState<TTool[]>([]);
@@ -54,6 +55,10 @@ const Deck: React.FC = () => {
   }, [dataTools, dataUser]);
 
   const onClickTool = (tool: TTool) => {
+    if (isProduction) {
+      ReactGA.event({ category: "Usage", action: "Tool Launched", label: tool.external ? "External" : "Internal" });
+    }
+
     if (!tool.external) {
       if (tabs.findIndex((i) => i.id === tool.id) === -1) {
         dispatch({ type: "ADD_TAB", payload: tool });
@@ -67,6 +72,10 @@ const Deck: React.FC = () => {
 
   const onClickDel = (id: string, subCat: string) => {
     const callback = () => {
+      if (isProduction) {
+        ReactGA.event({ category: "Usage", action: "Tool Deleted" });
+      }
+
       // Change filter if last one
 
       if (addedTools.filter((tool) => tool.subCat === subCat).length === 1) {
@@ -130,6 +139,10 @@ const Deck: React.FC = () => {
                   label: "Logout",
                   callback: () => {
                     logout().then(() => {
+                      if (isProduction) {
+                        ReactGA.event({ category: "User", action: "Logged Out" });
+                      }
+
                       router.push("/");
 
                       localStorage.clear();

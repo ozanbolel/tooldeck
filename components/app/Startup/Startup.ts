@@ -12,7 +12,7 @@ const Startup: React.FC = () => {
 
   // Analytics
 
-  if (typeof window !== "undefined") {
+  if (isProduction && typeof window !== "undefined") {
     React.useEffect(() => {
       ReactGA.initialize("UA-134207044-4");
     }, []);
