@@ -22,7 +22,7 @@ const LandingPage: TPage = () => {
     return (
       <>
         <Head>
-          <title>ToolDeck - Launchpad for developers' and designers' favorite tools</title>
+          <title>ToolDeck - Launchpad for developers' and designers' favorite tools.</title>
         </Head>
 
         <Landing />

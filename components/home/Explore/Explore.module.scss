@@ -1,12 +1,5 @@
 @import "core/styles/head";
 
-.pageTitle {
-  font-size: $h1;
-  font-weight: $b;
-  text-align: center;
-  margin-bottom: $g-xl;
-}
-
 .section {
   margin-bottom: $g-xl;
 }
@@ -14,7 +7,7 @@
 .title {
   font-size: $h2;
   font-weight: $b;
-  margin-bottom: $g-l;
+  margin-bottom: $g-m;
 }
 
 .grid {
@@ -26,12 +19,6 @@
 }
 
 // Responsive
-
-@media only screen and (min-width: 720px) {
-  .pageTitle {
-    text-align: unset;
-  }
-}
 
 @media only screen and (min-width: 1024px) {
   .grid {

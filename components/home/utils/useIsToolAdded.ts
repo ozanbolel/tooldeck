@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useQuery, useApolloClient, useMutation } from "@apollo/react-hooks";
-import { GET_USER_DATA, GET_TOOLS } from "core/queries";
+import { GET_TOOLS, GET_DECK } from "core/queries";
 import { ADD_TO_DECK } from "core/mutations";
 import { useDialog } from "core/tools";
 import { TTool } from "core/types";
@@ -9,18 +9,18 @@ import ReactGA from "react-ga";
 
 const useIsToolAdded = (id: string, callback?: Function) => {
   const [isAdded, setIsAdded] = React.useState(false);
-  const { data } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-only" });
+  const { data: dataDeck } = useQuery(GET_DECK);
   const [addToDeck, { loading }] = useMutation(ADD_TO_DECK);
   const cache = useApolloClient().cache;
   const dialog = useDialog();
 
   React.useEffect(() => {
-    if (data) {
-      if (data.deck.toolIds.findIndex((i: string) => i === id) !== -1) {
+    if (dataDeck) {
+      if (dataDeck.deck.toolIds.findIndex((i: string) => i === id) !== -1) {
         setIsAdded(true);
       }
     }
-  }, [data]);
+  }, [dataDeck]);
 
   const onClickAdd = async () =>
     addToDeck({ variables: { toolId: id } })
@@ -34,10 +34,10 @@ const useIsToolAdded = (id: string, callback?: Function) => {
         setIsAdded(true);
         callback ? callback() : null;
 
-        let newToolIds = data.deck.toolIds;
+        let newToolIds = dataDeck.deck.toolIds;
         newToolIds.unshift(id);
 
-        cache.writeQuery({ query: GET_USER_DATA, data: { user: data.user, deck: { toolIds: newToolIds, __typename: data.deck.__typename } } });
+        cache.writeQuery({ query: GET_DECK, data: { deck: { toolIds: newToolIds, __typename: dataDeck.deck.__typename } } });
 
         // Update local tool user count
 

@@ -1,7 +1,7 @@
 {
   "name": "ToolDeck",
   "short_name": "ToolDeck",
-  "description": "Launchpad for your favorite tools.",
+  "description": "Launchpad for developers' and designers' favorite tools.",
   "start_url": "/deck",
   "display": "standalone",
   "theme_color": "#252525",

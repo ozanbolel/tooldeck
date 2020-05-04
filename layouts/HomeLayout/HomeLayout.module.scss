@@ -23,7 +23,7 @@
 }
 
 .radio {
-  padding-bottom: $g-l;
+  padding-bottom: $g-m;
   text-align: center;
 }
 
@@ -32,4 +32,76 @@
   overflow-x: hidden;
   overflow-y: auto;
   @include sb-dark;
+}
+
+// Header
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $g-m;
+}
+
+.headerTitle {
+  font-size: $h1;
+  font-weight: $b;
+}
+
+.headerProfile {
+  margin-top: $g-s;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @include no-select;
+
+  &:hover {
+    .headerProfileAvatar {
+      border-color: $c-main;
+    }
+  }
+}
+
+.headerProfileAvatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $h1;
+  height: $h1;
+  background: $c-dark;
+  border-radius: 100%;
+  border: solid 2px $c-divider;
+  transition: border-color $de;
+  overflow: hidden;
+
+  svg {
+    position: relative;
+    width: 45%;
+    height: 45%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.headerProfileName {
+  margin-left: $g-xs;
+  font-size: $h4;
+  font-weight: $b;
+}
+
+// Responsive
+
+@media only screen and (min-width: 720px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .headerProfile {
+    margin-top: unset;
+  }
 }

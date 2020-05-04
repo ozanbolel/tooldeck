@@ -1,12 +1,11 @@
 import * as React from "react";
-import { useRouter } from "next/router";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { Icon, AnimatedGrid, Dropdown } from "core/elements";
+import { AnimatedGrid, Dropdown } from "core/elements";
 import { useDialog } from "core/tools";
-import { LOGOUT, REMOVE_FROM_DECK } from "core/mutations";
+import { REMOVE_FROM_DECK } from "core/mutations";
 import { TTool, TStore } from "core/types";
-import { GET_USER_DATA, GET_TOOLS } from "core/queries";
+import { GET_TOOLS, GET_DECK } from "core/queries";
 import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
@@ -17,16 +16,13 @@ import ReactGA from "react-ga";
 const Deck: React.FC = () => {
   const [addedTools, setAddedTools] = React.useState<TTool[]>([]);
   const [filter, setFilter] = React.useState<string | undefined>();
-  const { data: dataUser } = useQuery(GET_USER_DATA, { fetchPolicy: "cache-and-network" });
+  const { data: dataDeck } = useQuery(GET_DECK, { fetchPolicy: "cache-and-network" });
   const { data: dataTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const cache = useApolloClient().cache;
   const tabs = useSelector((store: TStore) => store.tabs.opened);
   const dispatch = useDispatch();
   const dialog = useDialog();
-  const router = useRouter();
-  const client = useApolloClient();
-  const [logout] = useMutation(LOGOUT);
 
   React.useEffect(() => {
     const storedDeckFilter = localStorage.getItem("DECK_FILTER");
@@ -35,11 +31,11 @@ const Deck: React.FC = () => {
       setFilter(storedDeckFilter);
     }
 
-    if (dataTools && dataUser) {
+    if (dataTools && dataDeck) {
       let newAddedTools = [];
 
-      for (let i = 0; i < dataUser.deck.toolIds.length; i++) {
-        newAddedTools.push(dataTools.tools.find((tool: TTool) => tool.id === dataUser.deck.toolIds[i]));
+      for (let i = 0; i < dataDeck.deck.toolIds.length; i++) {
+        newAddedTools.push(dataTools.tools.find((tool: TTool) => tool.id === dataDeck.deck.toolIds[i]));
       }
 
       setAddedTools(newAddedTools);
@@ -52,7 +48,7 @@ const Deck: React.FC = () => {
         setAddedTools(storedDeck);
       }
     }
-  }, [dataTools, dataUser]);
+  }, [dataTools, dataDeck]);
 
   const onClickTool = (tool: TTool) => {
     if (isProduction) {
@@ -86,9 +82,9 @@ const Deck: React.FC = () => {
 
       // Update local deck
 
-      const newDataDeckToolIds = dataUser.deck.toolIds.filter((i: string) => i !== id);
+      const newDataDeckToolIds = dataDeck.deck.toolIds.filter((i: string) => i !== id);
 
-      cache.writeQuery({ query: GET_USER_DATA, data: { user: dataUser.user, deck: { toolIds: newDataDeckToolIds, __typename: dataUser.deck.__typename } } });
+      cache.writeQuery({ query: GET_DECK, data: { deck: { toolIds: newDataDeckToolIds, __typename: dataDeck.deck.__typename } } });
 
       // Update server
 
@@ -126,47 +122,9 @@ const Deck: React.FC = () => {
 
   return (
     <div className={css.deck}>
-      <div className={css.header}>
-        <div className={css.headerTitle}>Your Deck</div>
-
-        <div
-          className={css.headerProfile}
-          onClick={() =>
-            dialog(
-              dataUser?.user.name,
-              [
-                {
-                  label: "Logout",
-                  callback: () => {
-                    logout().then(() => {
-                      if (isProduction) {
-                        ReactGA.event({ category: "User", action: "Logged Out" });
-                      }
-
-                      router.push("/");
-
-                      localStorage.clear();
-                      client.resetStore();
-                    });
-                  }
-                },
-                { label: "Close" }
-              ],
-              { autoclose: true }
-            )
-          }
-        >
-          <div className={css.headerProfileAvatar}>
-            {dataUser && dataUser.user.avatarUrl ? <img src={dataUser.user.avatarUrl} draggable="false" /> : <Icon name="user" />}
-          </div>
-
-          {dataUser ? <div className={css.headerProfileName}>{dataUser.user.name}</div> : null}
-        </div>
-      </div>
-
       {addedTools.length !== 0 ? (
         <div className={css.filter}>
-          <div className={css.filterLabel}>Filter:</div>
+          <div className={css.filterLabel}>Category:</div>
 
           <Dropdown
             className={css.filterDD}
@@ -186,7 +144,7 @@ const Deck: React.FC = () => {
       ) : null}
 
       {addedTools.length !== 0 ? (
-        <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 60]}>
+        <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
           {filteredAddedTools.map((tool: TTool) => (
             <div key={tool.id}>
               <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />

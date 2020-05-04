@@ -29,18 +29,15 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Provider store={getStore()}>
       <Head>
         <title>ToolDeck</title>
-        <meta
-          name="description"
-          content="Carefully curated tools for you to discover. Whether you are a designer or developer, create your deck and launch tools you never knew you needed."
-        />
+        <meta name="description" content="Carefully curated tools for you to discover." />
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
         <link rel="icon" type="image/png" href="/static/logo/logo-96.png" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/static/logo/logo-192.png" />
         <meta name="theme-color" content="#252525" />
-        <meta property="og:title" content="ToolDeck" />
-        <meta property="og:description" content="Launchpad for developers' and designers' favorite tools." />
+        <meta property="og:title" content="ToolDeck - Launchpad for developers' and designers' favorite tools." />
+        <meta property="og:description" content="Carefully curated tools for you to discover." />
         <meta property="og:image" content="https://tooldeckhq.com/static/og.png" />
       </Head>
 
