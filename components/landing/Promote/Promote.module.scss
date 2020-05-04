@@ -25,12 +25,10 @@
   }
 
   .title {
-    margin-top: $g-m;
-    font-size: $h2;
+    margin-top: $g-l;
+    font-size: $h3;
     font-weight: $b;
-    background-image: linear-gradient(45deg, $c-main 30%, $c-main-sub 100%);
-    background-clip: text;
-    color: transparent;
+    color: $c-light;
     padding: 0 $g-m;
     text-align: center;
   }

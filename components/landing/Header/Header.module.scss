@@ -45,8 +45,11 @@
   color: transparent;
 }
 
-.login {
-  margin-top: $g-l;
+.divider {
+  width: 90px;
+  height: 1px;
+  background: $c-divider;
+  margin: $g-m 0;
 }
 
 // Responsive
@@ -59,5 +62,9 @@
   .header {
     margin-top: unset;
     height: 28rem;
+  }
+
+  .divider {
+    width: 120px;
   }
 }

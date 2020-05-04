@@ -14,9 +14,9 @@ const Header: React.FC<{ controller: TLoginButtonsController }> = ({ controller 
 
       <div className={css.motto}>Launchpad for your favorite tools.</div>
 
-      <div className={css.login}>
-        <LoginButtons controller={controller} />
-      </div>
+      <div className={css.divider} />
+
+      <LoginButtons controller={controller} />
     </div>
   );
 };
