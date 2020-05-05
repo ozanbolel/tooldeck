@@ -1,5 +1,5 @@
 const SHELL_CACHE = "shell-v4";
-const DYNAMIC_CACHE = "dynamic-v10";
+const DYNAMIC_CACHE = "dynamic-v11";
 
 const assets = [
   "/",

@@ -42,6 +42,6 @@ export const categories = [
   {
     label: "Document Processing",
     value: "document",
-    desc: "Create or convert images."
+    desc: "Create or convert documents."
   }
 ];
