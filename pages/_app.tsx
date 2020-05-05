@@ -1,6 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { withApollo } from "core/tools";
@@ -9,9 +10,11 @@ import reducerRoot from "core/store/reducerRoot";
 import Startup from "components/app/Startup/Startup";
 import DialogMapper from "core/elements/Dialog/DialogMapper";
 import ModalMapper from "core/elements/Modal/ModalMapper";
+import InstallBanner from "components/app/InstallBanner/InstallBanner";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const Layout = (Component as any).Layout ? (Component as any).Layout : React.Fragment;
+  const router = useRouter();
 
   const getStore = () => {
     if (typeof window === "undefined") {
@@ -46,6 +49,8 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+
+      {router.pathname !== "/" && !router.pathname.includes("/auth/") ? <InstallBanner /> : null}
 
       <ModalMapper />
       <DialogMapper />
