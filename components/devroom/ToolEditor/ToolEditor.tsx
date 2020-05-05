@@ -80,7 +80,7 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
           <div className={css.field}>
             <div className={css.label}>cat:</div>
 
-            <Dropdown options={categories} value={cat} onChange={(v: string) => setCat(v)} />
+            <Dropdown options={[{ label: "Unset", value: "" }, ...categories]} value={cat} onChange={(v: string) => setCat(v)} />
           </div>
 
           <div className={css.field}>
@@ -123,7 +123,9 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
         <>
           <div className={css.gap} />
 
-          <div className={css.preview}>{isAnimationDone && !isClosing ? <iframe src={"https://" + url} /> : null}</div>
+          <div className={css.preview}>
+            {isAnimationDone && !isClosing ? <iframe src={"https://" + url.replace("https://", "").replace("http://", "")} /> : null}
+          </div>
         </>
       ) : null}
     </div>

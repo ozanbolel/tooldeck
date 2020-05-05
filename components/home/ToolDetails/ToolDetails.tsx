@@ -35,7 +35,7 @@ const ToolDetails: TModalComponent = ({ rerender, isAnimationDone, isClosing, pa
 
           <div className={css.numberContainer}>
             <div className={css.number}>
-              <Icon name="user" className={css.icon} />
+              <Icon name="users" className={css.icon} />
 
               <span>{tool.users}</span>
             </div>

@@ -18,7 +18,9 @@ const Startup: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-      ReactGA.pageview(router.pathname);
+      if (!router.pathname.includes("/auth/")) {
+        ReactGA.pageview(router.pathname);
+      }
     }, [router.pathname]);
   }
 

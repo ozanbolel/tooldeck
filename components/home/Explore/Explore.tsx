@@ -5,6 +5,7 @@ import { GET_TOOLS } from "core/queries";
 import ToolGridItem from "../ToolGridItem/ToolGridItem";
 import { TTool } from "core/types";
 import { categories } from "core/config";
+import { Icon } from "core/elements";
 
 const Explore: React.FC = () => {
   const { data } = useQuery(GET_TOOLS);
@@ -26,9 +27,17 @@ const Explore: React.FC = () => {
     return tools;
   };
 
-  const Section = ({ title, cat, sortBy, num }: { title: string; cat?: string; sortBy?: string; num?: number }) => (
+  const Section = ({ icon, title, desc, cat, sortBy, num }: { icon?: string; title: string; desc?: string; cat?: string; sortBy?: string; num?: number }) => (
     <div className={css.section}>
-      <div className={css.title}>{title}</div>
+      <div className={css.sectionHeader}>
+        <div className={css.title}>
+          {icon ? <Icon name={icon} /> : null}
+
+          {title}
+        </div>
+
+        {desc && desc !== "" ? <div className={css.desc}>{desc}</div> : null}
+      </div>
 
       <div className={css.grid}>
         {getTools({ cat, sortBy, num }).map((tool, index) => (
@@ -41,11 +50,11 @@ const Explore: React.FC = () => {
   if (data) {
     return (
       <>
-        <Section title="Most Added" sortBy="users" num={6} />
-        <Section title="Most Starred" sortBy="stars" num={4} />
+        <Section icon="users" title="Most Added" sortBy="users" num={6} />
+        <Section icon="star" title="Most Starred" sortBy="stars" num={4} />
 
         {categories.map((category) => (
-          <Section key={category.value} title={category.label} cat={category.value} />
+          <Section key={category.value} title={category.label} desc={category.desc} cat={category.value} />
         ))}
       </>
     );

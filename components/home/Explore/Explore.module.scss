@@ -4,10 +4,27 @@
   margin-bottom: $g-xl;
 }
 
-.title {
-  font-size: $h2;
-  font-weight: $b;
+.sectionHeader {
   margin-bottom: $g-m;
+
+  .title {
+    display: flex;
+    align-items: center;
+    font-size: $h2;
+    font-weight: $b;
+  }
+
+  .desc {
+    margin-top: $g-xxs;
+    font-size: $h3;
+    font-weight: $t;
+  }
+
+  svg {
+    width: $h2 * 0.8;
+    height: $h2 * 0.8;
+    margin-right: $g-xs;
+  }
 }
 
 .grid {

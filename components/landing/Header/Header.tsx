@@ -2,6 +2,7 @@ import * as React from "react";
 import css from "./Header.module.scss";
 import { TextChanger } from "core/elements";
 import LoginButtons, { TLoginButtonsController } from "../LoginButtons/LoginButtons";
+import { categories } from "core/config";
 
 const Header: React.FC<{ controller: TLoginButtonsController }> = ({ controller }) => {
   return (
@@ -10,7 +11,7 @@ const Header: React.FC<{ controller: TLoginButtonsController }> = ({ controller 
         <div className={css.bgShade} />
       </div>
 
-      <TextChanger data={["Color Palettes", "Code Snippets", "Utilities"]} containerClassName={css.changerContainer} textClassName={css.changer} />
+      <TextChanger data={categories.map((i) => i.label)} containerClassName={css.changerContainer} textClassName={css.changer} />
 
       <div className={css.motto}>Launchpad for your favorite tools.</div>
 
