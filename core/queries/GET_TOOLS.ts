@@ -8,7 +8,6 @@ export const GET_TOOLS = gql`
       shortDesc
       desc
       cat
-      subCat
       url
       iconUrl
       coverUrl

@@ -10,7 +10,7 @@ import ToolCard from "../ToolCard/ToolCard";
 import Nameplate from "../Nameplate/Nameplate";
 import DeckEmpty from "../DeckEmpty/DeckEmpty";
 import css from "./Deck.module.scss";
-import { subCatOptions, isProduction } from "core/config";
+import { categories, isProduction } from "core/config";
 import ReactGA from "react-ga";
 
 const Deck: React.FC = () => {
@@ -66,7 +66,7 @@ const Deck: React.FC = () => {
     }
   };
 
-  const onClickDel = (id: string, subCat: string) => {
+  const onClickDel = (id: string, cat: string) => {
     const callback = () => {
       if (isProduction) {
         ReactGA.event({ category: "Usage", action: "Tool Deleted" });
@@ -74,7 +74,7 @@ const Deck: React.FC = () => {
 
       // Change filter if last one
 
-      if (addedTools.filter((tool) => tool.subCat === subCat).length === 1) {
+      if (addedTools.filter((tool) => tool.cat === cat).length === 1) {
         setFilter("");
 
         localStorage.setItem("DECK_FILTER", "");
@@ -114,9 +114,9 @@ const Deck: React.FC = () => {
     );
   };
 
-  const filteredAddedTools = React.useMemo(() => addedTools.filter((i) => (filter ? i.subCat === filter : true)), [addedTools, filter]);
+  const filteredAddedTools = React.useMemo(() => addedTools.filter((i) => (filter ? i.cat === filter : true)), [addedTools, filter]);
   const filterOptions = React.useMemo(
-    () => [{ label: "All", value: "" }, ...subCatOptions.filter((i) => addedTools.findIndex((tool) => tool.subCat === i.value) !== -1)],
+    () => [{ label: "All", value: "" }, ...categories.filter((i) => addedTools.findIndex((tool) => tool.cat === i.value) !== -1)],
     [addedTools]
   );
 
@@ -148,7 +148,7 @@ const Deck: React.FC = () => {
           {filteredAddedTools.map((tool: TTool) => (
             <div key={tool.id}>
               <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
-              <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.subCat)} />
+              <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.cat)} />
             </div>
           ))}
         </AnimatedGrid>

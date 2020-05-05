@@ -7,7 +7,6 @@ export const UPDATE_TOOL = gql`
     $shortDesc: String
     $desc: String
     $cat: String
-    $subCat: String
     $url: String
     $iconUrl: String
     $coverUrl: String
@@ -19,7 +18,6 @@ export const UPDATE_TOOL = gql`
       shortDesc: $shortDesc
       desc: $desc
       cat: $cat
-      subCat: $subCat
       url: $url
       iconUrl: $iconUrl
       coverUrl: $coverUrl

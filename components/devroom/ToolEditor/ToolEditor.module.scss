@@ -47,6 +47,10 @@
     margin-bottom: $g-s;
   }
 
+  select {
+    width: 200px;
+  }
+
   input {
     width: 100%;
     line-height: $h-input;

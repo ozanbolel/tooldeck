@@ -4,9 +4,10 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_TOOLS } from "core/queries";
 import { DELETE_TOOL } from "core/mutations";
 import { TTool } from "core/types";
-import { Button, Radio } from "core/elements";
+import { Button, Dropdown } from "core/elements";
 import { useModal, useDialog } from "core/tools";
 import ToolEditor from "../ToolEditor/ToolEditor";
+import { categories } from "core/config";
 
 const ToolList: React.FC = () => {
   const { data } = useQuery(GET_TOOLS, { fetchPolicy: "network-only" });
@@ -45,7 +46,8 @@ const ToolList: React.FC = () => {
     return tools.map((tool: TTool) => (
       <div key={tool.id} className={css.item}>
         <div className={css.itemSection}>
-          <img src={"https://" + (tool.coverUrl || tool.iconUrl)} draggable="false" />
+          <img src={"https://" + (tool.coverUrl || tool.iconUrl)} onClick={() => modal(ToolEditor, { payload: { tool } })} draggable="false" />
+
           <div className={css.label}>{tool.label + (tool.external ? " (E)" : "")}</div>
         </div>
 
@@ -60,15 +62,7 @@ const ToolList: React.FC = () => {
   return (
     <div className={css.container}>
       <div className={css.filter}>
-        <Radio
-          items={[
-            { label: "All", value: "" },
-            { label: "Development", value: "development" },
-            { label: "Design", value: "design" },
-            { label: "Common", value: "common" }
-          ]}
-          onChange={(v: string) => setFilter(v)}
-        />
+        <Dropdown options={[{ label: "All", value: "" }, ...categories]} value={filter} onChange={(v: string) => setFilter(v)} />
 
         <Button label="Create Tool" onClick={() => modal(ToolEditor)} />
       </div>

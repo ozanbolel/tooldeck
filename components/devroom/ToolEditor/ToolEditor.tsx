@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Button, Radio } from "core/elements";
+import { Button, Radio, Dropdown } from "core/elements";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_TOOL, UPDATE_TOOL } from "core/mutations";
 import { useDialog } from "core/tools";
 import { TModalComponent, TTool } from "core/types";
 import css from "./ToolEditor.module.scss";
+import { categories } from "core/config";
 
 const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, payload }) => {
   const tool: TTool = payload?.tool;
@@ -16,7 +17,6 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
   const [shortDesc, setShortDesc] = React.useState(tool ? tool.shortDesc : "");
   const [desc, setDesc] = React.useState(tool ? tool.desc : "");
   const [cat, setCat] = React.useState(tool ? tool.cat : "");
-  const [subCat, setSubCat] = React.useState(tool ? tool.subCat : "");
   const [url, setUrl] = React.useState(tool ? tool.url : "");
   const [iconUrl, setIconUrl] = React.useState(tool ? tool.iconUrl : "");
   const [coverUrl, setCoverUrl] = React.useState(tool ? tool.coverUrl : "");
@@ -30,7 +30,6 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
         shortDesc,
         desc: desc && desc.replace(" ", "").length > 0 ? desc : undefined,
         cat,
-        subCat,
         url,
         iconUrl,
         coverUrl: coverUrl && coverUrl.replace(" ", "").length > 0 ? coverUrl : undefined,
@@ -47,7 +46,6 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
         shortDesc,
         desc: desc && desc.replace(" ", "").length > 0 ? desc : undefined,
         cat,
-        subCat,
         url,
         iconUrl,
         coverUrl: coverUrl && coverUrl.replace(" ", "").length > 0 ? coverUrl : undefined,
@@ -56,30 +54,6 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
     })
       .then(() => location.reload())
       .catch((error) => dialog(error.graphQLErrors[0]?.message || error.message, { label: "Ok" }));
-
-  const createCatItems = (type: "cat" | "subcat") => {
-    const subCats: { [key: string]: string[] } = {
-      development: ["style", "document", "snippet"],
-      design: ["color", "icon", "asset", "illustration", "mockup"],
-      common: ["image", "document"]
-    };
-
-    const cats: string[] = Object.keys(subCats);
-
-    let result: any = [];
-
-    if (type === "cat") {
-      for (let i = 0; i < cats.length; i++) {
-        result.push({ label: cats[i].charAt(0).toUpperCase() + cats[i].slice(1), value: cats[i] });
-      }
-    } else {
-      for (let i = 0; i < subCats[cat].length; i++) {
-        result.push({ label: subCats[cat][i].charAt(0).toUpperCase() + subCats[cat][i].slice(1), value: subCats[cat][i] });
-      }
-    }
-
-    return result;
-  };
 
   return (
     <div className={css.container}>
@@ -106,13 +80,7 @@ const ToolEditor: TModalComponent = ({ closeModal, isAnimationDone, isClosing, p
           <div className={css.field}>
             <div className={css.label}>cat:</div>
 
-            <Radio items={createCatItems("cat")} onChange={(v: string) => setCat(v)} />
-          </div>
-
-          <div className={css.field}>
-            <div className={css.label}>subCat:</div>
-
-            {cat && cat !== "" ? <Radio items={createCatItems("subcat")} onChange={(v: string) => setSubCat(v)} /> : null}
+            <Dropdown options={categories} value={cat} onChange={(v: string) => setCat(v)} />
           </div>
 
           <div className={css.field}>

@@ -4,7 +4,6 @@ export type TTool = {
   shortDesc: string;
   desc?: string;
   cat: string;
-  subCat: string;
   url: string;
   iconUrl: string;
   coverUrl?: string;

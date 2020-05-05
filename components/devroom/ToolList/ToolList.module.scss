@@ -12,6 +12,10 @@
   align-items: stretch;
   margin-bottom: $g-m;
 
+  select {
+    width: 200px;
+  }
+
   button {
     padding: 0 $g-m;
   }
@@ -47,7 +51,13 @@
     object-fit: cover;
     border-radius: $r;
     border: solid 2px $c-divider;
+    transition: border-color $de;
+    cursor: pointer;
     margin-right: $g-s * 1.5;
+
+    &:hover {
+      border-color: $c-main;
+    }
   }
 
   .label {

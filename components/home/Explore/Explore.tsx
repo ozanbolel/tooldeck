@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_TOOLS } from "core/queries";
 import ToolGridItem from "../ToolGridItem/ToolGridItem";
 import { TTool } from "core/types";
+import { categories } from "core/config";
 
 const Explore: React.FC = () => {
   const { data } = useQuery(GET_TOOLS);
@@ -42,9 +43,10 @@ const Explore: React.FC = () => {
       <>
         <Section title="Most Added" sortBy="users" num={6} />
         <Section title="Most Starred" sortBy="stars" num={4} />
-        <Section title="For Development" cat="development" />
-        <Section title="For Designing" cat="design" />
-        <Section title="For Everyone" cat="common" />
+
+        {categories.map((category) => (
+          <Section key={category.value} title={category.label} cat={category.value} />
+        ))}
       </>
     );
   } else {
