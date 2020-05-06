@@ -52,10 +52,17 @@
 
 .tabCloseIcon {
   position: absolute;
+  top: 0;
+  bottom: 0;
   right: 0;
-  width: 1.2rem;
-  height: 1.2rem;
+  display: flex;
+  align-items: center;
   padding: 0 $g-xs 0 0;
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 }
 
 .tabDeck {
