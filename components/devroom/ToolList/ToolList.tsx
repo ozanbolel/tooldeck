@@ -8,6 +8,7 @@ import { Button, Dropdown } from "core/elements";
 import { useModal, useDialog } from "core/tools";
 import ToolEditor from "../ToolEditor/ToolEditor";
 import { categories } from "core/config";
+import ToolCard from "components/home/ToolCard/ToolCard";
 
 const ToolList: React.FC = () => {
   const { data } = useQuery(GET_TOOLS, { fetchPolicy: "network-only" });
@@ -46,7 +47,7 @@ const ToolList: React.FC = () => {
     return tools.map((tool: TTool) => (
       <div key={tool.id} className={css.item}>
         <div className={css.itemSection}>
-          <img src={"https://" + (tool.coverUrl || tool.iconUrl)} onClick={() => modal(ToolEditor, { payload: { tool } })} draggable="false" />
+          <ToolCard iconUrl={tool.iconUrl} coverUrl={tool.coverUrl} className={css.card} onClick={() => modal(ToolEditor, { payload: { tool } })} />
 
           <div className={css.label}>{tool.label + (tool.external ? " (E)" : "")}</div>
         </div>

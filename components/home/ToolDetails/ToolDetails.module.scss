@@ -4,12 +4,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 90vw;
-  height: 90vh;
-  height: calc(var(--vh, 1vh) * 90);
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background: $c-light;
   color: $c-dark;
-  border-radius: $r;
   overflow: hidden;
 }
 
@@ -20,7 +19,7 @@
   display: flex;
   align-items: center;
   color: $c-light;
-  padding: $g-m;
+  padding: $g-m $g-s;
   box-shadow: $s-button;
   overflow: hidden;
   @include no-select;
@@ -83,7 +82,7 @@
 }
 
 .actions {
-  display: flex;
+  display: none;
   align-items: stretch;
   height: 40px;
 
@@ -109,13 +108,13 @@
 .content {
   flex: 1;
   box-sizing: border-box;
-  padding: $g-m;
+  padding: $g-m $g-s;
   overflow-y: auto;
   @include sb-light;
 }
 
 .section {
-  margin-bottom: $g-l;
+  margin-bottom: $g-m;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -151,6 +150,38 @@
   }
 }
 
+// Mobile Actions
+
+.mobileActions {
+  display: flex;
+  align-items: stretch;
+  height: 50px;
+}
+
+.mobileActionsButton {
+  border-radius: 0;
+
+  &.add {
+    flex: 2;
+  }
+
+  &.star {
+    flex: 1;
+    border-left: none;
+    border-right: none;
+  }
+
+  &.close {
+    flex: 2;
+  }
+
+  svg {
+    width: $h5;
+    height: $h5;
+    stroke-width: 3px;
+  }
+}
+
 // Responsive
 
 @media only screen and (min-width: 1024px) {
@@ -158,13 +189,28 @@
     width: 50vw;
     height: 70vh;
     height: calc(var(--vh, 1vh) * 70);
+    border-radius: $r;
+  }
+
+  .header {
+    padding: $g-m;
+  }
+
+  .content {
+    padding: $g-m;
+  }
+
+  .actions {
+    display: flex;
+  }
+
+  .mobileActions {
+    display: none;
   }
 }
 
 @media only screen and (min-width: 1600px) {
   .container {
     width: 40vw;
-    height: 70vh;
-    height: calc(var(--vh, 1vh) * 70);
   }
 }

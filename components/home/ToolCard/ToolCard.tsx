@@ -6,13 +6,14 @@ import { TTool } from "core/types";
 import useCardHandlers from "./utils/useCardHandlers";
 
 type TToolCard = React.FC<{
-  src: TTool["iconUrl"];
+  iconUrl: TTool["iconUrl"];
+  coverUrl: TTool["coverUrl"];
   external?: TTool["external"];
   className?: string;
   onClick?: Function;
 }>;
 
-const ToolCard: TToolCard = ({ src, external, className, onClick }) => {
+const ToolCard: TToolCard = ({ iconUrl, coverUrl, external, className, onClick }) => {
   const [spring, setSpring] = useSpring(() => ({ x: 0, y: 0, s: 1 }));
   const cardHandlers = useCardHandlers(spring, setSpring);
 
@@ -20,7 +21,9 @@ const ToolCard: TToolCard = ({ src, external, className, onClick }) => {
     React.useMemo(
       () => (
         <div className={css.inner}>
-          <img className={css.cover} src={"https://" + src} draggable="false" />
+          <div className={css.cover + (!coverUrl ? " " + css.nocover : "")}>
+            <img src={"https://" + (coverUrl || iconUrl)} draggable="false" />
+          </div>
 
           {external ? (
             <div className={css.innerExternal}>
@@ -29,7 +32,7 @@ const ToolCard: TToolCard = ({ src, external, className, onClick }) => {
           ) : null}
         </div>
       ),
-      [src, external]
+      [iconUrl, coverUrl, external]
     );
 
   return (

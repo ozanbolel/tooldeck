@@ -147,7 +147,13 @@ const Deck: React.FC = () => {
         <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
           {filteredAddedTools.map((tool: TTool) => (
             <div key={tool.id}>
-              <ToolCard className={css.gridItemCard} src={tool.coverUrl || tool.iconUrl} external={tool.external} onClick={() => onClickTool(tool)} />
+              <ToolCard
+                className={css.gridItemCard}
+                iconUrl={tool.iconUrl}
+                coverUrl={tool.coverUrl}
+                external={tool.external}
+                onClick={() => onClickTool(tool)}
+              />
               <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.cat)} />
             </div>
           ))}

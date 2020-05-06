@@ -7,7 +7,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { IS_STARRED, GET_TOOLS } from "core/queries";
 import { GIVE_STAR } from "core/mutations";
 
-const ToolDetails: TModalComponent = ({ rerender, isAnimationDone, isClosing, payload }) => {
+const ToolDetails: TModalComponent = ({ rerender, isAnimationDone, closeModal, isClosing, payload }) => {
   const tool: TTool = payload?.tool;
   const callback: Function = payload?.callback;
   const { isAdded, onClickAdd, loading } = useIsToolAdded(tool.id, callback);
@@ -92,6 +92,31 @@ const ToolDetails: TModalComponent = ({ rerender, isAnimationDone, isClosing, pa
             <span>Preview not available.</span>
           )}
         </div>
+      </div>
+
+      <div className={css.mobileActions}>
+        <Button
+          label={isAdded ? "ADDED" : "ADD TO DECK"}
+          className={css.mobileActionsButton + " " + css.add}
+          onClick={async () => {
+            await onClickAdd();
+
+            rerender();
+          }}
+          loading={loading}
+          disabled={isAdded}
+        />
+
+        <Button
+          label=""
+          icon={{ name: "star", position: "left", className: css.icon }}
+          className={css.mobileActionsButton + " " + css.star}
+          onClick={() => giveStar()}
+          loading={loadingIsStarred || loadingGiveStar}
+          disabled={dataIsStarred?.isStarred || dataGiveStar}
+        />
+
+        <Button label="CLOSE" className={css.mobileActionsButton + " " + css.close} onClick={() => closeModal()} />
       </div>
     </div>
   );

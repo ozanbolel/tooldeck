@@ -23,7 +23,7 @@ const ToolGridItem: TToolGridItem = ({ tool, index, badge }) => {
 
   return (
     <div key={tool.id} className={css.item} style={{ animationDelay: index * 0.02 + "s" }}>
-      <ToolCard src={tool.coverUrl || tool.iconUrl} className={css.cover} onClick={() => onClickView()} />
+      <ToolCard iconUrl={tool.iconUrl} coverUrl={tool.coverUrl} className={css.cover} onClick={() => onClickView()} />
 
       <div className={css.info}>
         {isNew && !badge ? <div className={css.new}>NEW</div> : null}
