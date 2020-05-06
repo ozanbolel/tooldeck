@@ -27,25 +27,31 @@ const Explore: React.FC = () => {
     return tools;
   };
 
-  const Section = ({ icon, title, desc, cat, sortBy, num }: { icon?: string; title: string; desc?: string; cat?: string; sortBy?: string; num?: number }) => (
-    <div className={css.section}>
-      <div className={css.sectionHeader}>
-        <div className={css.title}>
-          {icon ? <Icon name={icon} /> : null}
+  const Section = ({ icon, title, cat, sortBy, num }: { icon?: string; title: string; cat?: string; sortBy?: string; num?: number }) => {
+    const arrayTools = React.useMemo(() => getTools({ cat, sortBy, num }), []);
 
-          {title}
+    if (arrayTools.length !== 0) {
+      return (
+        <div className={css.section}>
+          <div className={css.sectionHeader}>
+            <div className={css.title}>
+              {icon ? <Icon name={icon} /> : null}
+
+              {title}
+            </div>
+          </div>
+
+          <div className={css.grid}>
+            {arrayTools.map((tool, index) => (
+              <ToolGridItem key={tool.id} tool={tool} index={index} badge={sortBy} />
+            ))}
+          </div>
         </div>
-
-        {desc && desc !== "" ? <div className={css.desc}>{desc}</div> : null}
-      </div>
-
-      <div className={css.grid}>
-        {getTools({ cat, sortBy, num }).map((tool, index) => (
-          <ToolGridItem key={tool.id} tool={tool} index={index} badge={sortBy} />
-        ))}
-      </div>
-    </div>
-  );
+      );
+    } else {
+      return null;
+    }
+  };
 
   if (data) {
     return (
@@ -54,7 +60,7 @@ const Explore: React.FC = () => {
         <Section icon="star" title="Most Starred" sortBy="stars" num={4} />
 
         {categories.map((category) => (
-          <Section key={category.value} title={category.label} desc={category.desc} cat={category.value} />
+          <Section key={category.value} title={category.label} cat={category.value} />
         ))}
       </>
     );

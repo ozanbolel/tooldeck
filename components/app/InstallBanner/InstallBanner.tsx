@@ -37,8 +37,8 @@ const InstallBanner: React.FC = () => {
     return (
       <div className={css.container}>
         <div className={css.inner}>
-          <div className={css.text}>Install ToolDeck to boost your productivity!</div>
-          <div className={css.desc}>Since we have in-app tabs, ToolDeck works best when installed.</div>
+          <div className={css.text}>Install ToolDeck to Boost Your Productivity 🚀</div>
+          <div className={css.desc}>With its in-app tabs, ToolDeck works best when installed.</div>
 
           <div className={css.actions}>
             <Button icon={{ name: "download", position: "left" }} label="INSTALL" className={css.button} onClick={() => prompt.prompt()} />

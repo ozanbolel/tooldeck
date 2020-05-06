@@ -14,11 +14,11 @@
   @keyframes innerIn {
     from {
       opacity: 0;
-      transform: scale(0);
+      transform: translateY(75%);
     }
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0);
     }
   }
 
@@ -26,22 +26,22 @@
   background: $c-light;
   color: $c-dark;
   text-align: center;
-  margin: $g-m;
   padding: $g-m;
-  border-radius: $r;
-  box-shadow: $s-card;
-  animation: innerIn $d-l $e-io;
+  border-top-left-radius: $r;
+  border-top-right-radius: $r;
+  box-shadow: $s-button;
+  animation: innerIn $d-l $e-o;
   @include no-select;
 }
 
 .text,
 .desc {
   font-size: $h4;
-  line-height: 2rem;
 }
 
 .text {
   font-weight: $b;
+  margin-bottom: $g-xxs;
 }
 
 .desc {
@@ -50,7 +50,7 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 
   .button,
   .hide {
@@ -65,7 +65,7 @@
   }
 
   .hide {
-    margin-top: $g-s;
+    margin-left: $g-xs;
     font-weight: $b;
     border: solid 1px $c-dark;
     border-radius: $r-100;
@@ -86,14 +86,8 @@
   }
 }
 
-@media only screen and (min-width: 720px) {
-  .actions {
-    flex-direction: row;
-    justify-content: center;
-
-    .hide {
-      margin-top: unset;
-      margin-left: $g-xs;
-    }
+@media only screen and (max-width: 1000px) {
+  .container {
+    display: none;
   }
 }
