@@ -8,7 +8,7 @@ export const categories = [
   { label: "Mockup Generators", value: "mockup" },
   { label: "Image Processing", value: "image" },
   { label: "Document Processing", value: "document" },
-  { label: "Stock Images", value: "stock_image" },
+  { label: "Stock Photos", value: "stock_photo" },
   { label: "Stock Videos", value: "stock_video" },
   { label: "Translators", value: "translator" }
 ];
