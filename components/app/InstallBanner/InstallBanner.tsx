@@ -31,6 +31,10 @@ const InstallBanner: React.FC = () => {
     localStorage.setItem("INSTALL_PROMPT", new Date().getTime().toString());
 
     setPrompt(null);
+
+    if (isProduction) {
+      ReactGA.event({ category: "Behavior", action: "Install Banner Hidden" });
+    }
   };
 
   if (prompt) {
