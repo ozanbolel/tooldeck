@@ -18,23 +18,23 @@ const InstallBanner: React.FC = () => {
       });
 
       window.addEventListener("appinstalled", (event) => {
-        setPrompt(null);
-
         if (isProduction) {
           ReactGA.event({ category: "App", action: "Installed" });
         }
+
+        setPrompt(null);
       });
     }
   }, []);
 
   const onClickHide = () => {
-    localStorage.setItem("INSTALL_PROMPT", new Date().getTime().toString());
-
-    setPrompt(null);
-
     if (isProduction) {
       ReactGA.event({ category: "Behavior", action: "Install Banner Hidden" });
     }
+
+    localStorage.setItem("INSTALL_PROMPT", new Date().getTime().toString());
+
+    setPrompt(null);
   };
 
   if (prompt) {

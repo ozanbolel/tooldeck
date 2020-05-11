@@ -18,7 +18,7 @@ const AuthRedirect: TAuthRedirect = ({ serviceName, isLoaded }) => {
       ReactGA.event({ category: "User", action: "Logged In", label: serviceName });
     }
 
-    setTimeout(() => router.push("/deck"), 400);
+    setTimeout(() => router.push("/deck"), 600);
   }
 
   return (
