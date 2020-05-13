@@ -38,9 +38,7 @@ const Startup: React.FC = () => {
 
   React.useEffect(() => {
     const resizeOps = () => {
-      setTimeout(() => {
-        document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
-      }, 100);
+      document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
     };
 
     window.addEventListener("resize", resizeOps);
