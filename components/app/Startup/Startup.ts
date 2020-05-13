@@ -37,7 +37,11 @@ const Startup: React.FC = () => {
   // Handle View Height
 
   React.useEffect(() => {
-    const resizeOps = () => document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+    const resizeOps = () => {
+      setTimeout(() => {
+        document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+      }, 100);
+    };
 
     window.addEventListener("resize", resizeOps);
     return () => window.removeEventListener("resize", resizeOps);
