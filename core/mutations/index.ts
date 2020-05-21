@@ -8,3 +8,4 @@ export * from "./CREATE_TOOL";
 export * from "./UPDATE_TOOL";
 export * from "./DELETE_TOOL";
 export * from "./GIVE_STAR";
+export * from "./ADD_COMMENT";

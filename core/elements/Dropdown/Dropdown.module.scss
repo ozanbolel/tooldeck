@@ -20,7 +20,7 @@
     color: $c-light;
     transform: rotate(-90deg);
     transition: transform $d-s $e-io;
-    pointer-events: none;
+    @include no-touch;
   }
 }
 

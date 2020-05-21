@@ -23,6 +23,12 @@ const HomeLayout: React.FC = ({ children }) => {
   const dialog = useDialog();
   const client = useApolloClient();
 
+  const radioItems = [
+    { label: "Deck", value: "/deck" },
+    { label: "Feed", value: "/feed" },
+    { label: "Explore", value: "/explore" }
+  ];
+
   return (
     <div className={css.home}>
       <Tabs />
@@ -35,10 +41,7 @@ const HomeLayout: React.FC = ({ children }) => {
 
           <div className={css.radio}>
             <Radio
-              items={[
-                { label: "Deck", value: "/deck" },
-                { label: "Explore", value: "/explore" }
-              ]}
+              items={radioItems}
               initial={router.pathname}
               value={router.pathname}
               onChange={(v: string) => {
@@ -58,7 +61,7 @@ const HomeLayout: React.FC = ({ children }) => {
         {currentTabId === "" ? (
           <Nest>
             <div className={css.header}>
-              <div className={css.headerTitle}>{router.pathname === "/deck" ? "Your Deck" : "Explore"}</div>
+              <div className={css.headerTitle}>{radioItems.find((i) => i.value === router.pathname)?.label}</div>
 
               <div
                 className={css.headerProfile}

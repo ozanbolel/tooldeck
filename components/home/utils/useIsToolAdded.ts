@@ -46,7 +46,7 @@ const useIsToolAdded = (id: string, callback?: Function) => {
 
         newTools[toolIndex].users = newTools[toolIndex].users + 1;
 
-        cache.writeQuery({ query: GET_TOOLS, data: { newTools } });
+        cache.writeQuery({ query: GET_TOOLS, data: { tools: newTools } });
       })
       .catch((e) => {
         if (e.graphQLErrors[0].code === "ALREADY_IN_DECK") {

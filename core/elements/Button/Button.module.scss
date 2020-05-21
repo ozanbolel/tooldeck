@@ -33,7 +33,7 @@
   right: 0;
   bottom: 0;
   opacity: 0;
-  pointer-events: none;
+  @include no-touch;
 
   &.active {
     opacity: 1;

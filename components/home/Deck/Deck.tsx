@@ -97,7 +97,7 @@ const Deck: React.FC = () => {
 
       newTools[toolIndex].users = newTools[toolIndex].users - 1;
 
-      cache.writeQuery({ query: GET_TOOLS, data: { newTools } });
+      cache.writeQuery({ query: GET_TOOLS, data: { tools: newTools } });
     };
 
     dialog(

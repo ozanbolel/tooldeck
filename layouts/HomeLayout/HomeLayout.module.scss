@@ -41,6 +41,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: $g-m;
+  @include no-select;
 }
 
 .headerTitle {

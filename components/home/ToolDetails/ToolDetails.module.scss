@@ -113,6 +113,38 @@
   @include sb-light;
 }
 
+.seeComments {
+  text-align: center;
+  margin-bottom: $g-m;
+  @include no-select;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    background: $c-light-alt;
+    padding: $g-xxs $g-s $g-xxs ($g-s + $g-xs);
+    border: solid 1px $c-dark;
+    border-radius: $r-100;
+    box-shadow: $s-divider;
+    transition: background $de, color $de;
+
+    &:hover {
+      background: $c-dark;
+      color: $c-light;
+    }
+
+    span {
+      font-weight: $b;
+      margin-right: $g-xxs;
+    }
+
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+  }
+}
+
 .section {
   margin-bottom: $g-m;
 
@@ -121,9 +153,31 @@
   }
 
   .title {
-    font-size: $h3;
-    font-weight: $b;
+    display: flex;
+    align-items: center;
     margin-bottom: $g-s;
+    @include no-select;
+
+    span {
+      font-size: $h3;
+      font-weight: $b;
+    }
+
+    button {
+      margin-left: $g-xs;
+      background: $c-light-alt;
+      font-weight: $b;
+      padding: $g-xxs $g-s;
+      border: solid 1px $c-dark;
+      border-radius: $r-100;
+      box-shadow: $s-divider;
+      transition: background $de, color $de;
+
+      &:hover {
+        background: $c-dark;
+        color: $c-light;
+      }
+    }
   }
 
   span {
@@ -146,7 +200,116 @@
     width: 100%;
     height: 100%;
     @include no-select;
-    pointer-events: none;
+    @include no-touch;
+  }
+}
+
+// Comments
+
+.comment {
+  background: $c-light-alt;
+  padding: $g-s;
+  border-radius: $r;
+  box-shadow: $s-divider;
+  margin-bottom: $g-s;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  @include no-select;
+
+  .photo {
+    width: 3.25rem;
+    height: 3.25rem;
+    cursor: pointer;
+    margin-right: $g-xs;
+
+    &:hover {
+      img {
+        border-color: $c-main;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: solid 3px $c-light;
+      border-radius: $r-100;
+      transition: border-color $de;
+    }
+  }
+
+  .name {
+    font-size: $h4;
+
+    .link {
+      font-weight: $b;
+      @include link-dark;
+    }
+  }
+}
+
+.commentBody {
+  margin-top: $g-s;
+  background: rgba($c-dark, 0.05);
+  font-size: $h4;
+  padding: $g-s;
+  border-radius: $r;
+}
+
+.commentTime {
+  margin-top: $g-s;
+}
+
+// Leave a Comment
+
+.leaveComment {
+  padding: $g-m $g-s;
+
+  .success {
+    font-size: $h4;
+    font-weight: $b;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    align-items: stretch;
+    height: 4rem;
+  }
+
+  input {
+    flex: 1;
+    background: $c-light-alt;
+    font-size: $h4;
+    font-weight: $b;
+    padding: 0 ($g-s + $g-xxs);
+    border-radius: $r-100;
+    box-shadow: $s-divider;
+  }
+
+  button {
+    margin-left: $g-s;
+    width: 9rem;
+    background: $c-light-alt;
+    font-weight: $b;
+    padding: $g-xxs 0;
+    box-sizing: border-box;
+    border: solid 1px $c-dark;
+    border-radius: $r-100;
+    box-shadow: $s-divider;
+    transition: background $de, color $de;
+
+    &:hover {
+      background: $c-dark;
+      color: $c-light;
+    }
   }
 }
 
@@ -186,9 +349,9 @@
 
 @media only screen and (min-width: 1024px) {
   .container {
-    width: 50vw;
-    height: 70vh;
-    height: calc(var(--vh, 1vh) * 70);
+    width: 65vw;
+    height: 75vh;
+    height: calc(var(--vh, 1vh) * 75);
     border-radius: $r;
   }
 
@@ -197,6 +360,10 @@
   }
 
   .content {
+    padding: $g-m;
+  }
+
+  .leaveComment {
     padding: $g-m;
   }
 
@@ -211,6 +378,6 @@
 
 @media only screen and (min-width: 1600px) {
   .container {
-    width: 40vw;
+    width: 45vw;
   }
 }

@@ -1,7 +1,7 @@
 @import "core/styles/head";
 
 .deck {
-  margin-bottom: $g-xl;
+  margin-bottom: $g-l;
 }
 
 // Filter
@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: $g-m;
+  @include no-select;
 }
 
 .filterLabel,
