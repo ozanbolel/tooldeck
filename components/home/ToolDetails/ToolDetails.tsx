@@ -20,7 +20,7 @@ const CommentCard: React.FC<{ comment: any }> = ({ comment }) => {
       if (profile.twitterId) {
         url = "https://twitter.com/i/user/" + profile.twitterId;
       } else {
-        const githubUser = await (await fetch("https://api.github.com/user/" + "49209002")).json();
+        const githubUser = await (await fetch("https://api.github.com/user/" + profile.githubId)).json();
 
         url = githubUser.html_url;
       }
