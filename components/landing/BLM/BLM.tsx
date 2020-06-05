@@ -20,7 +20,7 @@ const BLM: React.FC = () => {
   if (!isHidden) {
     return (
       <div className={css.container + (isClosing ? " " + css.closing : "")}>
-        <div className={css.text} style={{ animationDelay: "0.6s" }}>
+        <div className={css.text} style={{ animationDelay: "0.5s" }}>
           BLACK
         </div>
 
@@ -28,7 +28,7 @@ const BLM: React.FC = () => {
           LIVES
         </div>
 
-        <div className={css.text + " " + css.longerDuration} style={{ animationDelay: "1.6s" }}>
+        <div className={css.text + " " + css.longerDuration} style={{ animationDelay: "1.5s" }}>
           MATTER
         </div>
       </div>
