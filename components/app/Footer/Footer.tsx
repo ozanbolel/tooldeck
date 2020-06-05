@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   return (
     <div className={css.footer}>
       <div className={currentTabId !== "" ? css.hidden : undefined}>
-        <a
+        {/*         <a
           href="https://twitter.com/tooldeckhq"
           target="_blank"
           rel="noreferrer"
@@ -22,6 +22,19 @@ const Footer: React.FC = () => {
           }}
         >
           Follow on Twitter
+        </a> */}
+
+        <a
+          href="https://blacklivesmatter.com"
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => {
+            if (isProduction) {
+              ReactGA.event({ category: "Behavior", action: "BLM Link Clicked" });
+            }
+          }}
+        >
+          #BlackLivesMatter
         </a>
       </div>
 
