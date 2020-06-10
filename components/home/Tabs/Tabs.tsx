@@ -67,6 +67,12 @@ const Tabs: React.FC = () => {
       </div>
     ));
 
+  const paths: any = {
+    deck: "Deck",
+    feed: "Feed",
+    explore: "Explore"
+  };
+
   return (
     <div className={css.container + (currentTabId !== "" ? " " + css.borderNone : "")}>
       <div className={css.innerDeck}>
@@ -75,7 +81,7 @@ const Tabs: React.FC = () => {
           onClick={() => dispatch({ type: "SET_CURRENT_TAB_ID", payload: "" })}
         >
           <img src="/static/logo/logo-96.png" draggable="false" />
-          <span>{router.pathname.split("/")[1] === "deck" ? "Deck" : "Explore"}</span>
+          <span>{paths[router.pathname.split("/")[1]]}</span>
         </div>
       </div>
 
