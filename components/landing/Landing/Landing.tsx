@@ -5,7 +5,6 @@ import Header from "../Header/Header";
 import Promote from "../Promote/Promote";
 import LandingFooter from "../LandingFooter/LandingFooter";
 import Login from "../Login/Login";
-import BLM from "../BLM/BLM";
 
 const Landing: React.FC = () => {
   const [isGithubClicked, setIsGithubClicked] = React.useState(false);
@@ -14,25 +13,21 @@ const Landing: React.FC = () => {
   const controller = { isGithubClicked, setIsGithubClicked, isTwitterClicked, setIsTwitterClicked };
 
   return (
-    <>
-      <BLM />
+    <div className={css.landing}>
+      <Topbar controller={controller} />
 
-      <div className={css.landing}>
-        <Topbar controller={controller} />
+      <Header controller={controller} />
 
-        <Header controller={controller} />
-
-        <div className={css.section + " " + css.first}>
-          <Promote />
-        </div>
-
-        <div className={css.section}>
-          <Login controller={controller} />
-        </div>
-
-        <LandingFooter />
+      <div className={css.section + " " + css.first}>
+        <Promote />
       </div>
-    </>
+
+      <div className={css.section}>
+        <Login controller={controller} />
+      </div>
+
+      <LandingFooter />
+    </div>
   );
 };
 
