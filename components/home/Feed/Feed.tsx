@@ -16,6 +16,7 @@ const EventCard: TEventCard = ({ event, index }) => {
   const { data: dataTools } = useQuery(GET_TOOLS);
   const { data: dataProfile } = useQuery(GET_PROFILE, { variables: { userId: event.userId } });
   const [getComment, { data: dataComment }] = useLazyQuery(GET_COMMENT, { variables: { commentId: event.commentId } });
+  const [profileUrl, setProfileUrl] = React.useState("");
   const modal = useModal();
 
   if (event.type === "comment") {
@@ -24,73 +25,81 @@ const EventCard: TEventCard = ({ event, index }) => {
     }, []);
   }
 
-  if (dataTools && dataProfile) {
-    const tool = (dataTools.tools as TTool[]).find((i) => i.id === event.toolId);
+  const eventTools: TTool[] = React.useMemo(() => {
+    if (event && dataTools) {
+      return event.toolIds.map((toolId: TTool["id"]) => (dataTools.tools as TTool[]).find((i) => i.id === toolId));
+    } else {
+      return [];
+    }
+  }, [event, dataTools]);
 
-    if (tool) {
+  React.useEffect(() => {
+    if (dataProfile) {
       const { profile } = dataProfile;
 
-      const onClickProfile = async () => {
-        let url;
-
-        if (profile.twitterId) {
-          url = "https://twitter.com/i/user/" + profile.twitterId;
-        } else {
+      if (profile.twitterId) {
+        setProfileUrl("https://twitter.com/i/user/" + profile.twitterId);
+      } else {
+        const setGithubProfileUrl = async () => {
           const githubUser = await (await fetch("https://api.github.com/user/" + profile.githubId)).json();
 
-          url = githubUser.html_url;
-        }
+          setProfileUrl(githubUser.html_url);
+        };
 
-        window.open(url, "_blank");
-      };
+        setGithubProfileUrl();
+      }
+    }
+  }, [dataProfile]);
 
-      const onClickTool = () => modal(ToolDetails, { autoclose: true, payload: { tool } });
+  const onClickTool = (tool: TTool) => modal(ToolDetails, { autoclose: true, payload: { tool } });
 
-      return (
-        <div className={css.listItem} style={{ animationDelay: index * 0.02 + "s" }}>
-          <div className={css.listItemHeader}>
-            <div className={css.photo} onClick={() => onClickProfile()}>
-              <img src={profile.avatarUrl} alt={profile.name} draggable="false" />
-            </div>
+  return (
+    <div className={css.listItem} style={{ animationDelay: index * 0.02 + "s" }}>
+      <div className={css.listItemHeader}>
+        <a className={css.photo} href={profileUrl} target="_blank" rel="noreferrer">
+          <img src={dataProfile?.profile.avatarUrl} alt={dataProfile?.profile.name} draggable="false" />
+        </a>
 
-            <div className={css.event}>
-              <div>
-                <span className={css.link} onClick={() => onClickProfile()}>
-                  {profile.name}
-                </span>
+        <div className={css.event}>
+          <div>
+            <span className={css.link}>
+              <a href={profileUrl} target="_blank" rel="noreferrer">
+                {dataProfile?.profile.name}
+              </a>
+            </span>
 
-                {event.type === "add" ? <span> added </span> : null}
-                {event.type === "star" ? <span> starred </span> : null}
-                {event.type === "comment" ? <span> commented on </span> : null}
+            {event.type === "add" ? <span> added </span> : null}
+            {event.type === "star" ? <span> starred </span> : null}
+            {event.type === "comment" ? <span> commented on </span> : null}
 
-                <span className={css.link} onClick={() => onClickTool()}>
+            {eventTools.map((tool, index) => (
+              <React.Fragment key={tool.id}>
+                <span className={css.link} onClick={() => onClickTool(tool)}>
                   {tool.label}
                 </span>
 
-                <span>.</span>
-              </div>
-            </div>
+                {index + 1 === eventTools.length - 1 ? <span> and </span> : index + 1 !== eventTools.length ? <span>, </span> : <span>.</span>}
+              </React.Fragment>
+            ))}
           </div>
-
-          {event.type === "comment" && dataComment ? (
-            <div className={css.listItemBody}>
-              <div className={css.text}>{dataComment.comment.text}</div>
-
-              <div className={css.cover}>
-                <ToolCard iconUrl={tool.iconUrl} coverUrl={tool.coverUrl} className={css.cover} onClick={() => onClickTool()} />
-              </div>
-            </div>
-          ) : null}
-
-          <div className={css.listItemTime}>{getTimeAgo(event.createdAt)}</div>
         </div>
-      );
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
+      </div>
+
+      {event.type === "comment" ? (
+        <div className={css.listItemBody}>
+          <div className={css.text}>{dataComment?.comment.text}</div>
+
+          <div className={css.cover}>
+            {eventTools.length !== 0 ? (
+              <ToolCard iconUrl={eventTools[0].iconUrl} coverUrl={eventTools[0].coverUrl} className={css.cover} onClick={() => onClickTool(eventTools[0])} />
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      <div className={css.listItemTime}>{getTimeAgo(event.createdAt)}</div>
+    </div>
+  );
 };
 
 const Feed: React.FC = () => {

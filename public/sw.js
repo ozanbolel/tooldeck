@@ -1,10 +1,7 @@
-const SHELL_CACHE = "shell-v4";
-const DYNAMIC_CACHE = "dynamic-v25";
+const SHELL_CACHE = "shell-v5";
+const DYNAMIC_CACHE = "dynamic-v26";
 
 const assets = [
-  "/",
-  "/deck",
-  "/explore",
   "/manifest.json",
   "/static/icons.svg",
   "/static/taken.svg",

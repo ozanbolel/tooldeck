@@ -6,7 +6,7 @@ export const GET_FEED = gql`
       id
       type
       userId
-      toolId
+      toolIds
       commentId
       createdAt
     }

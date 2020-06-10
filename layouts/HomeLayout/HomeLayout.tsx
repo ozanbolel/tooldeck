@@ -51,6 +51,7 @@ const HomeLayout: React.FC = ({ children }) => {
 
                 refSwitch.current.scroll({ top: 0 });
               }}
+              itemClassName={css.radioItem}
               noTopBorder
             />
           </div>

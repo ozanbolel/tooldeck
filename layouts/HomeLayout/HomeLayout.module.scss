@@ -23,8 +23,12 @@
 }
 
 .radio {
-  padding-bottom: $g-m;
   text-align: center;
+  padding-bottom: $g-m;
+}
+
+.radioItem {
+  padding: 0 $g-m;
 }
 
 .switch {
@@ -104,5 +108,9 @@
 
   .headerProfile {
     margin-top: unset;
+  }
+
+  .radioItem {
+    padding: 0 $g-l;
   }
 }

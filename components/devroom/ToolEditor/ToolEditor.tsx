@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Radio, Dropdown } from "core/elements";
+import { Button, Dropdown } from "core/elements";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_TOOL, UPDATE_TOOL } from "core/mutations";
 import { useDialog } from "core/tools";
