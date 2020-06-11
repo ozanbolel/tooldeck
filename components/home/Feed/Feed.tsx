@@ -61,27 +61,25 @@ const EventCard: TEventCard = ({ event, index }) => {
         </a>
 
         <div className={css.event}>
-          <div>
-            <span className={css.link}>
-              <a href={profileUrl} target="_blank" rel="noreferrer">
-                {dataProfile?.profile.name}
-              </a>
-            </span>
+          <span className={css.link}>
+            <a href={profileUrl} target="_blank" rel="noreferrer">
+              {dataProfile?.profile.name}
+            </a>
+          </span>
 
-            {event.type === "add" ? <span> added </span> : null}
-            {event.type === "star" ? <span> starred </span> : null}
-            {event.type === "comment" ? <span> commented on </span> : null}
+          {event.type === "add" ? <span> added </span> : null}
+          {event.type === "star" ? <span> starred </span> : null}
+          {event.type === "comment" ? <span> commented on </span> : null}
 
-            {eventTools.map((tool, index) => (
-              <React.Fragment key={tool.id}>
-                <span className={css.link} onClick={() => onClickTool(tool)}>
-                  {tool.label}
-                </span>
+          {eventTools.map((tool, index) => (
+            <React.Fragment key={tool.id}>
+              <span className={css.link} onClick={() => onClickTool(tool)}>
+                {tool.label}
+              </span>
 
-                {index + 1 === eventTools.length - 1 ? <span> and </span> : index + 1 !== eventTools.length ? <span>, </span> : <span>.</span>}
-              </React.Fragment>
-            ))}
-          </div>
+              {index + 1 === eventTools.length - 1 ? <span> and </span> : index + 1 !== eventTools.length ? <span>, </span> : <span>.</span>}
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
