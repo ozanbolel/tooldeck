@@ -104,6 +104,7 @@
 
 .listItemTime {
   margin-top: $g-s;
+  @include no-select;
 }
 
 // Responsive
