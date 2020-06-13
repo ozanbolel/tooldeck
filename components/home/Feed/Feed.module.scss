@@ -1,4 +1,5 @@
 @import "core/styles/head";
+@import "core/styles/animation";
 
 .list {
   margin-bottom: $g-l;
@@ -39,24 +40,33 @@
   @include no-select;
 
   .photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 3.5rem;
     height: 3.5rem;
-    padding-right: $g-xs;
+    box-sizing: border-box;
+    border: solid 2px $c-divider;
+    border-radius: $r-100;
+    transition: border-color $de;
+    overflow: hidden;
     cursor: pointer;
+    margin-right: $g-xs;
 
     &:hover {
-      img {
-        border-color: $c-main;
-      }
+      border-color: $c-main;
+    }
+
+    svg {
+      position: relative;
+      width: 45%;
+      height: 45%;
     }
 
     img {
       width: 100%;
       height: 100%;
-      box-sizing: border-box;
-      border: solid 2px $c-divider;
-      border-radius: $r-100;
-      transition: border-color $de;
+      @include a-fadeIn;
     }
   }
 

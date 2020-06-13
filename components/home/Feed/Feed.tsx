@@ -3,6 +3,7 @@ import css from "./Feed.module.scss";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { GET_TOOLS, GET_FEED, GET_PROFILE, GET_COMMENT } from "core/queries";
 import { useModal, getTimeAgo } from "core/tools";
+import { Icon } from "core/elements";
 import { TTool } from "core/types";
 import ToolDetails from "../ToolDetails/ToolDetails";
 import ToolCard from "../ToolCard/ToolCard";
@@ -57,7 +58,7 @@ const EventCard: TEventCard = ({ event, index }) => {
     <div className={css.listItem} style={{ animationDelay: index * 0.02 + "s" }}>
       <div className={css.listItemHeader}>
         <a className={css.photo} href={profileUrl} target="_blank" rel="noreferrer">
-          <img src={dataProfile?.profile.avatarUrl} alt={dataProfile?.profile.name} draggable="false" />
+          {dataProfile?.profile.avatarUrl ? <img src={dataProfile.profile.avatarUrl} alt={dataProfile.profile.name} draggable="false" /> : <Icon name="user" />}
         </a>
 
         <div className={css.event}>
