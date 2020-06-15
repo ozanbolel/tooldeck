@@ -1,5 +1,5 @@
 const SHELL_CACHE = "shell-v5";
-const DYNAMIC_CACHE = "dynamic-v31";
+const DYNAMIC_CACHE = "dynamic-v32";
 
 const assets = [
   "/manifest.json",

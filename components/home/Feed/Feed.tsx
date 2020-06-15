@@ -86,7 +86,7 @@ const EventCard: TEventCard = ({ event, index }) => {
 
       {event.type === "comment" ? (
         <div className={css.listItemBody}>
-          <div className={css.text}>{dataComment?.comment.text}</div>
+          <div className={css.text}>"{dataComment?.comment.text}"</div>
 
           <div className={css.cover}>
             {eventTools.length !== 0 ? (
