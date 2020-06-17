@@ -106,11 +106,15 @@ const Feed: React.FC = () => {
 
   if (dataFeed) {
     return (
-      <div className={css.list}>
-        {dataFeed.feed.map((event: any, index: number) => (
-          <EventCard key={event.id} event={event} index={index} />
-        ))}
-      </div>
+      <>
+        <div className={css.pageTitle}>Latest Activities</div>
+
+        <div className={css.list}>
+          {dataFeed.feed.map((event: any, index: number) => (
+            <EventCard key={event.id} event={event} index={index} />
+          ))}
+        </div>
+      </>
     );
   } else {
     return null;

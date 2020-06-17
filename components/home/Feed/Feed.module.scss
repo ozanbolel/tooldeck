@@ -1,6 +1,12 @@
 @import "core/styles/head";
 @import "core/styles/animation";
 
+.pageTitle {
+  font-size: $h2;
+  font-weight: $b;
+  margin-bottom: $g-m;
+}
+
 .list {
   margin-bottom: $g-l;
 }
