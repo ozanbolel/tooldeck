@@ -120,53 +120,49 @@ const Deck: React.FC = () => {
     [addedTools]
   );
 
-  if (!loadingDeck && !loadingTools) {
-    return (
-      <div className={css.deck}>
-        {addedTools.length !== 0 ? (
-          <>
-            <div className={css.filter}>
-              <div className={css.filterLabel}>Show:</div>
+  return (
+    <div className={css.deck}>
+      {addedTools.length !== 0 ? (
+        <>
+          <div className={css.filter}>
+            <div className={css.filterLabel}>Show:</div>
 
-              <Dropdown
-                className={css.filterDD}
-                options={filterOptions}
-                value={filter as any}
-                onChange={(value) => {
-                  localStorage.setItem("DECK_FILTER", value);
+            <Dropdown
+              className={css.filterDD}
+              options={filterOptions}
+              value={filter as any}
+              onChange={(value) => {
+                localStorage.setItem("DECK_FILTER", value);
 
-                  setFilter(value);
-                }}
-              />
+                setFilter(value);
+              }}
+            />
 
-              <div className={css.filterNum}>
-                {filteredAddedTools.length} Tool{filteredAddedTools.length > 1 ? "s" : ""}
-              </div>
+            <div className={css.filterNum}>
+              {filteredAddedTools.length} Tool{filteredAddedTools.length > 1 ? "s" : ""}
             </div>
+          </div>
 
-            <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
-              {filteredAddedTools.map((tool: TTool) => (
-                <div key={tool.id}>
-                  <ToolCard
-                    className={css.gridItemCard}
-                    iconUrl={tool.iconUrl}
-                    coverUrl={tool.coverUrl}
-                    external={tool.external}
-                    onClick={() => onClickTool(tool)}
-                  />
-                  <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.cat)} />
-                </div>
-              ))}
-            </AnimatedGrid>
-          </>
-        ) : (
-          <DeckEmpty />
-        )}
-      </div>
-    );
-  } else {
-    return null;
-  }
+          <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
+            {filteredAddedTools.map((tool: TTool) => (
+              <div key={tool.id}>
+                <ToolCard
+                  className={css.gridItemCard}
+                  iconUrl={tool.iconUrl}
+                  coverUrl={tool.coverUrl}
+                  external={tool.external}
+                  onClick={() => onClickTool(tool)}
+                />
+                <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.cat)} />
+              </div>
+            ))}
+          </AnimatedGrid>
+        </>
+      ) : null}
+
+      {!loadingDeck && !loadingTools && addedTools.length === 0 ? <DeckEmpty /> : null}
+    </div>
+  );
 };
 
 export default Deck;
