@@ -32,7 +32,7 @@
   padding: $g-s;
   border-radius: $r;
   animation: itemIn $d-s $e-io forwards;
-  overflow: hidden;
+  box-shadow: $s-button;
   margin-bottom: $g-m;
 
   &:last-of-type {

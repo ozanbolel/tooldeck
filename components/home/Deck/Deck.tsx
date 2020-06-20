@@ -16,8 +16,8 @@ import ReactGA from "react-ga";
 const Deck: React.FC = () => {
   const [addedTools, setAddedTools] = React.useState<TTool[]>([]);
   const [filter, setFilter] = React.useState<string | undefined>();
-  const { data: dataDeck } = useQuery(GET_DECK, { fetchPolicy: "cache-and-network" });
-  const { data: dataTools } = useQuery(GET_TOOLS);
+  const { data: dataDeck, loading: loadingDeck } = useQuery(GET_DECK, { fetchPolicy: "cache-and-network" });
+  const { data: dataTools, loading: loadingTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const cache = useApolloClient().cache;
   const tabs = useSelector((store: TStore) => store.tabs.opened);
@@ -120,49 +120,53 @@ const Deck: React.FC = () => {
     [addedTools]
   );
 
-  return (
-    <div className={css.deck}>
-      {addedTools.length !== 0 ? (
-        <div className={css.filter}>
-          <div className={css.filterLabel}>Category:</div>
+  if (!loadingDeck && !loadingTools) {
+    return (
+      <div className={css.deck}>
+        {addedTools.length !== 0 ? (
+          <>
+            <div className={css.filter}>
+              <div className={css.filterLabel}>Show:</div>
 
-          <Dropdown
-            className={css.filterDD}
-            options={filterOptions}
-            value={filter as any}
-            onChange={(value) => {
-              localStorage.setItem("DECK_FILTER", value);
+              <Dropdown
+                className={css.filterDD}
+                options={filterOptions}
+                value={filter as any}
+                onChange={(value) => {
+                  localStorage.setItem("DECK_FILTER", value);
 
-              setFilter(value);
-            }}
-          />
-
-          <div className={css.filterNum}>
-            {filteredAddedTools.length} Tool{filteredAddedTools.length > 1 ? "s" : ""}
-          </div>
-        </div>
-      ) : null}
-
-      {addedTools.length !== 0 ? (
-        <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
-          {filteredAddedTools.map((tool: TTool) => (
-            <div key={tool.id}>
-              <ToolCard
-                className={css.gridItemCard}
-                iconUrl={tool.iconUrl}
-                coverUrl={tool.coverUrl}
-                external={tool.external}
-                onClick={() => onClickTool(tool)}
+                  setFilter(value);
+                }}
               />
-              <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.cat)} />
+
+              <div className={css.filterNum}>
+                {filteredAddedTools.length} Tool{filteredAddedTools.length > 1 ? "s" : ""}
+              </div>
             </div>
-          ))}
-        </AnimatedGrid>
-      ) : (
-        <DeckEmpty />
-      )}
-    </div>
-  );
+
+            <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
+              {filteredAddedTools.map((tool: TTool) => (
+                <div key={tool.id}>
+                  <ToolCard
+                    className={css.gridItemCard}
+                    iconUrl={tool.iconUrl}
+                    coverUrl={tool.coverUrl}
+                    external={tool.external}
+                    onClick={() => onClickTool(tool)}
+                  />
+                  <Nameplate className={css.gridItemPlate} label={tool.label} onClickDel={() => onClickDel(tool.id, tool.cat)} />
+                </div>
+              ))}
+            </AnimatedGrid>
+          </>
+        ) : (
+          <DeckEmpty />
+        )}
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Deck;

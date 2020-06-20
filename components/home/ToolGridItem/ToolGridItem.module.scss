@@ -23,8 +23,8 @@
   box-sizing: border-box;
   padding: $g-s;
   border-radius: $r;
+  box-shadow: $s-button;
   animation: itemIn $d-s $e-io forwards;
-  overflow: hidden;
 }
 
 .cover {
@@ -46,8 +46,7 @@
 .info {
   flex: 1;
 
-  .new,
-  .badge {
+  .new {
     position: absolute;
     top: $g-xs;
     right: $g-xs;
@@ -60,11 +59,6 @@
     border-radius: $r;
   }
 
-  .badge {
-    background: $c-main;
-    color: $c-dark;
-  }
-
   .label {
     font-size: $h4;
     font-weight: $b;
@@ -72,16 +66,27 @@
 
   .desc {
     margin-top: $g-xxs;
-    margin-bottom: $g-s;
   }
 
-  .button {
-    width: 5.5rem;
-    padding: $g-xxs 0;
-    margin-right: $g-xxs;
+  .promote {
+    margin-top: $g-xxs;
 
-    &:last-of-type {
-      margin-right: 0;
+    .bold {
+      font-weight: $b;
+    }
+  }
+
+  .actions {
+    margin-top: $g-s;
+
+    .button {
+      width: 5.5rem;
+      padding: $g-xxs 0;
+      margin-right: $g-xxs;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
     }
   }
 }

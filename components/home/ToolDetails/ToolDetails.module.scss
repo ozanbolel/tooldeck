@@ -265,6 +265,7 @@
 
 .commentTime {
   margin-top: $g-s;
+  @include no-select;
 }
 
 // Leave a Comment

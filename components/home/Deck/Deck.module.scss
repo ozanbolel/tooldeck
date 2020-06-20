@@ -10,6 +10,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: $c-content;
+  padding: $g-xs $g-s;
+  border-radius: $r;
+  box-shadow: $s-button;
   margin-bottom: $g-m;
   @include no-select;
 }
