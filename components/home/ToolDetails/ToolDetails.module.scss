@@ -109,7 +109,7 @@
   flex: 1;
   box-sizing: border-box;
   padding: $g-m $g-s;
-  overflow-y: auto;
+  overflow-y: scroll;
   @include sb-light;
 }
 
