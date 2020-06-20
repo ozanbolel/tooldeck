@@ -46,7 +46,7 @@
 }
 
 .divider {
-  width: 90px;
+  width: 100px;
   height: 1px;
   background: $c-divider;
   margin: $g-m 0;
@@ -62,9 +62,5 @@
   .header {
     margin-top: unset;
     height: 28rem;
-  }
-
-  .divider {
-    width: 120px;
   }
 }

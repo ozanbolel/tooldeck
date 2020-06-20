@@ -58,7 +58,7 @@ const HomeLayout: React.FC = ({ children }) => {
         </>
       ) : null}
 
-      <div ref={refSwitch} className={css.switch}>
+      <div ref={refSwitch} className={css.switch + (currentTabId !== "" ? " " + css.web : "")}>
         {currentTabId === "" ? (
           <Nest>
             <div className={css.header}>

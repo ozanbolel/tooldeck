@@ -35,8 +35,12 @@
 .switch {
   flex: 1;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   @include sb-dark;
+
+  &.web {
+    overflow-y: hidden;
+  }
 }
 
 // Header
