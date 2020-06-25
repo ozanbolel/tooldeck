@@ -14,12 +14,13 @@ type TSection = {
   promote?: string;
   cat?: string;
   num?: number;
+  alt?: boolean;
 };
 
 const Explore: React.FC = () => {
   const { data } = useQuery(GET_TOOLS);
 
-  const getTools = ({ cat, promote, num }: { cat?: string; promote?: string; num?: number }) => {
+  const getTools = ({ cat, promote, num, alt }: { cat?: string; promote?: string; num?: number; alt?: boolean }) => {
     const tools: [TTool] = data.tools;
 
     if (cat) {
@@ -31,7 +32,7 @@ const Explore: React.FC = () => {
         return tools.filter((i) => isToolNew(i.createdAt));
       } else {
         let sortedTools = tools;
-        sortedTools.sort((a: any, b: any) => (a[promote] === b[promote] ? 0 : a[promote] < b[promote] ? 1 : -1));
+        sortedTools.sort((a: any, b: any) => (a[promote] === b[promote] ? 0 : a[promote] < b[promote] ? (alt ? -1 : 1) : alt ? 1 : -1));
 
         return sortedTools.slice(0, num ? num : 6);
       }
@@ -40,8 +41,8 @@ const Explore: React.FC = () => {
     return tools;
   };
 
-  const Section = ({ icon, title, cat, num, promote }: TSection) => {
-    const arrayTools = React.useMemo(() => getTools({ cat, promote, num }), []);
+  const Section = ({ icon, title, cat, num, promote, alt }: TSection) => {
+    const arrayTools = React.useMemo(() => getTools({ cat, promote, num, alt }), []);
 
     if (arrayTools.length !== 0) {
       return (
@@ -69,7 +70,7 @@ const Explore: React.FC = () => {
   if (data) {
     return (
       <>
-        <Section icon="bell" title="New Arrivals" promote="new" num={4} />
+        <Section icon="bell" title="New Arrivals" promote="new" num={4} alt />
         <Section icon="users" title="Most Added" promote="users" num={6} />
         <Section icon="star" title="Most Starred" promote="stars" num={4} />
 
