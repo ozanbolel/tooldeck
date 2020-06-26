@@ -166,7 +166,7 @@ const ToolDetails: TModalComponent = ({ rerender, isAnimationDone, closeModal, i
 
         <div className={css.section}>
           <div className={css.title}>
-            <span>Descripcion</span>
+            <span>Description</span>
           </div>
 
           <span>{tool.desc || tool.shortDesc}</span>
