@@ -20,7 +20,7 @@ const Deck: React.FC = () => {
   const { data: dataTools, loading: loadingTools } = useQuery(GET_TOOLS);
   const [removeFromDeck] = useMutation(REMOVE_FROM_DECK);
   const cache = useApolloClient().cache;
-  const tabs = useSelector((store: TStore) => store.tabs.opened);
+  const { currentTabId, opened: tabs } = useSelector((store: TStore) => store.tabs);
   const dispatch = useDispatch();
   const dialog = useDialog();
 
@@ -143,11 +143,11 @@ const Deck: React.FC = () => {
             </div>
           </div>
 
-          <AnimatedGrid columns={[4, 4, 3, 2, 1]} gap={[60, 60, 60, 60, 30]}>
+          <AnimatedGrid columns={[4, 4, 3, 2, 2]} gap={[60, 60, 60, 60, 30]}>
             {filteredAddedTools.map((tool: TTool) => (
               <div key={tool.id}>
                 <ToolCard
-                  className={css.gridItemCard}
+                  className={css.gridItemCard + (tabs.findIndex((i) => i.id === tool.id) !== -1 ? " " + css.opened : "")}
                   iconUrl={tool.iconUrl}
                   coverUrl={tool.coverUrl}
                   external={tool.external}

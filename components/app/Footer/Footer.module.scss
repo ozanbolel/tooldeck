@@ -16,13 +16,6 @@
   a {
     @include link-light;
   }
-
-  div {
-    &.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
 }
 
 // Responsive

@@ -42,6 +42,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta property="og:title" content="ToolDeck - Launchpad for developers' and designers' favorite tools." />
         <meta property="og:description" content="Carefully curated tools for you to discover." />
         <meta property="og:image" content="https://tooldeckhq.com/static/og.png" />
+        <meta property="twitter:title" content="ToolDeck - Launchpad for developers' and designers' favorite tools." />
+        <meta property="twitter:description" content="Carefully curated tools for you to discover." />
+        <meta property="twitter:image" content="https://tooldeckhq.com/static/og.png" />
       </Head>
 
       <Startup />

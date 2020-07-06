@@ -12,17 +12,18 @@
   align-items: center;
   background: $c-content;
   font-weight: $b;
-  padding: 0 $g-m;
+  padding: 0 $g-s;
   box-sizing: border-box;
   border: solid 1px $c-divider;
   border-radius: $r-100;
 }
 
 .label span {
-  max-width: 80px;
+  width: 40px;
   white-space: nowrap;
   word-break: keep-all;
   text-overflow: ellipsis;
+  text-align: center;
   overflow: hidden;
 }
 
@@ -40,5 +41,19 @@
   .icon {
     width: 1.2rem;
     stroke-width: 3px;
+  }
+}
+
+// Responsive
+
+@media only screen and (min-width: 360px) {
+  .label span {
+    width: 70px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .label span {
+    width: 90px;
   }
 }

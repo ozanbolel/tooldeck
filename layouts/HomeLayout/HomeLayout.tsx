@@ -13,9 +13,10 @@ import { isProduction } from "core/config";
 import ReactGA from "react-ga";
 import { useDialog } from "core/tools";
 import { LOGOUT } from "core/mutations";
+import Head from "next/head";
 
 const HomeLayout: React.FC = ({ children }) => {
-  const currentTabId = useSelector((store: TStore) => store.tabs.currentTabId);
+  const { currentTabId, opened } = useSelector((store: TStore) => store.tabs);
   const { data: dataUser } = useQuery(GET_USER);
   const [logout] = useMutation(LOGOUT);
   const router = useRouter();
@@ -29,85 +30,94 @@ const HomeLayout: React.FC = ({ children }) => {
     { label: "Explore", value: "/explore" }
   ];
 
+  const headerTitle = React.useMemo(() => radioItems.find((i) => i.value === router.pathname)?.label, [router.pathname]);
+  const pageTitle = React.useMemo(() => (currentTabId !== "" ? opened.find((i) => i.id === currentTabId)?.label : headerTitle), [currentTabId, headerTitle]);
+
   return (
-    <div className={css.home}>
-      <Tabs />
+    <>
+      <Head>
+        <title>ToolDeck / {pageTitle}</title>
+      </Head>
 
-      {currentTabId === "" ? (
-        <>
-          <div className={css.tile}>
-            <div className={css.shade} />
-          </div>
+      <div className={css.home}>
+        <Tabs />
 
-          <div className={css.radio}>
-            <Radio
-              items={radioItems}
-              initial={router.pathname}
-              value={router.pathname}
-              onChange={(v: string) => {
-                if (router.pathname !== v) {
-                  router.push(v);
-                }
-
-                refSwitch.current.scroll({ top: 0 });
-              }}
-              itemClassName={css.radioItem}
-              noTopBorder
-            />
-          </div>
-        </>
-      ) : null}
-
-      <div ref={refSwitch} className={css.switch + (currentTabId !== "" ? " " + css.web : "")}>
         {currentTabId === "" ? (
-          <Nest>
-            <div className={css.header}>
-              <div className={css.headerTitle}>{radioItems.find((i) => i.value === router.pathname)?.label}</div>
-
-              <div
-                className={css.headerProfile}
-                onClick={() =>
-                  dialog(
-                    dataUser?.user.name,
-                    [
-                      {
-                        label: "Logout",
-                        callback: () => {
-                          logout().then(() => {
-                            if (isProduction) {
-                              ReactGA.event({ category: "User", action: "Logged Out" });
-                            }
-
-                            router.push("/");
-
-                            localStorage.clear();
-                            client.resetStore();
-                          });
-                        }
-                      },
-                      { label: "Close" }
-                    ],
-                    { autoclose: true }
-                  )
-                }
-              >
-                <div className={css.headerProfileAvatar}>
-                  {dataUser && dataUser.user.avatarUrl ? <img src={dataUser.user.avatarUrl} draggable="false" /> : <Icon name="user" />}
-                </div>
-
-                {dataUser ? <div className={css.headerProfileName}>{dataUser.user.name}</div> : null}
-              </div>
+          <>
+            <div className={css.tile}>
+              <div className={css.shade} />
             </div>
 
-            {children}
-          </Nest>
+            <div className={css.radio}>
+              <Radio
+                items={radioItems}
+                initial={router.pathname}
+                value={router.pathname}
+                onChange={(v: string) => {
+                  if (router.pathname !== v) {
+                    router.push(v);
+                  }
+
+                  refSwitch.current.scroll({ top: 0 });
+                }}
+                itemClassName={css.radioItem}
+                noTopBorder
+              />
+            </div>
+          </>
         ) : null}
 
-        <WebFrame hidden={currentTabId === ""} />
-      </div>
+        <div ref={refSwitch} className={css.switch + (currentTabId !== "" ? " " + css.web : "")}>
+          {currentTabId === "" ? (
+            <Nest>
+              <div className={css.header}>
+                <div className={css.headerTitle}>{headerTitle}</div>
 
-      <Footer />
-    </div>
+                <div
+                  className={css.headerProfile}
+                  onClick={() =>
+                    dialog(
+                      dataUser?.user.name,
+                      [
+                        {
+                          label: "Logout",
+                          callback: () => {
+                            logout().then(() => {
+                              if (isProduction) {
+                                ReactGA.event({ category: "User", action: "Logged Out" });
+                              }
+
+                              router.push("/");
+
+                              localStorage.clear();
+                              client.resetStore();
+                            });
+                          }
+                        },
+                        { label: "Close" }
+                      ],
+                      { autoclose: true }
+                    )
+                  }
+                >
+                  <div className={css.headerProfileAvatar}>
+                    {dataUser && dataUser.user.avatarUrl ? <img src={dataUser.user.avatarUrl} draggable="false" /> : <Icon name="user" />}
+                  </div>
+
+                  {dataUser ? <div className={css.headerProfileName}>{dataUser.user.name}</div> : null}
+                </div>
+              </div>
+
+              {children}
+            </Nest>
+          ) : null}
+
+          <WebFrame hidden={currentTabId === ""} />
+        </div>
+
+        <Footer />
+      </div>
+    </>
   );
 };
 

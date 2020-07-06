@@ -50,6 +50,10 @@
   &:hover {
     border-color: $c-main;
   }
+
+  &.opened {
+    opacity: 0.2;
+  }
 }
 
 .gridItemPlate {

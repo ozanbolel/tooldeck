@@ -7,8 +7,8 @@ const LandingFooter: React.FC = () => {
   return (
     <div className={css.footer}>
       <div>
-        {/*         <a
-          href="https://twitter.com/tooldeckhq"
+        <a
+          href="https://twitter.com/oznbll"
           target="_blank"
           rel="noreferrer"
           onClick={() => {
@@ -17,20 +17,7 @@ const LandingFooter: React.FC = () => {
             }
           }}
         >
-          Follow on Twitter
-        </a> */}
-
-        <a
-          href="https://blacklivesmatter.com"
-          target="_blank"
-          rel="noreferrer"
-          onClick={() => {
-            if (isProduction) {
-              ReactGA.event({ category: "Behavior", action: "BLM Link Clicked" });
-            }
-          }}
-        >
-          #BlackLivesMatter
+          Follow Me on Twitter
         </a>
       </div>
 
