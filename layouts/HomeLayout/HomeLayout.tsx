@@ -16,11 +16,12 @@ import { LOGOUT } from "core/mutations";
 import Head from "next/head";
 
 const HomeLayout: React.FC = ({ children }) => {
+  const [deckScrollPct, setDeckScrollPct] = React.useState(0);
   const { currentTabId, opened } = useSelector((store: TStore) => store.tabs);
   const { data: dataUser } = useQuery(GET_USER);
   const [logout] = useMutation(LOGOUT);
   const router = useRouter();
-  const refSwitch = React.useRef<any>(null);
+  const refSwitch = React.useRef<HTMLDivElement>(null);
   const dialog = useDialog();
   const client = useApolloClient();
 
@@ -32,6 +33,23 @@ const HomeLayout: React.FC = ({ children }) => {
 
   const headerTitle = React.useMemo(() => radioItems.find((i) => i.value === router.pathname)?.label, [router.pathname]);
   const pageTitle = React.useMemo(() => (currentTabId !== "" ? opened.find((i) => i.id === currentTabId)?.label : headerTitle), [currentTabId, headerTitle]);
+
+  React.useEffect(() => {
+    const elemSwitch = refSwitch.current;
+
+    if (elemSwitch && currentTabId === "") {
+      setTimeout(() => {
+        elemSwitch.scrollTop = elemSwitch.scrollHeight * deckScrollPct;
+      }, 100);
+    }
+  }, [currentTabId]);
+
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    if (router.pathname === "/deck") {
+      const elem = event.target as HTMLDivElement;
+      if (elem.scrollTop > 0) setDeckScrollPct(elem.scrollTop / elem.scrollHeight);
+    }
+  };
 
   return (
     <>
@@ -54,11 +72,9 @@ const HomeLayout: React.FC = ({ children }) => {
                 initial={router.pathname}
                 value={router.pathname}
                 onChange={(v: string) => {
-                  if (router.pathname !== v) {
-                    router.push(v);
-                  }
-
-                  refSwitch.current.scroll({ top: 0 });
+                  if (router.pathname !== v) router.push(v);
+                  if (refSwitch.current) refSwitch.current.scrollTop = 0;
+                  if (router.pathname === "/deck") setDeckScrollPct(0);
                 }}
                 itemClassName={css.radioItem}
                 noTopBorder
@@ -67,7 +83,7 @@ const HomeLayout: React.FC = ({ children }) => {
           </>
         ) : null}
 
-        <div ref={refSwitch} className={css.switch + (currentTabId !== "" ? " " + css.web : "")}>
+        <div ref={refSwitch} onScroll={handleScroll} className={css.switch + (currentTabId !== "" ? " " + css.web : "")}>
           {currentTabId === "" ? (
             <Nest>
               <div className={css.header}>

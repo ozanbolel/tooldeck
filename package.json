@@ -1,7 +1,7 @@
 {
   "name": "tooldeck",
-  "version": "2.3.0",
-  "author": "Ozan Bolel",
+  "version": "2.4.0",
+  "author": "ozanbolel",
   "scripts": {
     "start": "next",
     "build": "next build"

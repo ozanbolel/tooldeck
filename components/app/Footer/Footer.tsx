@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
 
-          <div>ToolDeck v2.3</div>
+          <div>ToolDeck v2.4</div>
         </>
       ) : (
         <div>

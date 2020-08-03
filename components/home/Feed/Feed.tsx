@@ -2,6 +2,7 @@ import * as React from "react";
 import css from "./Feed.module.scss";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { GET_TOOLS, GET_FEED, GET_PROFILE, GET_COMMENT } from "core/queries";
+import fetch from "isomorphic-unfetch";
 import { useModal, getTimeAgo } from "core/tools";
 import { Icon } from "core/elements";
 import { TTool } from "core/types";
@@ -18,6 +19,7 @@ const EventCard: TEventCard = ({ event, index }) => {
   const { data: dataProfile } = useQuery(GET_PROFILE, { variables: { userId: event.userId } });
   const [getComment, { data: dataComment }] = useLazyQuery(GET_COMMENT, { variables: { commentId: event.commentId } });
   const [profileUrl, setProfileUrl] = React.useState("");
+  const [showAvatar, setShowAvatar] = React.useState(false);
   const modal = useModal();
 
   if (event.type === "comment") {
@@ -49,6 +51,12 @@ const EventCard: TEventCard = ({ event, index }) => {
 
         setGithubProfileUrl();
       }
+
+      if (profile.avatarUrl) {
+        fetch(profile.avatarUrl).then((res) => {
+          if (res.ok) setShowAvatar(true);
+        });
+      }
     }
   }, [dataProfile]);
 
@@ -58,7 +66,7 @@ const EventCard: TEventCard = ({ event, index }) => {
     <div className={css.listItem} style={{ animationDelay: index * 0.02 + "s" }}>
       <div className={css.listItemHeader}>
         <a className={css.photo} href={profileUrl} target="_blank" rel="noreferrer">
-          {dataProfile?.profile.avatarUrl ? <img src={dataProfile.profile.avatarUrl} alt={dataProfile.profile.name} draggable="false" /> : <Icon name="user" />}
+          {showAvatar ? <img src={dataProfile.profile.avatarUrl} alt={dataProfile.profile.name} draggable="false" /> : <Icon name="user" />}
         </a>
 
         <div className={css.event}>
