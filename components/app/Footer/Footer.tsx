@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
         <>
           <div>
             <a
-              href="https://twitter.com/oznbll"
+              href="https://twitter.com/ozanbll"
               target="_blank"
               rel="noreferrer"
               onClick={() => {
